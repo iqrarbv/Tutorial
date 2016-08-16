@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <content>DeletePurchaseOrder</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>Edit_Purchase_Order</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>NewPurchaseOrder</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Account__c</fullName>
+        <label>Supplier Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Purchase Orders</relationshipLabel>
+        <relationshipName>Purchase_Orders</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Approved_By__c</fullName>
+        <label>Approved By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Purchase_Orders</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Order_By__c</fullName>
+        <label>Order By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Purchase_Orders1</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Order_Date__c</fullName>
+        <label>Order Date</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Approval</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Goods Recieved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Supplier_Reference__c</fullName>
+        <label>Supplier Reference</label>
+        <length>100</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Total_Amount__c</fullName>
+        <label>Total Amount</label>
+        <summarizedField>Purchase_Order_Line_Items__c.Total_Amount__c</summarizedField>
+        <summaryForeignKey>Purchase_Order_Line_Items__c.Purchase_Order__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Gross__c</fullName>
+        <label>Total Amount</label>
+        <summarizedField>Purchase_Order_Line_Items__c.Total_Gross__c</summarizedField>
+        <summaryForeignKey>Purchase_Order_Line_Items__c.Purchase_Order__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Net__c</fullName>
+        <label>Total Net</label>
+        <summarizedField>Purchase_Order_Line_Items__c.Amount__c</summarizedField>
+        <summaryForeignKey>Purchase_Order_Line_Items__c.Purchase_Order__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_VAT__c</fullName>
+        <label>Total VAT</label>
+        <summarizedField>Purchase_Order_Line_Items__c.Total_VAT__c</summarizedField>
+        <summaryForeignKey>Purchase_Order_Line_Items__c.Purchase_Order__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <label>Purchase Order</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Purchase Order Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Purchase Orders</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Order_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Account__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Order_By__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Supplier_Reference__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Create_Invoice</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>url</linkType>
+        <masterLabel>Create Invoice</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/apex/NewPurchaseInvoice?poid={!Purchase_Order__c.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_PDF</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasScrollbars>true</hasScrollbars>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Generate PDF</masterLabel>
+        <openType>newWindow</openType>
+        <page>Purchase_Order_Pdf_View</page>
+        <position>none</position>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Mark_Goods_Received</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Mark Goods Received</masterLabel>
+        <openType>noSidebar</openType>
+        <page>Recievegoods</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_Order_As_Email</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send Order As Email</masterLabel>
+        <openType>noSidebar</openType>
+        <page>PurchaseOrderSendtoEmail</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_Reminder_for_Goods_Received</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasScrollbars>true</hasScrollbars>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Send Reminder for Goods Received</masterLabel>
+        <openType>newWindow</openType>
+        <page>ReminderforGoodsRecieved</page>
+        <position>none</position>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Submit_For_Approval</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Submit For Approval</masterLabel>
+        <openType>noSidebar</openType>
+        <page>SubmitPurchaseOrderForApproval</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

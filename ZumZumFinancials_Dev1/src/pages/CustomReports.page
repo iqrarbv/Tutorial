@@ -1,0 +1,25 @@
+<apex:page >
+<apex:pageblock title="Setup">
+<apex:form >
+<apex:pageblocksection title="ZumZum Financials Reports" columns="2">
+	<table style="width:100%;">
+			 <td>
+			 <input type="button" class="btn" value="Aged Payable" onclick="window.location='/apex/agedpayable'"/>
+			 </td>
+			 <td>
+			 <input type="button" class="btn" value="Aged Reciveables" onclick="window.location='/apex/AgedRecivables'"/>
+			 </td>
+			 <td>
+			 <input type="button" class="btn" value="Balance Sheet" onclick="window.location='/apex/ReportBalanceSheet'"/>
+			 </td>
+			 <td>
+			 <input type="button" class="btn" value="Profit & Loss Report" onclick="window.location='/apex/ReportProfitAndLoss'"/>
+			 </td>
+			 <td>
+			 <input type="button" class="btn" value="Trail Balance" onclick="window.location='/apex/ReportTrialBalance'"/>
+			 </td>
+	</table>
+</apex:pageblocksection>
+</apex:form>
+</apex:pageblock>
+</apex:page>

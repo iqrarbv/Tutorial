@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Expense Sheet Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Expense Sheet Detail</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Expense Sheet Detail --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Business Passenger --></label>
+        <name>Business_Passenger__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date String --></label>
+        <name>Date_String__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Day --></label>
+        <name>Day__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expense Sheet --></label>
+        <name>Expense_Sheet__c</name>
+        <relationshipLabel><!-- Expense Sheet Detail --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Miles --></label>
+        <name>Miles__c</name>
+    </fields>
+    <fields>
+        <label><!-- Narrative --></label>
+        <name>Narrative__c</name>
+    </fields>
+    <fields>
+        <label><!-- Nominal Account --></label>
+        <name>Nominal_Account__c</name>
+        <relationshipLabel><!-- Expense Sheet Detail --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Expense Sheet Detail --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tax Rate --></label>
+        <name>Tax_Rate__c</name>
+        <relationshipLabel><!-- Expense Sheet Detail --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Total Gross --></label>
+        <name>Total_Gross__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Net --></label>
+        <name>Total_Net__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total VAT --></label>
+        <name>Total_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- UID --></label>
+        <name>UID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Amount --></label>
+        <name>Unit_Amount__c</name>
+    </fields>
+    <layouts>
+        <layout>Expense Sheet Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

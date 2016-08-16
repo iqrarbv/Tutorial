@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Sales Order</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sales Orders</value>
+    </caseValues>
+    <fields>
+        <label><!-- Customer Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Sales Orders --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approved By --></label>
+        <name>Approved_By__c</name>
+        <relationshipLabel><!-- Sales Orders (Approved By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Customer Order No --></label>
+        <name>Customer_Order_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Amount --></label>
+        <name>Net_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Sales Orders --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Order By --></label>
+        <name>Order_By__c</name>
+        <relationshipLabel><!-- Sales Orders (Order By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Order Date --></label>
+        <name>Order_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Placed By --></label>
+        <name>Placed_By__c</name>
+        <relationshipLabel><!-- Sales Orders (Placed By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quote Number --></label>
+        <name>Quote_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Customer Reference --></label>
+        <name>Supplier_Reference__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Gross --></label>
+        <name>Total_Gross__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Net --></label>
+        <name>Total_Net__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total VAT --></label>
+        <name>Total_VAT__c</name>
+    </fields>
+    <layouts>
+        <layout>Sales Order Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Create_Invoice --></label>
+        <name>Create_Invoice</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_PDF --></label>
+        <name>Generate_PDF</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Sales_Order_as_Email --></label>
+        <name>Send_Sales_Order_as_Email</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Submit_For_Approval --></label>
+        <name>Submit_For_Approval</name>
+    </webLinks>
+</CustomObjectTranslation>

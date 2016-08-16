@@ -1,0 +1,43 @@
+<apex:page controller="ReportTrialBalanceController" id="page">
+	<apex:sectionHeader title="Trial Balance Report" />
+	<apex:pageMessages />
+	<apex:form id="frm">
+		<apex:pageblock id="pb">
+			<apex:pageblocksection id="pbs">
+				<apex:pageblocksectionitem id="pbsi">
+				<apex:outputLabel for="lblMonth" value="Period" />
+				<apex:selectlist value="{!fiscalMonth}" multiselect="false" size="1" Id="cmbMonth">
+					<apex:selectOptions value="{!Monthslist}" />
+				</apex:selectlist>
+				</apex:pageblocksectionitem>
+				<script type="text/javascript">
+				function OpenExcelReport()
+				{
+					var month = document.getElementById('{!$Component.frm.pb.pbs.pbsi.cmbMonth}').value;
+					window.open('/apex/ReportTrialBalance_Excel?fiscalMonth='+month,'excelReport');
+				}
+				</script>
+			</apex:pageblocksection>
+			<apex:pageblockbuttons location="bottom">
+				<apex:commandButton value="Run Report" action="{!GetRecords}" />
+				<input type="button" value="Run Report in Excel" onclick="OpenExcelReport();" class="btn"/>
+			</apex:pageblockbuttons>
+		</apex:pageblock>
+	</apex:form>
+	<apex:pageblock >
+		<apex:pageblocktable value="{!records}" var="record">
+			<apex:column value="{!record.Nominal_Account__r.Nominal_Code__c}"
+				headerValue="NC"
+				styleClass="{!IF(record.Nominal_Account__r.Name=='Total','totalRow ','')}" />
+			<apex:column value="{!record.Nominal_Account__r.Name}"
+				headerValue="Name"
+				styleClass="{!IF(record.Nominal_Account__r.Name=='Total','totalRow ','')}" />
+			<apex:column value="{!record.Actuals_Debit__c}" headerValue="Debit"
+				styleClass="{!IF(record.Nominal_Account__r.Name=='Total','totalRow ','')}"
+				style="text-align: right;"/>
+			<apex:column value="{!record.Actuals_Credit__c}" headerValue="Credit"
+				styleClass="{!IF(record.Nominal_Account__r.Name=='Total','totalRow ','')}"
+				style="text-align: right;"/>
+		</apex:pageblocktable>
+	</apex:pageblock>
+</apex:page>

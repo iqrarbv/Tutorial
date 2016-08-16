@@ -1,0 +1,36 @@
+<apex:page id="statementid" standardcontroller="Statement__c">
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+        	<apex:pageblock title="Schedule Statements">		       
+            <table class="grid" width="100%">
+            
+                <tr>
+                  <td>Date of execution</td>
+                  <td><input id="relatedName2" type="text" value="01/01/2011" 
+                            class="date" /></td>
+                </tr>
+                <tr>
+                <td width="200">
+						Frequency</td>
+			  <td>
+			          <select id="Select2" name="D2" class="dropdown">
+                            <option value="Months">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select></td>
+              </tr>
+              <tr>
+                <td width="200">Do not send statements when balance is zero</td>
+			  <td>
+			  <input name="checkbox" type="checkbox" value="checkbox" />
+			  </td>
+              </tr>
+              
+      </table>
+      
+        <apex:pageblockbuttons >
+<input type="submit" value="Save" />
+        	<input type="submit" value="Discard" />
+        </apex:pageblockbuttons>
+	</apex:pageblock>
+</apex:page>

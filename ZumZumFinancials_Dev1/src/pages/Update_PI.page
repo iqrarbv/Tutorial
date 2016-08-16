@@ -1,0 +1,21 @@
+<apex:page standardController="Purchase_Invoice__c" title="Approve for Payment">
+<!-- Begin Default Content REMOVE THIS -->
+<h1>Congratulations</h1>
+This is your new Page
+<!-- End Default Content REMOVE THIS -->
+<script type="text/javascript" src="/js/functions.js"></script>
+	<script src="/soap/ajax/9.0/connection.js"></script>
+	<script src="/soap/ajax/9.0/apex.js"></script>
+	<script type="text/javascript">
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    <script src="../../soap/ajax/21.0/connection.js"
+          type="text/javascript">
+    
+</script>
+<script type="text/javascript" >
+var nominalAccountId = 'a0P90000000DTZY' ; 
+result = sforce.connection.query("Update Purchase_Invoice__c set Status__c = 'Updated' where Id = '"+nominalAccountId+"'");
+alert('this is resutlt : '  + result);
+</script>
+</apex:page>

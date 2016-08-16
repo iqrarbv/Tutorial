@@ -1,0 +1,245 @@
+<apex:page standardcontroller="VAT_Return__c" renderas="pdf" sidebar="false" showheader="false">
+	<apex:pageblock title="Company Vat Return">
+		    <table width="100%" class="grid">
+		        <tr>
+		            <td width="70">
+		                Date from</td>
+		            <td>
+		                01/01/2010</td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Date to</td>
+		            <td>
+		                31/12/2010</td>
+		        </tr>
+		    </table>		    
+    <p></p>
+        <table width="100%" class="grid" 
+    title="From 01 January 2010 To 31 December 2010">
+            <tr>
+                <td>
+                    <b>Description</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td width="72">
+                    <b>Value</b></td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 1</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT due on sales and other outputs</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 2</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT due from you on acquisitions from other EU countries</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 3</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total VAT due</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 4</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT reclaimable on your purchases</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 5</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT payable or reclaimable </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 6</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total sales excluding VAT</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 7</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total purchases excluding VAT</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 8</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total value of goods you supplied to other EU countries</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    </td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 9</b></td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">&nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total value of goods you acquired from other EU countries</td>
+                <td width="20">&nbsp;
+                    </td>
+                <td align="right" width="72">
+                    7.75</td>
+            </tr>
+</table>
+</apex:pageblock></apex:page>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>EditControlAccounts</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>InDevelopment</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Accruals__c</fullName>
+        <label>Accruals</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Accruals)</relationshipLabel>
+        <relationshipName>Control_Accounts1</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Bad_Debts__c</fullName>
+        <label>Bad Debts</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Bad Debts)</relationshipLabel>
+        <relationshipName>Bad_Debts</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Credit_Charges__c</fullName>
+        <label>Credit Charges</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Credit Charges)</relationshipLabel>
+        <relationshipName>Credit_Charges</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Creditors_Control__c</fullName>
+        <label>Creditors Control</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Creditors Control)</relationshipLabel>
+        <relationshipName>Creditors_Control</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Debtors_Control__c</fullName>
+        <label>Debtors Control</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Debtors Control)</relationshipLabel>
+        <relationshipName>Debtors_Control</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Default_Bank__c</fullName>
+        <label>Default Bank</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Default Bank)</relationshipLabel>
+        <relationshipName>Default_Bank</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Default_Sales__c</fullName>
+        <label>Default Sales</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Default Sales)</relationshipLabel>
+        <relationshipName>Default_Sales</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Exchange_Rate_Variance__c</fullName>
+        <label>Exchange Rate Variance</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Exchange Rate Variance)</relationshipLabel>
+        <relationshipName>Exchange_Rate_Variance</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Manual_Adjustments__c</fullName>
+        <label>Manual Adjustments</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Manual Adjustments)</relationshipLabel>
+        <relationshipName>Manual_Adjustments</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Mispostings__c</fullName>
+        <label>Mispostings</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Mispostings)</relationshipLabel>
+        <relationshipName>Mispostings</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Nominal_Account__c</fullName>
+        <label>Nominal Account</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts</relationshipLabel>
+        <relationshipName>Control_Accounts</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Prepayments__c</fullName>
+        <label>Prepayments</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Prepayments)</relationshipLabel>
+        <relationshipName>Prepayments</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Purchase_Discount__c</fullName>
+        <label>Purchase Discount</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Purchase Discount)</relationshipLabel>
+        <relationshipName>Purchase_Discount</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Retained_Earnings__c</fullName>
+        <label>Retained Earnings</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Retained Earnings)</relationshipLabel>
+        <relationshipName>Retained_Earnings</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Discount__c</fullName>
+        <label>Sales Discount</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Sales Discount)</relationshipLabel>
+        <relationshipName>Sales_Discount</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Suspense__c</fullName>
+        <label>Suspense</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (Suspense)</relationshipLabel>
+        <relationshipName>Suspense</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>VAT_Liability__c</fullName>
+        <label>VAT Liability</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (VAT Liability)</relationshipLabel>
+        <relationshipName>VAT_Liability</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>VAT_on_Purchases__c</fullName>
+        <label>VAT on Purchases</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (VAT on Purchases)</relationshipLabel>
+        <relationshipName>VAT_on_Purchases</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>VAT_on_Sales__c</fullName>
+        <label>VAT on Sales</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Control Accounts (VAT on Sales)</relationshipLabel>
+        <relationshipName>VAT_on_Sales</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <label>Control Account</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Control Accounts</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Control Accounts</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

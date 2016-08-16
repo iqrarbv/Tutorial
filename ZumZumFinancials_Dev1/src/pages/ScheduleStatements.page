@@ -1,0 +1,74 @@
+<apex:page id="statementid" standardcontroller="Schedule_Statements__c" extensions="StatementController" title="Schedule Statements">
+<apex:pageMessages id="pgMsgs" />
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.Stt_CSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+<apex:form id="frm">
+        	<apex:pageblock title="Schedule Statements" id="pb">       
+            <table class="grid" width="100%">
+                <tr>
+                  <td>Date of execution</td>
+                  <td>
+                  <div class="requiredInput">
+	              	<div class="requiredBlock"></div>
+                  <apex:inputField value="{!objectStatement.Day__c}" id="days"/>                                    			                                   
+                  <apex:inputField value="{!objectStatement.Month__c}" id="months"/>
+                  </div>	
+                  </td>
+                </tr>
+                <tr>
+                <td width="200">
+						Frequency</td>
+			  <td>
+			        <div class="requiredInput">
+	              		<div class="requiredBlock"></div> 
+               		<apex:inputField value="{!objectStatement.Frequency__c}" id="frequency" onchange="hide();"/>
+               		</div>
+              </td>
+              </tr>
+              <tr>
+                <td width="200">Do not send statements when balance is zero</td>
+			  <td>
+			  <apex:inputField value="{!objectStatement.send_statements_if_balance_is_zero__c}"/>
+			  <!--  
+			  <input name="checkbox" type="checkbox" value="checkbox" />		
+              -->			  
+			  </td>
+              </tr>              
+      </table>      
+        <apex:pageblockbuttons >
+	        	<apex:commandButton value="Save" id="idSave" action="{!save}" onclick="setBunload(false);"/>
+	        	<apex:commandButton value="Cancel" action="{!Discard}" id="idDiscard" onclick="setBunload(false);"/>	        	
+	    </apex:pageblockbuttons>
+   </apex:pageblock>
+   </apex:form> 
+<Script type="text/javascript">
+if(document.getElementById('statementid:frm:pb:frequency').value != "Yearly")
+{
+document.getElementById('statementid:frm:pb:months').style.visibility='hidden';
+}
+function hide()
+{
+if(document.getElementById('statementid:frm:pb:frequency').value == "Monthly")
+{
+document.getElementById('statementid:frm:pb:months').style.visibility='hidden';
+}
+if(document.getElementById('statementid:frm:pb:frequency').value == "Yearly")
+{
+document.getElementById('statementid:frm:pb:months').style.visibility='visible';
+}
+} 
+function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    function setBunload(on)
+    {
+        window.onbeforeunload = (on) ? unloadMessage : null;                
+    }
+    setBunload(true);    
+ </Script> 
+ 
+</apex:page>

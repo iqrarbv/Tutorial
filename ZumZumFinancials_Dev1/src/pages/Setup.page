@@ -1,0 +1,52 @@
+<apex:page >
+<apex:stylesheet value="{!URLFOR($Resource.ZF_BtnCSS)}"/>
+<apex:pageblock title="Setup">
+<apex:form >
+<apex:pageblocksection title="Chart of Account" columns="4"><table style="width:100%;">
+    <tr>
+        <td>
+<input type="button" class="roundbutton" value="Nominal Category" onclick="window.location='/{!$ObjectType.Nominal_Categories__c}'" /></td>
+        <td>
+<input type="button" class="roundbutton" value="Nominal Sub-Category" onclick="window.location='/{!$ObjectType.Sub_Category__c}'" /></td>
+        <td>
+<input type="button" class="roundbutton" value="Nominal Account" onclick="window.location='/{!$ObjectType.Nominal_Account__c}'" /></td>
+    </tr>
+</table>
+</apex:pageblocksection>
+<apex:pageblocksection title="General Setup" columns="2"><table style="width:100%;">
+    <tr>
+        <td>
+<input type="button" class="roundbutton" value="Tax" onclick="window.location='/{!$ObjectType.Tax_Rate__c}'" /></td>
+        <td>
+<input type="button" class="roundbutton" value="Company Setup" onclick="window.location='/apex/CompanySetup'" /></td>
+        <td>
+<input type="button" class="roundbutton" value="Dimensions" onclick="window.location='/{!$ObjectType.Dimension__c}'" /></td>
+<td>
+<input type="button" class="roundbutton" value="Activities" onclick="window.location='/{!$ObjectType.Activity_Code__c}'" /></td>
+    </tr>
+    <tr>
+        <td>
+<input type="button" class="roundbutton" value="Control Accounts" onclick="window.location='/apex/controlAccounts'" /></td>
+        <td>
+<input type="button" class="roundbutton" value="Invoice Templates" onclick="window.location='/{!$ObjectType.Invoice_Template__c}'" /></td>
+        <td>
+<input type="button" class="roundbutton" value="Bank Accounts" onclick="window.location='/{!$ObjectType.Bank_Account__c}'" /></td>
+    </tr>    
+<tr>
+<td><input type="button" class="roundbutton" value="Opening Balances" onclick="window.location='/apex/openingbalances'"/></td>
+<td><input type="button" class="roundbutton" value="Customer Opening Balances" onclick="window.location='/apex/Customer_Opening_Balances'"/></td>
+<td><input type="button" class="roundbutton" value="Supplier Opening Balances" onclick="window.location='/apex/Supplier_Opening_Balances'"/></td>
+</tr>
+<tr>    
+<td>
+<input type="button" class="roundbutton" value="Reminders" onclick="window.location='/{!$ObjectType.Schedule_Reminders__c}'"/></td>
+<td>
+<input type="button" class="roundbutton" value="Statements" onclick="window.location='/{!$ObjectType.Schedule_Statements__c}'"/></td>
+</tr>
+</table>
+</apex:pageblocksection>
+
+
+</apex:form>
+</apex:pageblock>
+</apex:page>

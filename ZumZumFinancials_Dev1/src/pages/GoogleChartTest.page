@@ -1,0 +1,4 @@
+<apex:page tabStyle="Account">
+<apex:sectionHeader title="Accounts by Type"></apex:sectionHeader>
+<apex:image url="http://chart.apis.google.com/chart?cht=bvg&chs=350x300&chd=t:20,35,10,10|30,55,25,5&chxr=1,0,60&chds=0,60&chco=0A8C8A,EBB671,DE091A&chbh=15,0,20&chxt=x,y&chxl=0:|Project1|Project2|Project3|Project4&chdl=Large|Medium|Small&c"></apex:image>
+</apex:page>

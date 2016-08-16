@@ -1,0 +1,73 @@
+<apex:page controller="DaysSalesOutstandingController" id="page" action="{!Calculate}">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Year');
+        data.addColumn('number', 'Periodic Balance Value');
+        data.addRows(5);
+        var d = new Date();
+		data.setValue(0, 0, 'Less than 30 days');
+        data.setValue(0, 1, {!aggResult1});
+        
+		data.setValue(1, 0, '30-59 days');
+        data.setValue(1, 1, {!aggResult2});
+
+		data.setValue(2, 0, '60 - 89 days');
+        data.setValue(2, 1, {!aggResult3});
+        
+        data.setValue(3, 0, '90 - 119 days');
+        data.setValue(3, 1, {!aggResult4});
+        
+        data.setValue(4, 0, '120 days or more');
+        data.setValue(4, 1, {!aggResult5});
+
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, {width: 400, height: 300, title: 'Days Sales Outstanding',
+                          vAxis: {title: 'Days Sales Outstanding', titleTextStyle: {color: 'red'}},
+                          hAxis: {maxValue: 5000},
+                          hAxis: {title: 'Month', titleTextStyle: {color: 'Blue'}}
+                         });
+      }
+      function getMonthName(val)
+		{
+			if(val==0)
+				return 'January';
+			if(val==1)
+				return 'Feberuary';
+			if(val==2)
+				return 'March';
+			if(val==3)
+				return 'April';
+			if(val==4)
+				return 'May';
+			if(val==5)
+				return 'Jun';
+			if(val==6)
+				return 'Jully';
+			if(val==7)
+				return 'August';
+			if(val==8)
+				return 'September';
+			if(val==9)
+				return 'October';
+			if(val==10)
+				return 'November';
+			if(val==11)
+				return 'December';		
+		}
+    </script>
+	<!-- 
+	{!thisMonth}
+	<br/>
+	{!secMonth}
+	<br/>
+	{!thrdMonth}
+	<br/>
+	 -->
+	<div id="chart_div" >
+	</div>
+</apex:page>

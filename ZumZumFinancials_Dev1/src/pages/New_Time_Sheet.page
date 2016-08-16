@@ -1,0 +1,355 @@
+<apex:page standardController="Time_Sheet__c" extensions="TimeSheet_Controller" title="New Time Sheet" sidebar="false" id="mainPage" action="{!init}">
+<apex:stylesheet value="{!URLFOR($Resource.ajaxWaitIndicatorZip,'ajaxWaitIndicator_css.css')}"></apex:stylesheet>
+<apex:includeScript value="{!URLFOR($Resource.ajaxWaitIndicatorZip, 'ajaxWaitIndicator.js')}"/> 
+<link rel="stylesheet" type="text/css" href="ZumzumFinacials.css" />
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<style>
+.grid{font-family:Arial, Helvetica, sans-serif;font-size:12px;}
+.grid thead tr th{width:90px;border:1px solid #000;}
+.grid tbody tr td{width:90px;border:1px solid #000;}
+
+.grid2{font-family:Arial, Helvetica, sans-serif;font-size:12px;}
+.grid2 tbody tr td{width:90px;border:0px solid #000;}
+.grid2 tbody tr td input, .grid2 tbody tr td select{width:80px;}
+.dt input{width:100px !important;}
+.grid2 tbody tr td.minus input{width:170px;}
+.button input {width:80px;}
+.grid2 .plus{border-right:0;}
+.grid2 .plus2{border-left:0;}
+
+.cust01 {width:130px !important;}
+.cust01 select{width:130px !important;}
+</style>
+
+<apex:pagemessages id="errorMessages" />
+	<apex:form id="mainForm" >
+	<apex:sectionHeader title="Add Time Sheet" />
+		<apex:pageblock title="New Time Sheet" id="timesheet">
+			<table width="1200" cellpadding="0" cellspacing="0">
+			  <tr>
+			   
+			    <td height="20" width="40"><strong>Opportunity:</strong></td>
+			    <td height="20" width="180">
+				    <apex:selectlist value="{!project}" size="1" multiselect="false" style="width:180px;" > 
+									<apex:selectoptions value="{!Projects}" />
+					</apex:selectlist>
+			    </td>
+			    <td height="20" width="65"><strong>Activity Code:</strong></td>
+			    <td height="20" width="180">
+				    <apex:selectlist value="{!activityCodess}" size="1" multiselect="false" style="width:180px;">
+									<apex:selectoptions value="{!ActivityList}" />	
+					</apex:selectlist>
+			    </td>
+			    <td height="20" width="50"><strong>Start Date:</strong></td>
+			    <td height="20" width="90">
+			   		<apex:inputtext value="{!filterDate}" style="width:75px;"/>
+			    </td>
+			    <td height="20" width="45"><strong>End Date:</strong></td>
+			    <td height="20" width="60">
+			   		<apex:inputtext value="{!filterendDate}" style="width:75px;"/>
+			    </td>
+				<td width="50" >
+				<apex:commandbutton value="Filter" action="{!filterTimeSheet}" style="width:60px;" onclick="setBunload(false);"/>
+				</td>
+				<td width="50">
+				<apex:commandbutton value="Clear Filter" action="{!clearfilter}" style="width:70px;" onclick="setBunload(false);"/>
+				</td>
+			  </tr>
+			</table>
+			<br/>
+			<br/>
+		  <table  cellpadding="0" cellspacing="" >
+			  <!-- THIS IS IT -->
+			  <tr>
+          <td height="20" width="163"><strong>Expense Year:</strong></td>
+          <td height="20" width="972"><strong>
+          	<div class="requiredInput">
+	            <div class="requiredBlock"></div>
+          		<!-- <apex:inputtext value="{!yearName}" style="width:88px;"/>-->
+          		<apex:selectList id="selectYear" value="{!yearName}" size="1" style="width:88px;">
+				<apex:selectOption itemValue="2010" itemLabel="2010"/>
+				<apex:selectOption itemValue="2011" itemLabel="2011"/>
+				<apex:selectOption itemValue="2012" itemLabel="2012"/>
+				<apex:selectOption itemValue="2013" itemLabel="2013"/>
+				<apex:selectOption itemValue="2014" itemLabel="2014"/>
+				<apex:selectOption itemValue="2015" itemLabel="2015"/>
+				<apex:selectOption itemValue="2016" itemLabel="2016"/>
+				<apex:selectOption itemValue="2017" itemLabel="2017"/>
+				<apex:selectOption itemValue="2018" itemLabel="2018"/>
+				<apex:selectOption itemValue="2019" itemLabel="2019"/>
+				<apex:selectOption itemValue="2020" itemLabel="2020"/>
+				<apex:selectOption itemValue="2021" itemLabel="2021"/>
+				<apex:selectOption itemValue="2022" itemLabel="2022"/>
+				<apex:selectOption itemValue="2023" itemLabel="2023"/>
+				<apex:selectOption itemValue="2024" itemLabel="2024"/>
+				<apex:selectOption itemValue="2025" itemLabel="2025"/>
+				<apex:selectOption itemValue="2026" itemLabel="2026"/>
+				<apex:selectOption itemValue="2027" itemLabel="2027"/>
+				<apex:selectOption itemValue="2028" itemLabel="2028"/>
+				<apex:selectOption itemValue="2029" itemLabel="2029"/>
+				<apex:selectOption itemValue="2030" itemLabel="2030"/>
+				</apex:selectList>
+          	</div>
+          	</strong>
+          </td>
+          </tr>
+          <tr>
+          <td height="20" width="163"><strong>Expense Month:</strong></td>
+          <td height="20" width="972"><strong>
+          <div class="requiredInput">
+	            <div class="requiredBlock"></div>
+          		<apex:selectList id="selectMonth" value="{!monthName}" size="1">
+				<apex:selectOption itemValue="1" itemLabel="January"/>
+				<apex:selectOption itemValue="2" itemLabel="February"/>
+				<apex:selectOption itemValue="3" itemLabel="March"/>
+				<apex:selectOption itemValue="4" itemLabel="April"/>
+				<apex:selectOption itemValue="5" itemLabel="May"/>
+				<apex:selectOption itemValue="6" itemLabel="June"/>
+				<apex:selectOption itemValue="7" itemLabel="July"/>
+				<apex:selectOption itemValue="8" itemLabel="August"/>
+				<apex:selectOption itemValue="9" itemLabel="September"/>
+				<apex:selectOption itemValue="10" itemLabel="October"/>
+				<apex:selectOption itemValue="11" itemLabel="November"/>
+				<apex:selectOption itemValue="12" itemLabel="December"/>
+				</apex:selectList>
+				</div>
+          </strong>
+          </td>
+          </tr>
+			  <!-- <tr>
+	          <td height="20" width="163"><strong>Month:</strong></td>
+	          <td height="20" width="972"><strong>{!newTimeSheetinfo.Name}</strong></td>
+	          </tr>
+	          -->
+			  
+			  <!-- this is out -->
+	          <tr>
+	          <td height="20" width="163">&nbsp;</td>
+	          <td height="20" width="972">&nbsp;</td>
+	          </tr>
+	          <tr>
+	          <td height="20" width="163"><strong>Total Hours:</strong></td>
+	          <td height="20" width="972">
+	          	<strong>
+		          	<apex:outputtext value="{0, number, 0.00}"  >
+				            <apex:param value="{!totalHours}" />
+				    </apex:outputtext>
+	          	</strong>
+	          </td>
+	          </tr>
+	          <tr>
+	          <td height="20" width="163">&nbsp;</td>
+	          <td height="20" width="972">&nbsp;</td>
+	          </tr>
+        </table>
+        <apex:pageblock id="TimeSheetDetails" title="Time Sheet Details" >
+			<table width="100%" class="grid">
+        		<tr>
+                        <td align="left" width="152">
+                        	<b>Date</b>
+                        </td>
+                        <td align="left">
+             				<b>Day</b>
+             			</td>
+                        <td align="left" width="42">
+							<b>Opportunity</b>
+						</td>
+                        <td align="left" width="72">
+                            <b>Account</b>
+                        </td>
+                        <td align="left" width="200">
+                            <b>Narrative</b>
+                        </td>
+                        <td align="right" width="40">
+                            <b>Hours</b>
+                        </td>
+                        <td align="left" width="152">
+                            <b>Activity Code</b>
+                        </td>
+                        <td align="left" width="200">
+                            <b>Options</b>
+                        </td>
+              </tr>
+              <tr>
+                  <td width="152" colspan="2">						      
+                    <div class="requiredInput">
+	              	<div class="requiredBlock"></div>
+						<apex:inputfield value="{!tsDetails.timeSheetDetail.Date__c}" /> 
+				  	</div>
+				  </td>
+                 <!--  <td>
+					<div class="requiredInput">
+                	<div class="requiredBlock">
+                		</div><apex:outputtext styleclass="detailTxtArea">29 March</apex:outputtext>
+                	</div>
+                  </td>
+                  --> 
+                  <td>
+					 <!-- 
+					 <apex:selectlist value="{!tsDetails.timeSheetDetail.Project__c}" size="1" tabindex="1" style="width:180px;">
+								<apex:selectoptions value="{!Projects}" />
+					 </apex:selectlist>
+					  -->
+					  <apex:inputfield value="{!tsDetails.timeSheetDetail.Project__c}" />
+                 </td>
+                 <td width="42">
+                       <apex:inputField Id="Account" value="{!tsDetails.timeSheetDetail.Account__c}" />
+                 </td>
+                 <td align="left" width="200"><div class="requiredInput">
+	             	<div class="requiredBlock"></div>
+						<apex:inputfield value="{!tsDetails.timeSheetDetail.Narrative__c}" style="width:300px;"/>
+					</div>
+				 </td>
+                 <td width="40" align="right">
+                 	<div class="requiredInput">
+	              	<div class="requiredBlock"></div>
+						<apex:inputfield value="{!tsDetails.timeSheetDetail.Total_Hours__c}"  styleclass="currency" id="totalHours" style="width:80px;"/>
+					</div>
+				 </td>
+                 <td align="left" width="50">
+                    <apex:selectlist value="{!tsDetails.timeSheetDetail.Activity_Code__c}"  size="1" tabindex="6" style="width:180px;" >
+										<apex:selectoptions value="{!ActivityList}" />
+					</apex:selectlist>
+				</td>
+                <td width="200" align="center">
+                    <apex:commandbutton onClick="Mask.show();" onComplete="Mask.hide();" style="width:40px; font-size:10px;" value="Add" action="{!addTimesheetToList}" rerender="timesheet,errorMessages"/>&nbsp;
+					<apex:commandbutton onClick="Mask.show();" onComplete="Mask.hide();" style="width:40px; font-size:10px;" value="Cancel" action="{!clearTimeSheetvalues}" rerender="timesheet,errorMessages"/>
+                </td>
+              </tr>
+              <apex:repeat value="{!wrapTimeSheet}" var="o" id="timesheetList" rendered="{!fullSheet=true}" >
+              	<tr>
+	                <td width="152">
+								   <apex:outputField value="{!o.timeSheetDetail.Date__c}" />
+					</td>
+	                <td width="152">
+								   {!o.timeSheetDetail.Day__c} 
+					</td>
+	                <td>
+						<apex:outputfield value="{!o.timeSheetDetail.Project__c}" />
+					</td>
+	                <td width="42">
+	                   		 <apex:outputfield value="{!o.timeSheetDetail.Account__c}" /> 
+	                </td>
+	                <td width="200">
+		                            {!o.timeSheetDetail.Narrative__c} 
+		            </td>
+	                <td align="right" width="60">
+		                           <!--  {!o.timeSheetDetail.Total_Hours__c} -->
+		                           {!o.totalHours}
+		            </td>
+	                <td  width="72">
+		                            {!o.activityCode}
+		            </td>
+	                <td width="200" align="center">
+		                            <apex:commandLink value="Edit" action="{!editListItems}" rerender="timesheet,errorMessages">
+									<apex:param name="editId" value="{!o.Index}"/>
+									</apex:commandLink>&nbsp;  &nbsp;&nbsp;
+									<apex:commandLink value="Delete" action="{!deletListItems}" onclick="return confirmDelete();">
+									<apex:param name="deletId" value="{!o.Index}" />
+									</apex:commandLink>&nbsp;  &nbsp;&nbsp;
+									<apex:commandLink value="Clone" action="{!CloneEntry}" rerender="timesheet,errorMessages" >
+									<apex:param name="cloneId" value="{!o.Index}" />
+									</apex:commandLink>
+		            </td>
+	              </tr>
+	          </apex:repeat> 
+	           <apex:repeat value="{!filteredTimeSheet}" var="o" id="filteredList" rendered="{!filterSheet=true}" >
+              	<tr>
+	                <td width="152">
+								   <apex:outputField value="{!o.timeSheetDetail.Date__c}" />
+					</td>
+	                <td width="152">
+								   {!o.timeSheetDetail.Day__c} 
+					</td>
+	                <td>
+						<apex:outputfield value="{!o.timeSheetDetail.Project__c}" />
+					</td>
+	                <td width="42">
+	                   		 <apex:outputfield value="{!o.timeSheetDetail.Account__c}" /> 
+	                </td>
+	                <td width="200">
+		                            {!o.timeSheetDetail.Narrative__c} 
+		            </td>
+	                <td align="right" width="60">
+		                           <!--  {!o.timeSheetDetail.Total_Hours__c} -->
+		                           {!o.totalHours}
+		            </td>
+	                <td  width="72">
+		                            {!o.activityCode}
+		            </td>
+	                <td width="200" align="center">
+		                            <apex:commandLink value="Edit" action="{!editListItems}" rerender="timesheet,errorMessages">
+									<apex:param name="editId" value="{!o.Index}"/>
+									</apex:commandLink>&nbsp;  &nbsp;&nbsp;
+									<apex:commandLink value="Delete" action="{!deletListItems}" onclick="return confirmDelete();">
+									<apex:param name="deletId" value="{!o.Index}" />
+									</apex:commandLink>&nbsp;  &nbsp;&nbsp;
+									<apex:commandLink value="Clone" action="{!CloneEntry}" rerender="timesheet,errorMessages" >
+									<apex:param name="cloneId" value="{!o.Index}" />
+									</apex:commandLink>
+		            </td>
+	              </tr>
+	          </apex:repeat>    
+              <tr>
+                  <td width="152">
+                      <b></b>
+                  </td>
+                  <td>
+                      <b></b>
+                  </td>
+                  <td width="42">
+                      <b></b>
+                  </td>
+                  <td align="right" width="72">
+                      
+                  </td>
+                  <td width="50">&nbsp;
+                	
+                  </td>
+                  <td align="right" width="50">
+                    <b>
+                      	<apex:outputtext value="{0, number, 0.00}"  >
+				            <apex:param value="{!totalHours}" />
+				    	</apex:outputtext>
+				    </b>
+                  </td>
+                  <td width="152">
+                      <b></b>
+                  </td>
+                  <td width="80" align="center">
+                      <b></b>
+                  </td>
+              </tr>
+		</table>
+		</apex:pageblock>
+			<br/>
+			<br/>	  
+			<apex:pageblockbuttons location="top">
+				<apex:commandbutton value="Save Time Sheet" action="{!saveTimeSheet}" onclick="setBunload(false);"/>
+				<apex:commandbutton value="Cancel Time Sheet" action="{!cancel}" onclick="setBunload(false);"/>
+			</apex:pageblockbuttons>
+		</apex:pageblock>
+	</apex:form>
+	<script type = "text/javascript">
+		function confirmDelete()
+		{
+			var confirmdelete = confirm("Are you Sure to delete this Entry ?");
+			if (confirmdelete == false)
+			{
+				return false;
+			} 
+			setBunload(false);
+		}
+		function unloadMessage()
+		{
+	        //message = "Wait! You haven't finished."
+	        message = "Your Time Sheet Information is not Saved yet!\n are you sure you to exit";
+	        return message;
+	    }
+	    function setBunload(on)
+	    {
+	        window.onbeforeunload = (on) ? unloadMessage : null;
+	    }
+	    setBunload(true);
+	</script>
+</apex:page>

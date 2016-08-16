@@ -1,0 +1,64 @@
+<apex:page controller="controllerVATTransfer" id="pg" title="VAT Transfer"> 
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.VATTrnsfr_CSS}"/>
+
+<apex:PageMessages id="pgMsgs"/>
+<apex:form ID="frm">
+	<apex:pageblock title="Company Vat Transfer">		    
+<table width="100%" class="grid">
+		        <tr>
+		            <td width="70">
+		                A/C</td>
+		            <td>
+		            <apex:outputText value="{!objectNominal.Nominal_Code__c}"></apex:outputText>
+                    <!--  <input type="text" class="lookupField" id="lookup0"/>
+                    <input id="hiddenId0" type="hidden" /> --> 
+                    -
+                    <apex:outputText value="{!objectNominal.Name}"></apex:outputText>                 
+                  </td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Date to</td>
+		            <td>		
+		            <div class="requiredInput">
+	                	<div class="requiredBlock"></div>            	
+		                <apex:inputField styleclass="date" id="Text48" value="{!objectVATReturn.Date_To__c}"/>
+		            </div>
+		            </td>
+		        </tr>		       
+		        <tr>
+		            <td width="70">
+		                Sales</td>
+		            <td>
+		            <apex:outputText value="{!currencySymbol}" /> 
+                    <apex:inputText styleclass="currency" id="Text49" value="{!Sales}"/></td>
+		        </tr>
+		         <tr>
+		            <td width="70">
+		                Purchases</td>
+		            <td>
+		            <apex:outputText value="{!currencySymbol}" />
+                    <apex:inputText styleclass="currency" id="Text33" value="{!Purchases}" /></td>
+		        </tr>		        
+		    </table>
+		    <apex:pageBlockButtons >
+		    	<apex:commandButton value="Save" action="{!Save}" onclick="setBunload(false);" rerender="pgMsgs"/> 
+        		<apex:commandButton value="Cancel" action="{!Discard}" onclick="setBunload(false);"/>		    	
+		    </apex:pageBlockButtons>
+    </apex:pageblock>
+    </apex:form>
+    <script type = "text/javascript" >
+    function setFocusOnLoad(){}
+    function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    function setBunload(on)
+    {
+        window.onbeforeunload = (on) ? unloadMessage : null;                
+    }
+    setBunload(true);    
+    </script>
+</apex:page>

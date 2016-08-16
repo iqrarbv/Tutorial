@@ -1,0 +1,7 @@
+<apex:page standardcontroller="Sales_Invoice__c" extensions="PostInvoice" >
+<apex:pagemessages id="errormessages" />
+<apex:form id="mainForm" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Back to Sales Invoice" action="{!back}"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Post to Ledger" action="{!init}" rendered="{!goBack=false}"/>
+</apex:form>
+</apex:page>

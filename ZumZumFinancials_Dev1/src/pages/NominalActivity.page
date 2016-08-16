@@ -1,0 +1,2 @@
+<apex:page standardcontroller="Nominal_Account__c" extensions="NominalActivityController" action="{!NominalAction}">
+</apex:page>

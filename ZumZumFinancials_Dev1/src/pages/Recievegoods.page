@@ -1,0 +1,180 @@
+<apex:page standardcontroller="Purchase_Order__c" sidebar="0" title="Purchase Order - Recieved Goods" extensions="RecievedGoodsController">
+<head>
+    <style type="text/css">
+
+        .style1
+        {
+            font-weight: bold;
+        }
+    </style>
+<link rel="stylesheet" type="text/css" href="ZumzumFinacials.css" />
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+</head>
+<apex:pagemessages id="errorMessages" />
+	<apex:form id="frmMain" rendered="{!showPage}">
+		<apex:pageblock title="Purchase Order - Receive Goods">
+			<apex:pageblocksection columns="2">
+				<apex:pageblocksectionitem >
+					<apex:outputtext value="Order No." />
+                    <apex:outputtext value="{!PurchaseOrders.Name}" />		
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+					<apex:outputtext value="Supplier Account" />
+                    <apex:outputtext value="{!accountName}" />
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+					<apex:outputtext value="Supplier Reference" />
+                    <apex:outputtext value="{!PurchaseOrders.Supplier_Reference__c}" />
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+					<apex:outputtext value="Order Date" />
+                    <apex:outputtext value="{!orderdate}" />
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+					<apex:outputtext value="Ordered by" />
+                    <apex:outputtext value="{!UserName}" />
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+					<apex:outputtext value="Status" />
+                    <apex:outputtext value="{!PurchaseOrders.Status__c}" />
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+                    <apex:outputtext value="Total Tax" />
+                    <apex:outputtext value="{!currencySymbol}{!PurchaseOrders.Total_VAT__c}" />
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >					
+                    <apex:outputtext value="Net Amount" />
+                    <apex:outputtext value="{!currencySymbol}{!PurchaseOrders.Total_Net__c}" />
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+					<apex:outputtext value="Total Amount" />
+                    <apex:outputtext value="{!currencySymbol}{!PurchaseOrders.Total_Gross__c}" />
+				</apex:pageblocksectionitem>
+			</apex:pageblocksection>
+            
+            <table width="100%" border="1" class="grid">
+                    <tr>
+                        <td align="left" width="12%" class="style1">
+                            Product</td>
+                        <td align="left" width="12%">
+                            <b>Narrative</b></td>
+                        <td align="right" width="10%">
+                            <b>Quantity</b></td>
+                        <td align="right" width="80">
+                            <b>Price</b></td>
+                        <td align="left" width="50">
+                            <b>T/C</b></td>
+                        <td align="right" width="80">
+                            <b>Tax Rate</b></td>
+                        <td align="right" width="80">
+                            <b>Tax Amount</b></td>  
+                        <td align="right" width="80">
+                            <b>Total Amount</b></td>
+                        <td align="left" width="150">
+                            <b>Opportunity</b></td>
+                        <td align="center" width="80">
+                            <b>Received</b></td>
+                    </tr>
+               <apex:repeat value="{!Lineitems}" var="o">     
+                    <tr>
+                    <td width="150">
+						   {!o.ProducName}
+						</td>
+                        <td>
+						 	{!o.purchaseOrderLineItems.Narrative__c}
+						</td>
+                        <td width="80" align="right">
+					    	<apex:outputtext value="{0, number, integer}"  >
+					            	<apex:param value="{!o.purchaseOrderLineItems.Quantity__c}" />
+					         </apex:outputtext>
+				   		</td>
+				   		
+					    <td align="right" width="80"> 
+					    	{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+					            	<apex:param value="{!o.purchaseOrderLineItems.Amount__c}" />
+					         </apex:outputtext>
+					    </td>
+					    
+					    <td align="left" width="80">
+					    	{!o.strTaxRate} 
+					    </td>
+					    
+					    <td align="right" width="80">
+					    	<apex:outputtext value="{0, number, 0.00}"  >
+					            	<apex:param value="{!o.taxRate}" />
+					            </apex:outputtext>
+					    </td>
+					    
+					    <td align="right" width="80"> 
+					    	{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+					            	<apex:param value="{!o.purchaseOrderLineItems.Total_VAT__c}" />
+					            </apex:outputtext>	
+					    </td>
+					    <td align="right" width="80">
+                        	{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+					            	<apex:param value="{!o.purchaseOrderLineItems.Total_Gross__c}" />
+					            </apex:outputtext>   
+                        </td>
+
+					    <td width="150">
+					    	<apex:outputfield value="{!o.purchaseOrderLineItems.Opportunity__c}" />
+					    </td>
+
+                        <td width="80" align="center">
+                            <apex:inputfield value="{!o.purchaseOrderLineItems.Item_Received__c}" />
+                        </td>
+                    </tr>
+               </apex:repeat>     
+                    <tr>
+                    	 <td colspan="10" />
+                    </tr>
+                    <tr>
+                        <td width="150">
+                            <b></b>
+                        </td>
+                        <td>
+                            <b></b>
+                        </td>
+                        <td width="80">
+                            <b></b>
+                        </td>
+                        <td align="right" width="80">
+                        	<b>
+                            	{!currencySymbol}{!PurchaseOrders.Total_Net__c}
+				        	</b>    
+                        </td>
+                        <td width="50">
+                            <b></b>
+                        </td>
+                        <td width="80">
+                            <b></b>
+                        </td>
+                        <td align="right" width="80">
+                            <b>
+                            	{!currencySymbol}{!PurchaseOrders.Total_VAT__c}
+				        	</b>
+                        </td>
+                        <td align="right" width="80">
+                            <b>
+                            	{!currencySymbol}{!PurchaseOrders.Total_Gross__c}
+				        	</b>
+                        </td>
+                        <td width="150">
+                            <b></b>
+                        </td>
+                        <td width="80">
+                            <b></b>
+                        </td>
+                    </tr>
+                    </table>
+            
+			<apex:pageblockbuttons location="top">
+				<apex:commandbutton value="Save" action="{!Save_order}"/>
+				<apex:commandbutton value="Cancel" action="{!cancel}"/>
+			</apex:pageblockbuttons>
+		</apex:pageblock>
+	</apex:form>
+	<apex:form id="frmback" rendered="{!showPage==false}">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Back to Purchase Order" action="{!back}"/>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Account_Code__c</fullName>
+        <label>Account Code</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Balance__c</fullName>
+        <formula>Debit_Balance__c - Credit_Balance__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Balance</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Credit_Balance__c</fullName>
+        <label>Credit Balance</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Debit_Balance__c</fullName>
+        <label>Debit Balance</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Expense__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Expense</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Nominal_Category__c</fullName>
+        <formula>Sub_Category__r.Nominal_Categories__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nominal Category</label>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Nominal_Code__c</fullName>
+        <formula>TEXT( Account_Code__c )</formula>
+        <label>Nominal Code</label>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>P_O__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>P O</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>S_O__c</fullName>
+        <defaultValue>true</defaultValue>
+        <label>S O</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sub_Category__c</fullName>
+        <label>Sub Category</label>
+        <referenceTo>Sub_Category__c</referenceTo>
+        <relationshipLabel>Nominal Accounts</relationshipLabel>
+        <relationshipName>Nominal_Accounts</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Tax_Rate__c</fullName>
+        <label>Tax Rate</label>
+        <referenceTo>Tax_Rate__c</referenceTo>
+        <relationshipLabel>Nominal Accounts</relationshipLabel>
+        <relationshipName>Nominal_Accounts</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <label>Nominal Account</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Sub_Category__c</columns>
+        <columns>Nominal_Code__c</columns>
+        <columns>NAME</columns>
+        <columns>Debit_Balance__c</columns>
+        <columns>Credit_Balance__c</columns>
+        <columns>Balance__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Nominals_with_codee</fullName>
+        <columns>NAME</columns>
+        <columns>Account_Code__c</columns>
+        <columns>Credit_Balance__c</columns>
+        <columns>Debit_Balance__c</columns>
+        <columns>Balance__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Account_Code__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1200</value>
+        </filters>
+        <filters>
+            <field>Account_Code__c</field>
+            <operation>lessOrEqual</operation>
+            <value>1299</value>
+        </filters>
+        <label>Nominals with code ranges 1200</label>
+    </listViews>
+    <nameField>
+        <label>Nominal Account Name</label>
+        <type>Text</type>
+    </nameField>
+    <namedFilters>
+        <fullName>nf_01I900000003OSuEAM_00N90000001qYeOEAU</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <field>Bank_Account__c.Nominal_Account__c</field>
+        <filterItems>
+            <field>Nominal_Account__c.Account_Code__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1200</value>
+        </filterItems>
+        <filterItems>
+            <field>Nominal_Account__c.Account_Code__c</field>
+            <operation>lessOrEqual</operation>
+            <value>1299</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+        <name>Bank Account_Nominal Account</name>
+    </namedFilters>
+    <pluralLabel>Nominal Accounts</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Nominal_Activity</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Nominal Activity</masterLabel>
+        <openType>sidebar</openType>
+        <page>NominalActivity</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

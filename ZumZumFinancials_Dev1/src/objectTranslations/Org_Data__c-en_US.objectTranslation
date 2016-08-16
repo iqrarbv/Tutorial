@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Org Data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Org Data</value>
+    </caseValues>
+    <fields>
+        <label><!-- ref number --></label>
+        <name>ref_number__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

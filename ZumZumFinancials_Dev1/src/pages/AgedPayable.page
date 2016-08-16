@@ -1,0 +1,63 @@
+<apex:page standardcontroller="Ledger__c" Title="Aged Receivables Report" extensions="AgedPayable">
+<apex:pagemessages id="errorMessage"/>
+<script type="text/javascript" src="{!URLFOR($Resource.jsGlobalFunctions)}"></script>
+<script type="text/javascript">
+				function OpenExcelReport()
+				{
+					var startDate = document.getElementById('j_id0:j_id28:j_id29:j_id31').value;
+					var startDate = new Date(startDate);
+					window.open('/apex/Aged_Payable_Excel?reportDate='+startDate.format("yyyy-mm-dd"));
+				}
+				</script>
+<apex:form >
+	<apex:pageblock title="Sales Aged Receivables" >
+				
+					Report Date :<apex:inputfield value="{!leg.Trans_Date__c}" />
+					<apex:commandbutton value="Generate Report" action="{!GenerateReport}" />
+					<input type="button" value="Run Report in Excel" onclick="OpenExcelReport();" class="btn"/>
+					<apex:pageblocksection >
+						<apex:pageblocktable width="100%" value="{!lstPayable}" var="o" rendered="{!showreport}">
+							<apex:column headerValue="Account Number">
+								<apex:outputtext value="{!o.AccountName}"  />
+							</apex:column>
+							<apex:column headerValue="30 Days">
+								<apex:outputtext value="{!o.days30}"  />
+							</apex:column>
+							<apex:column headerValue="60 Days">
+								<apex:outputtext value="{!o.days60}"  />
+							</apex:column>
+							<apex:column headerValue="90 Days">
+								<apex:outputtext value="{!o.days90}"  />
+							</apex:column>
+							<apex:column headerValue="Older">
+								<apex:outputtext value="{!o.olderAmount}"  />
+							</apex:column>
+							<apex:column headerValue="Future">
+								<apex:outputtext value="{!o.featureAmount}"  />
+							</apex:column>
+							<!-- <apex:column headerValue="Total">
+								<apex:outputtext value="{!o.totalAmount}"  />
+							</apex:column>
+							
+							<apex:column headerValue="Balance">
+								<apex:outputtext value="{!o.totalBalance}"  />
+							</apex:column>
+							<apex:column headerValue="Paid Amount">
+								<apex:outputtext value="{!o.PaidAmount}"  />
+							</apex:column>
+							 -->
+						</apex:pageblocktable>
+				</apex:pageblocksection>
+	</apex:pageblock>
+</apex:form>			
+<!-- {!monthlyMap} -->
+<br/>
+<br/>
+<!-- {!oldPaymnets} -->
+<script type="text/javascript">
+	function setFocusOnLoad()
+	{
+		
+	}
+</script>
+</apex:page>

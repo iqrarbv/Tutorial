@@ -1,0 +1,178 @@
+<apex:page controller="controllerBankReceipt_New" id="pg" title="Bank Receipt">
+<apex:stylesheet value="{!$Resource.BankRcpt_CSS}"/>
+<apex:pageMessages id="pgMsg"/> 
+	<apex:form id="theForm">	
+	<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+	<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="pg:theForm:theBlock:hiddenId0" nominalCode_textbox="relatedName0"/>
+	<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="pg:theForm:theBlock:hiddenId1" nominalCode_textbox="relatedName1"/>
+		<apex:pageblock title="New Bank Receipt" id="theBlock">	 	          
+	<table width="100%" class="grid" id="theTable">
+	            <tr>
+	                <td width="42" >
+	                    Bank</td>
+	                <td width="72">
+	                    Ref.</td>
+	                <td width="40">
+	                    N/C</td>
+	                <td width="127">
+	                    N/C Name</td>
+	                <td >
+	                    Details</td>	                
+	                <td width="72" colspan="2">
+	                    Amount</td>
+	                <td width="50">
+	                    VAT</td> 	
+	                <td width="70">
+	                    Tax Rate</td>
+	                <td width="72">
+	                    Tax</td>
+	                <td width="72">
+	                    Net</td>
+	                <td width="120">
+	                    Actions</td>
+	            </tr>
+	            <tr>
+	                <td width="42">
+	                <div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+	                <apex:selectList value="{!BankId}" multiselect="false" size="1" styleClass="dropdown">
+	                	<apex:selectOptions value="{!BankAccount}"/>		                	
+	                </apex:selectList>
+	                </div>
+	                </td>
+	                <td class="ref" width="72">
+	                <apex:inputText value="{!Reference}" styleClass="ref" id="Text25"/>	                    
+	                </td>
+	                <td width="40">
+	                <div class="requiredInput">
+	                		<div class="requiredBlock"></div>
+	                    <input type="text" id="lookup1" class="lookupField" value = "{!NomCode}"/>
+	                </div>
+	  				<apex:inputHidden id="hiddenId1" value="{!NominalId}" /></td>
+	                <td width="127">
+			                <input id="relatedName1" readonly="readonly" type="text" value = "{!NomName}"
+	                            class="lookupName" /></td>  
+	                <td>
+	                <apex:inputTextArea value="{!Details}" cols="40" rows="3" styleClass="detailTxtArea"/>					
+	                </td>
+	                <td width="3" align="right"><apex:outputText value="{!currencySymbol}"/>
+	                <td align="right" width="72">
+	                <div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+	                <apex:inputText value="{!Amount}" styleClass="currency">
+	                <apex:actionSupport event="onchange" action="{!settingRate}" rerender="txtTaxRate,txtNet,txtTax,pgMsg"/> 
+	                </apex:inputText>
+	                </div>	                    
+	                </td>
+	                </td>
+	                <td width="50">
+	                <div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+	                <apex:SelectList value="{!TaxId}" multiselect="false" size="1" id="cmbTaxRate">
+	                	<apex:selectOptions value="{!TaxRate}"/>
+	                	<apex:actionSupport event="onchange" action="{!settingRate}" rerender="txtTaxRate,txtNet,txtTax,pgMsg"/>	                	 	                		                
+	                </apex:SelectList>
+	                </div>	                	               		                	               
+	                 </td>	                                 
+	                 <td align="right" width="70">
+	                <apex:outputText value="{!Rate}%" id="txtTaxRate"/>	                	                               
+					</td>	                	                
+	                <td align="right" width="72">
+	                <apex:outputText id="txtTax" value="{!currencySymbol}{0,number,0.00}">
+	                    <apex:param value="{!Tax}"/>
+	                </apex:outputText>
+	                </td>
+	                <td align="right" width="72">
+	                <apex:outputText id="txtNet" value="{!currencySymbol}{0,number,0.00}">
+	               		<apex:param value="{!Net}" />
+	                </apex:outputText>
+	                </td>
+	                <td width="120" align="center">
+	                    <apex:commandButton id="Button1" value="Add" action="{!Add}" rerender="pgMsg,theForm" /></td>
+	            </tr> 
+	            <tr>
+	                <td colspan="12">
+	                    &nbsp;</td>
+	            </tr> 
+	            <apex:variable var="rowNum" value="!1"></apex:variable>	            	            
+	            <apex:actionregion >
+	            <apex:repeat value="{!lstWrapper}" var="list" id="idTheRepeat">
+	            <tr>
+	                <td width="42">
+	                    <apex:outputText value="{!list.bnkAcctt}" id="val1"/>
+	                    </td>
+	                <td class="style1" width="72">
+	                    <apex:outputText value="{!list.Reference}" id="val2"/>	                    
+	                    </td>
+	                <td width="40">
+	                    <apex:outputText value="{!list.codeNom}" id="val3"/>
+	                    </td>
+	                <td width="127">
+	                    <apex:outputText value="{!list.NomAcctt}" id="val4"/>
+	                    </td>
+	                <td>
+	                    <apex:outputText value="{!list.Details}" id="val5"/>
+	                    </td>	                
+	                <td align="right" width="72" colspan="2">
+	                    <apex:outputText value="{!currencySymbol}{0,number,0.00}" id="val6" >
+	                    	<apex:param value="{!list.Amount}" />
+	                    </apex:outputText>
+	                    </td>
+	                <td width="50">
+	                    <apex:outputText value="{!list.taxName}" id="val7"/> 
+	                    </td>
+	                <td align="right" width="70">
+	                    <apex:outputText value="{0,number,0.00}%" id="val8">
+	                    	<apex:param value="{!list.Rate}" />
+	                    </apex:outputText>
+	                    </td>
+	                <td align="right" width="72">
+	                    <apex:outputText value="{!currencySymbol}{0,number,0.00}" id="val9">
+	                    	<apex:param value="{!list.Tax}" />
+	                    </apex:outputText>
+	                    </td>
+	                <td align="right" width="72">
+	                    <apex:outputText value="{!currencySymbol}{0,number,0.00}" id="val10">
+	                    	<apex:param value="{!list.Net}" />
+	                    </apex:outputText>
+	                    </td>
+	                <td width="120" align="center">
+	                    <apex:commandLink value="Edit" action="{!editItem}" id="idEdit" rerender="pgMsg,theForm">-
+	                    	<apex:param name="paramEdit" value="{!list.index}"/>
+	                    </apex:commandLink> 	
+	                    <apex:commandLink value="Delete" id="idDelete" action="{!deleteItem}" onclick="return deletionResponse();">
+	                       <apex:param name="paramDelete" value="{!list.index}"/> 		                       
+	                    </apex:commandLink>
+	                    </td>
+	            </tr> 
+	            </apex:repeat>  
+	            </apex:actionregion>	                        
+	            </table>        
+		<p>&nbsp;</p>       
+	        <apex:pageblockbuttons >
+	        	<apex:commandButton value="Save" action="{!Save}" onclick="setBunload(false);"/>  
+	        	<apex:commandButton value="Cancel" action="{!Discard}" onclick="setBunload(false);"/>	        	
+	        </apex:pageblockbuttons>
+	        
+		</apex:pageblock>
+	</apex:form>
+	<Script type="text/javascript">
+		function deletionResponse()
+		{
+			var deletionResponse = confirm("Are you sure to delete this entry?");			 
+			if (deletionResponse == false)
+				return false;									
+			setBunload(false);								
+		}
+		function unloadMessage()
+		{
+	        message = "Are you sure you want to navigate away from this page?"
+	        return message;
+	    }
+	    function setBunload(on)
+	    {
+	        window.onbeforeunload = (on) ? unloadMessage : null;                
+	    }
+	    setBunload(true);    
+	</Script>
+</apex:page>

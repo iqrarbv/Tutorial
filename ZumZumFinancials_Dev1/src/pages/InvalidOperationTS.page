@@ -1,0 +1,5 @@
+<apex:page standardController="Time_Sheet_Detail__c" extensions="InvalidOperationTS" title="Invalid Operation" action="{!init}" >
+<!-- Begin Default Content REMOVE THIS -->
+<apex:pagemessages id="errorMessages" />
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

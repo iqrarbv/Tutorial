@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <icon>Graphics_Pack_for_Tabs/x_office_spreadsheet_png1.png</icon>
+    <label>Financial Reports</label>
+    <mobileReady>false</mobileReady>
+    <motif>Custom203: Custom</motif>
+    <page>ZF_Reports</page>
+</CustomTab>

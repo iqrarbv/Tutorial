@@ -1,0 +1,6 @@
+<apex:page standardController="Time_Sheet__c" extensions="DeleteTimeSheet" title="Delete Time Sheet" action="{!init}">
+<apex:pagemessages id="errorMessages" />
+<apex:form >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <apex:commandbutton action="{!back}" value="Back to Time Sheet" />
+</apex:form>
+</apex:page>

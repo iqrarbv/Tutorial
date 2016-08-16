@@ -1,0 +1,172 @@
+<apex:page >
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+	<apex:pageblock title="Supplier Payment">
+<table width="100%" class="grid">
+		        <tr>
+		            <td width="60" >
+		                Bank</td>
+		            <td width="210" >
+                    <select id="select20" name="D8">
+                        <option value="0">00001 - Bank 1</option>
+                        <option value="17.5">00567 - Bank 2</option>
+                        <option value="20">00567001 - Bank 3</option>
+                    </select>
+                    </td>
+		            <td >&nbsp;
+                  </td>
+		            <td width="40" >
+		                Date</td>
+		            <td width="72"  align="right">
+		                <input type="text" class="date" id="Text3" value="28/12/2007" /></td>
+		            <td width="60" >
+	                  Cheque</td>
+		            <td width="72"  align="right">
+		                <input type="text" class="ref" id="Text34" value="CHQ11100" /></td>
+		        </tr>
+		        <tr>
+		            <td width="60" class="style1">
+		                Payee</td>
+		            <td width="210" class="style1">
+		                <input id="relatedName1" class="lookupName" readonly="readonly" type="text" />
+                        <apex:image url="{!URLFOR($Resource.LookupImage)}"/></td>
+		            <td class="style1">
+                  </td>
+		            <td width="40" class="style1">
+		                Pay</td>
+		            <td width="72" class="style1" align="right">
+		                <input type="text" class="currency" id="Text4" value="470.00" /></td>
+		            <td width="60" colspan="1" class="style1">
+                </td>
+		            <td width="72" colspan="1" class="style1" align="right">
+                  </td>
+		        </tr>
+  </table>		    
+<p></p>
+			<table width="100%" class="grid">
+				<tr>
+					<td width="40" align="left"><b>No.</b></td>
+					<td width="30" align="left"><b>Type</b></td>
+					<td align="left"><b>A/C</b></td>
+					<td width="70" align="left"><b>Date</b></td>
+					<td width="80" align="left"><b>Ref</b></td>
+					<td align="left"><b>Details</b></td>
+					<td width="50" align="left"><b>T/C</b></td>
+					<td width="60" align="left"><b>Amount</b></td>
+				  <td width="72" align="left"><b>Receipt</b></td>
+					<td width="72" align="left"><b>Discount</b></td>
+				</tr>			
+				<tr>
+					<td width="40">323						
+					</td>
+					<td width="30">PC</td>
+					<td>UNI001</td>						
+					<td width="70">28/10/2007						
+					</td>
+					<td width="80">69
+					</td>
+					<td>Calculator-Desktop						
+					</td>
+					<td width="50">T1						
+					</td>
+					<td width="60" align="right">103.64						
+					</td>
+					<td width="72" align="right">
+                    <input type="text" class="currency" id="Text33"  value="103.64"  /></td>
+					<td width="72" align="right">
+                  <input type="text" class="currency" id="Text38"  value="0.00"  /></td>
+				</tr>
+				<tr>
+					<td width="40">324						
+					</td>
+					<td width="30">Pl											
+					</td>
+					<td>UNI001</td>						
+					<td width="70">28/10/2007						
+					</td>
+					<td width="80">69
+					</td>
+					<td>PC Combo Pack 2						
+					</td>
+					<td width="50">T1						
+					</td>
+					<td width="60" align="right">1496.95						
+					</td>
+					<td width="72" align="right">
+                    <input type="text" class="currency" id="Text49"  
+                            value="1496.95"  /></td>
+					<td width="72" align="right">
+                  <input type="text" class="currency" id="Text39"  value="0.00"  /></td>
+				</tr>
+				<tr>
+					<td width="40">325</td>
+					<td width="30">Pl											
+					</td>
+					<td>UNI001</td>						
+					<td width="70">28/10/2007						
+					</td>
+					<td width="80">69
+					</td>
+					<td>Flip Chart-A1 Pad						
+					</td>
+					<td width="50">T1						
+					</td>
+					<td width="60" align="right">110.54						
+					</td>
+					<td width="72" align="right">
+                    <input type="text" class="currency" id="Text50"  value="0.00"  /></td>
+					<td width="72" align="right">
+                  <input type="text" class="currency" id="Text37"  value="0.00"  /></td>
+				</tr>	
+				<tr>
+					<td width="40">326</td>
+					<td width="30">Pl											
+					</td>
+					<td>UNI001</td>						
+					<td width="70">28/10/2007						
+					</td>
+					<td width="80">69
+					</td>
+					<td>Filing Cabinet						
+					</td>
+					<td width="50">T1						
+					</td>
+					<td width="60" align="right">74.85						
+					</td>
+					<td width="72" align="right">
+                    <input type="text" class="currency" id="Text51"  value="0.00"  /></td>
+					<td width="72" align="right">
+                  <input type="text" class="currency" id="Text40"  value="0.00"  /></td>
+				</tr>		
+				</table>
+  <p>&nbsp;</p>
+            <table width="100%" class="grid">
+            <tr>
+                
+                <td align="right">&nbsp;
+              </td>
+                
+                <td align="right" width="120">
+                    <strong>Bank Balance</strong></td>
+                
+                <td width="72" align="right">
+		                <input type="text" class="currency" id="Text44" 
+                             value="17.50"  readonly="readonly"/></td>
+                <td width="120" align="right">
+		                <strong>Analysis Total</strong></td>
+                <td width="72" align="right">
+		                <input type="text" class="currency" id="Text45" 
+                             value="17.50"  readonly="readonly"/></td>
+            </tr>
+
+            </table>
+        <apex:pageblockbuttons >
+      <input type="submit" value="Save" />
+        	<input type="submit" value="Discard" />
+        	<input type="submit" value="Pay in full" />
+        	<input type="submit" value="Automatic" />
+        	<!-- input type="submit" value="Calc. Net" /-->
+        </apex:pageblockbuttons>
+	</apex:pageblock>
+</apex:page>

@@ -1,0 +1,190 @@
+<apex:page ></apex:page>
+<!-- 
+<apex:page standardController="Purchase_Order__c" extensions="PurchaseOrderController" sidebar="false" title="New Purchase Order">
+<apex:pagemessages id="apexMsg" />
+	<apex:form >
+	<apex:sectionHeader title="Purchase Order"/>
+		<apex:pageblock id="orderSection">
+			<apex:pageBlockSection columns="2" >
+		          <apex:inputField Id="Supplier" value="{!PurchaseOrders.Supplier_Reference__c}" />
+		          <apex:pageblockSectionItem >
+		            <apex:outputText value="Placed By" />
+		            <apex:outputText value="{!UserName}" />
+		          </apex:pageblockSectionItem>
+		           <apex:pageblockSectionItem >
+		
+		            <apex:outputLabel for="grd">Account</apex:outputLabel>
+		                       <apex:panelgrid columns="2" id="AccName">
+				<apex:panelgroup id="pAccName">
+		            <div class="requiredInput">
+		              <div class="requiredBlock"></div>
+		              <apex:inputField Id="Account" value="{!PurchaseOrders.Account__c}" />
+		            </div>
+		            </apex:panelgroup></apex:panelgrid>
+		          </apex:pageblockSectionItem>
+		          <apex:inputField Id="OrderDate" value="{!PurchaseOrders.Order_Date__c}" required="true" />
+		      </apex:pageBlockSection>
+			<apex:pageBlockButtons location="top">
+			<apex:commandbutton value="Save" action="{!save_con}" />
+			<apex:commandbutton value="Cancel" action="{!cancel_con}" />
+			</apex:pageBlockButtons>
+		</apex:pageblock>
+		<apex:sectionHeader title="PO Line Item"/>
+		<apex:pageblock id="lineitemsinfo" title="Purchase Line Items">
+		<apex:commandbutton value="Add More" action="{!addproductnewproductitem}" immediate="true" />
+			<table width="96%" cellpadding="0" cellspacing="0">
+			  <tr>
+			  	<td width="4%"><strong>S.No</strong></td>
+			    <td width="25%" height="25"><strong>Expense Type (Nominal Code)</strong></td>
+			    <td width="11%"><strong>Narrative</strong></td>
+			    <td width="5%"><strong>Qty</strong></td>
+			    <td></td>
+			    <td width="7%"><strong>Amount</strong></td>
+			    <td width="9%"><strong>Tax Rate</strong></td>
+			    <td></td>
+			    <td width="9%"><strong>Tax Amount</strong></td>
+			    <td width="13%"><strong>Project</strong></td>
+			    <td width="11%"><strong>Sub Project</strong></td>
+			    <td></td>
+			    <td width="6%"><strong>Total</strong></td>
+			    <td width="6%"><strong> </strong></td> 
+			  </tr>
+		  <apex:repeat value="{!poItems}" var="o">
+			<tr>
+			  	<td >{!o.purchaseOrderLineItems.Serial_No__c}</td>
+			    <td>
+			    	<div class="requiredInput">
+            		<div class="requiredBlock"></div>
+			    	<apex:selectlist value="{!o.purchaseOrderLineItems.Nominal_Account__c}" multiselect="false" size="1">
+						<apex:selectoptions value="{!NominalAccounts}" />
+						<apex:actionsupport event="onchange" action="{!selectedTax}" rerender="lineitemsinfo , apexMsg"  />
+					</apex:selectlist>
+					</div>
+			    </td>
+			    <td>
+			    	<div class="requiredInput">
+            		<div class="requiredBlock"></div>
+			    	<apex:inputfield value="{!o.purchaseOrderLineItems.Narrative__c}" onclick="itemClicked(this.id , this.value);" onchange="itemValueChanged(this.id , this.value);"/>
+			    	</div>
+			    </td>
+			    <td><apex:inputfield value="{!o.purchaseOrderLineItems.Quantity__c}" onchange="validatefield_quantity(this.id , this.value , this.title)" /></td>
+			    <td>{!currencySymbol}&nbsp;&nbsp;</td>
+			    <td><apex:inputfield value="{!o.purchaseOrderLineItems.Amount__c}"  onchange="validatefield_Amount(this.id , this.value , this.title)" /></td>
+			    <td>
+			    	<div class="requiredInput">
+            		<div class="requiredBlock"></div>
+			    	<apex:selectlist value="{!o.purchaseOrderLineItems.Tax_Rate__c}" multiselect="false" size="1"  id="taxrateId">
+						<apex:selectoptions value="{!AllTaxes}" />
+						<apex:actionsupport event="onchange" action="{!changeTaxRate}" rerender="lineitemsinfo , apexMsg" />
+					</apex:selectlist>
+					</div>
+			    </td>
+			    <td>{!currencySymbol}&nbsp;&nbsp;</td>
+			    <td><apex:inputfield value="{!o.purchaseOrderLineItems.Total_VAT__c}" /></td>
+			    <td>
+			    	<div class="requiredInput">
+            		<div class="requiredBlock"></div>
+			    	<apex:selectlist value="{!o.purchaseOrderLineItems.Project__c}" multiselect="false" size="1"  id="projectId" >
+						<apex:selectoptions value="{!AllProjects}" />
+					<apex:actionsupport event="onchange" action="{!changeSubProject}" rerender="lineitemsinfo , apexMsg" >
+						<apex:param name="project" value="{!o.purchaseOrderLineItems.Project__c}" />
+					</apex:actionsupport>	
+					</apex:selectlist>
+					</div>
+			    </td>
+			    <td>
+				    <apex:selectlist value="{!o.purchaseOrderLineItems.Sub_Project__c}" multiselect="false" size="1"  id="subProjectId">
+						<apex:selectoptions value="{!o.SubProjectList}" />
+					</apex:selectlist>
+				</td>
+				<td>{!currencySymbol}&nbsp;&nbsp;</td>
+			    <td><apex:inputfield value="{!o.purchaseOrderLineItems.Total_Amount__c}"  /></td>
+			     <td>
+			    <apex:commandbutton value="Delete" action="{!deleteLineItem}" rerender="lineitemsinfo,apexMsg" >
+			    	<apex:param name="deleteId" value="{!o.purchaseOrderLineItems.Serial_No__c}" />
+			    </apex:commandbutton>
+			    </td> 
+		  	</tr>
+			</apex:repeat>
+			</table>
+		</apex:pageblock>
+		<table width="105%" >
+	          <tr>
+	            <td width="90%" colapsan="2"  align="right"><strong>Net Total: </strong></td>
+	            <td width="10%" >{!wtAmount}</td>
+	          </tr>
+	          <tr>
+	            <td width="90%" colapsan="2"  align="right"><strong>Total Tax: </strong></td>
+	            <td width="10%" >{!totalTax}</td>
+	          </tr>
+	          <tr>
+	            <td width="90%" colapsan="2"  align="right"><strong>Total Amount: </strong></td>
+	            <td width="10%" >{!PoAmount}</td>
+	          </tr>
+	    </table>
+	</apex:form>
+	<script type = "text/javascript">
+	var clicked  = false;
+		function validatefield_quantity(fieldsName , value , title)
+		{
+			//alert (fieldsName);
+			//var value = document.getElementById(fieldsName).getAttribute("value");
+			//alert (value);
+			if (value > 0 )
+			{
+				//alert ('in if block ');
+				//return true ;
+			}
+			else 
+			{
+				document.getElementById(fieldsName).focus();
+				alert( 'Quantity Must be greater then 1') ;
+				document.getElementById(fieldsName).value = 1;
+			}
+		}
+		function validatefield_Amount(fieldsName , value , title)
+		{
+			//alert (fieldsName);
+			//var value = document.getElementById(fieldsName).getAttribute("value");
+			//alert (value);
+			if (value > 0 )
+			{
+				//alert ('in if block ');
+				//return true ;
+			}
+			else 
+			{
+				document.getElementById(fieldsName).focus();
+				alert( 'Amount Must be greater then 1') ;
+				document.getElementById(fieldsName).value = 1;
+			}
+		}
+		function itemClicked(Id , value)
+		{
+			if (clicked == false)
+			{
+				document.getElementById(Id).value = '';
+				document.getElementById(Id).focus();
+				clicked = true ;
+			}
+			
+		}
+		function itemValueChanged(Id , value)
+		{
+			//alert(value);
+			if (value == "" || value == null || !isNaN(value) || value.charAt(0) == ' ' || value.charAt(0) == '' || typeof(value)=="undefined")
+			{
+				document.getElementById(Id).focus();
+				alert('Please Enter Item Name');
+				return false;	
+			}
+			else 
+			{
+				//document.getElementById(Id).focus();
+				//alert('Enter Item Name from else');
+				return true;
+			}
+		}
+	</script>
+</apex:page>
+ -->

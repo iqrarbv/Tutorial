@@ -1,0 +1,10 @@
+<messaging:emailTemplate subject="Invoice Due Reminder" recipientType="Contact" relatedToType="Account">
+<messaging:htmlEmailBody >
+<p>Dear {!Recipient.Name},</p>
+<p>Following is the list of invoices due for payment. Please make the required payment.</p>
+<p>Thanks</p>
+</messaging:htmlEmailBody>
+<messaging:attachment renderAs="PDF" filename="InvoicesDue.pdf">
+<c:ReminderAttachment AccountId="{!relatedTo.Id}" BeforeOrAfter="Before" id="attachment" NumberOfDays="0" />
+</messaging:attachment>
+</messaging:emailTemplate>

@@ -1,0 +1,20 @@
+<apex:page standardController="Time_Sheet__c" extensions="SendTimeSheettoEmail" action="{!init}" title="Send Time Sheet as Email" >
+<apex:pagemessages id="errorMessages" />
+<apex:form >
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Back To Time Sheet" action="{!back}" rendered="{!sendBack}" />
+</apex:form>
+<apex:form id="mainForm" rendered="{!showPage}" >
+<apex:pageblock title="Send Email" rendered="{!sendBack=false}"  >
+	<br/>
+	Please Enter Email Addresses:
+	<br/>
+	<apex:inputtextarea value="{!emailAddresses}" style="width:350px;" />
+	<br/>
+	<br/>
+	<apex:inputCheckbox value="{!sendEmailtoViewer}"/> Send me a copy of the email
+	<br/>
+	<br/>
+	<apex:commandbutton value="Send Email" action="{!sendEmail}"/>
+</apex:pageblock>
+</apex:form>
+</apex:page>

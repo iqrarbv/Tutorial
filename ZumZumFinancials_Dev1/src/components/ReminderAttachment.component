@@ -1,0 +1,24 @@
+<apex:component controller="ReminderAttachmentController"
+	access="global">
+	<apex:attribute name="AccountId" Type="string" assignTo="{!AccountId}"
+		required="True" description="Account Id for fetching Invoice records." access="global"/>
+	<apex:attribute name="NumberOfDays" Type="integer"
+		assignTo="{!NumberOfDays}" required="True"
+		description="No. of days before or after invoice due date for fetching records. 0 means on invoice due date" access="global"/>
+	<apex:attribute name="BeforeOrAfter" Type="string"
+		assignTo="{!BeforeOrAfter}" required="True"
+		description="Before or after invoice due date for fetching records." access="global"/>
+	<div valign="top" align="center" style="font-family:{!HTMLENCODE(template.Font_Face__c)};font-weight:bold;font-size:{!HTMLENCODE(template.Font_Size__c)};" escape="false">{!HTMLENCODE(template.Heading_Text__c)}</div>
+	<apex:datatable value="{!InvoiceList}" var="invoice">
+	<div valign="top" align="center" style="font-family:{!HTMLENCODE(invoice.Invoice_Template__r.Font_Face__c)};font-weight:bold;font-size:{!HTMLENCODE(invoice.Invoice_Template__r.Font_Size__c)};" escape="false">{!HTMLENCODE(invoice.Invoice_Template__r.Heading_Text__c)}</div>
+		<apex:column headerValue="Invoice No." 
+			value="{!invoice.Name}"/>
+		<apex:column headerValue="Invoice Due Date"
+			value="{!invoice.Invoice_Due_Date__c}" />
+		<apex:column headerValue="Invoice Amount"
+			value="{!invoice.Total_Net__c}" />
+	</apex:datatable>
+	<div style="position:absolute; bottom:{!template.Margins_top_bottom__c}in; font-family:{!template.Font_Face__c}; text-align:center;font-size:{!template.Font_Size__c}px; width:100%;" align="center" escape="false">
+		{!template.Footer_Text__c}
+	</div>	  
+</apex:component>

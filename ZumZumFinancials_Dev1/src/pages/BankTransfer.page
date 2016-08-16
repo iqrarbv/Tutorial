@@ -1,0 +1,94 @@
+<apex:page controller="controllerBankTransfer" title="Bank Transfer" id="pg"> 
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.BnkTrnsfr_CSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+<apex:PageMessages id="pgMsg"/>
+<apex:form >
+		<apex:pageblock title="Bank Transfer">
+				<table width="100%" class="grid">
+					<tr>
+						<td width="100">
+							Account from
+						</td>
+						<td>		                    
+						<div class="requiredInput">
+	                		<div class="requiredBlock"></div>
+		                    <apex:selectList value="{!fromID}" multiselect="false" size="1">
+		                    	<apex:selectOptions value="{!FromBankAccount}"/> 
+		                    </apex:selectList>
+		                </div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Account to
+						</td>
+						<td>	
+						<div class="requiredInput">
+	                		<div class="requiredBlock"></div>	                   
+		                    <apex:selectList value="{!toID}" multiselect="false" size="1">
+		                    	<apex:selectOptions value="{!ToBankAccount}"/>
+		                    </apex:selectList>
+		                </div>
+						</td>
+					</tr>				
+				</table>
+				<table width="100%" class="grid">
+				<tr>
+					<td width="100">
+						Reference
+					</td>
+					<td width="72">
+						<apex:inputText value="{!objectBankTransfer.Reference__c}" styleClass="ref" />	
+
+				
+					</td>
+					<td width="100"> 
+						Description 
+					</td>
+					<td>
+						<apex:inputTextarea value="{!objectBankTransfer.Description__c}" cols="35" rows="3" />
+						
+					</td>
+				</tr>
+				<tr>
+					<td width="100"> 
+						Date
+					</td>
+					<td width="72">
+					<div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+						<apex:inputField styleClass="date" value="{!objectBankTransfer.Date__c}"/>		
+					</div>			
+					</td>
+					<td width="70">
+						Payment Value
+					</td>
+					<td>
+					<div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+						<apex:inputText styleClass="currency" value="{!amount}"/>
+					</div>
+					</td>
+				</tr>		
+				</table>
+        		
+		<apex:pageBlockbuttons >			
+				<apex:commandbutton value="Save" action="{!Save}" rerender="pgMsg" onclick="setBunload(false);"/>
+        		<apex:commandbutton value="Cancel" action="{!Discard}" onclick="setBunload(false);"/>
+        </apex:pageBlockbuttons>
+		</apex:pageBlock>
+	</apex:form>
+	<script type="text/javascript">
+	function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    function setBunload(on){
+        window.onbeforeunload = (on) ? unloadMessage : null;
+    }
+    setBunload(true);		
+	</script>
+</apex:page>

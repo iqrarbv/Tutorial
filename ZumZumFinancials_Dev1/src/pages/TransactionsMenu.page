@@ -1,0 +1,32 @@
+<apex:page id="pg">
+<apex:stylesheet value="{!URLFOR($Resource.ZF_BtnCSS)}"/>
+
+<apex:pageblock >
+<apex:form >
+<apex:pageblocksection title="Transactions" columns="4">
+<table align="center" width="100%">
+    <tr>
+        <td>
+<input type="button" class="roundbutton" value="New Journal" onclick="window.location='/apex/GeneralJournal'" /></td>        
+        <td>
+<input type="button" class="roundbutton" value="VAT Return" onclick="window.location='/{!$ObjectType.VAT_Return__c}'" /></td>
+    
+        <td>
+<input type="button" class="roundbutton" value="VAT Transfer" onclick="window.location='/apex/VAT_Transfer'" /></td>
+<td></td>
+        
+</tr>
+</table>
+</apex:pageblocksection>
+<apex:pageblocksection title="Ledger Amendments" columns="2" >
+<table style="width:100%;">
+<tr>				
+	 <td>
+	 <input type="button" class="roundbutton" value="Amend ledger entries" onclick="window.location='/00O90000001e5VB'"/>
+	 </td>
+</tr>
+</table>
+</apex:pageblocksection>
+</apex:form>
+</apex:pageblock>
+</apex:page>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Time Sheet Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Time Sheet Details</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Time Sheet Details --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Activity Code --></label>
+        <name>Activity_Code__c</name>
+        <relationshipLabel><!-- Time Sheet Details --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Created Date --></label>
+        <name>Created_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date String --></label>
+        <name>Date_String__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Day --></label>
+        <name>Day__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name of business passenger --></label>
+        <name>Name_of_business_passenger__c</name>
+    </fields>
+    <fields>
+        <label><!-- Narrative --></label>
+        <name>Narrative__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Time Sheet Details (Project) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Time Sheet --></label>
+        <name>Time_Sheet__c</name>
+        <relationshipLabel><!-- Time Sheet Details --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Total Hours --></label>
+        <name>Total_Hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- UID --></label>
+        <name>UID__c</name>
+    </fields>
+    <layouts>
+        <layout>Time Sheet Detail Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

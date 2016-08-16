@@ -1,0 +1,24 @@
+<apex:page standardcontroller="Ledger__c" extensions="CorrectionsController" id="pg">
+<apex:pageMessages id="pgMsgs"/>
+	<apex:form id="frm">
+		<apex:PageBlock >
+			<apex:pageBlockTable value="{!listLedger}" var="lst" columns="11">
+				<apex:column >
+					<apex:commandButton value="Mark" action="{!Mark}" id="btnMrk" rerender="frm,pgMsgs">
+						<apex:param name="num" value="{!lst.Name}" />
+					</apex:commandButton>
+				</apex:column> 
+				<apex:column value="{!lst.Trans_No__c}" id="cl1"/>
+				<apex:column value="{!lst.Type__c}" id="cl2"/>
+				<apex:column value="{!lst.Sub_Account__c}" id="cl3"/>
+				<apex:column value="{!lst.Nominal__c}" id="cl4"/>
+				<apex:column value="{!lst.Details__c}" id="cl5"/>
+				<apex:column value="{!lst.Reference__c}" id="cl6"/>
+				<apex:column value="{!lst.Net__c}" id="cl7"/>
+				<apex:column value="{!lst.Tax__c}" id="cl8"/>
+				<apex:column value="{!lst.Tax_Code__c}" id="cl9"/>
+				<apex:column value="{!lst.Amount__c}" id="cl10"/>			
+			</apex:pageBlockTable>		
+		</apex:PageBlock>
+	</apex:form>
+</apex:page>

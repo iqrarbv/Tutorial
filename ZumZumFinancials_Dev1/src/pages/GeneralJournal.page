@@ -1,0 +1,169 @@
+<apex:page controller="GeneralJournalController" id="Journal" title="New Journal's Entry">
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.NewJournal_Logo}"/>
+
+<apex:pageMessages id="pmsgs"/>
+<apex:form id="frm">
+	<c:AutoCompleteNomCodes autocomplete_textbox="lookup" selectedvalue_textbox="Journal:frm:pb:hiddenId" nominalCode_textbox="relatedName"/>
+		<apex:pageblock title="New Journals Entry" id="pb">
+			    <table width="100%">
+			        <tr>
+			            <td width="100">
+			                Reference</td> 
+			            <td width="150">
+			                <apex:inputText id="Text1" styleclass="ref" value="{!Reference}"/></td>			                
+			            <td>
+			                &nbsp;</td>
+			            <td width="60" align="right">
+			                Balance</td>
+			            <td width="80">			                			               
+			                <apex:outputText id="Text3" value="{!currencySymbol}{0, number, 0.00}" >			                	 
+			                	<apex:param value="{!Balance}"/> 
+			                </apex:outputText> 			                
+			                </td>
+			        </tr>
+			        <tr> 
+			            <td width="100">
+			                Posting Date</td>
+			            <td width="150">
+			            <div class="requiredInput">
+	                		<div class="requiredBlock"></div>
+			                <apex:inputField id="Text2" styleclass="date" value="{!objectLookup.Date__c}"/>
+			                </div>
+			                </td>			        
+			            <td>
+			                &nbsp;</td>
+			            <td width="60">
+			                &nbsp;</td>
+			            <td width="80">
+			                &nbsp;</td>
+			        </tr>
+			    </table>		    
+	    <p></p>
+	    
+	        <table width="100%" cellpadding="0" cellspacing="0" class="grid" id="tbl1">
+	            
+	            <tr>
+	                <td width="40">
+	                    N/C</td>
+	                <td width="70">
+	                    Name</td>
+                    <td width="60">
+                    Detail</td>
+	                <td width="50">
+	                    VAT</td>	                
+	                <td  width="70" align="right" colspan="2">
+	                    Debit</td>	                
+	                <td  width="60" align="right" colspan="2">
+	                    Credit</td>
+	                <td width="80">
+	                    Action</td>
+	            </tr>	
+	            <tr> 
+	                <td width="40">
+	                <div class="requiredInput"> 
+	                <div class="requiredBlock"></div>
+	                    <input class="lookupField" id="lookup" type="text" value="{!codeGeneralJournal}"/></div>	
+	                    	<apex:inputHidden id="hiddenId" value="{!ncId}"/>	  					
+	  					</td>
+	                <td><input Class="lookupName" id="relatedName" readonly="readonly" type="text" value="{!nameGeneralJournal}"/></td>	                	               
+	                <td><apex:inputTextArea value="{!Narrative}" cols="38" rows="3" /> </td>
+	                <td width="50">
+	                <div class="requiredInput">
+	                <div class="requiredBlock"></div>
+		                <apex:selectList styleclass="dropdown" value="{!objectLookup.Tax_Rate__c}" multiselect="false" size="1">
+							<apex:selectOptions value="{!TaxRate}"/>
+						</apex:selectList>	         
+					</div>          	                    
+	                </td> 
+	                <td width="3" align="right"><apex:outputText value="{!currencySymbol}"/>
+	                <td  width="50" align="right"><apex:inputText styleClass="currency" id="Text50" value="{!Debit}"  styleclass="currency" /></td></td>
+	                <td width="3" align="right"><apex:outputText value="{!currencySymbol}"/>
+	                <td  width="60" align="right"><apex:inputText styleClass="currency" id="Text51" value="{!Credit}"  styleclass="currency" /></td></td>
+	                <td> <apex:commandButton id="Button2" value="Add" action="{!Add}" rerender="pmsgs,frm"></apex:commandButton></td>
+	            </tr> 	            	                        	            	          
+	            <apex:actionregion >
+	            <apex:repeat value="{!listGeneralJournal}" var="listJournal" id="idTheRepeat"> 
+	            	<tr>	            	
+		                <td width="40">		                
+							<apex:outputText value="{!listJournal.Code}" id="idValue1" />							   
+						</td>          
+		                <td>
+		                	<apex:outputText value="{!listJournal.Name}" id="idValue2" />
+		                </td>		            
+		                <td>
+	                    <apex:outputText value="{!listJournal.Narrative}" id="idValue3" /> </td>    
+		                <td width="5">
+		                 <apex:outputText value="{!listJournal.Tax}" id="idValue4"/>   </td>		                
+		                <td width="60" align="right" colspan="2">
+		                    <apex:outputText value="{!currencySymbol}{0, number, 0.00}" id="idValue5">
+		                    	<apex:param value="{!listJournal.Debit}" />
+		                    </apex:outputText>
+		                </td>		                
+		                <td  width="60" align="right" colspan="2">
+		                    <apex:outputText value="{!currencySymbol}{0, number, 0.00}" id="idValue6">
+		                    	<apex:param value="{!listJournal.Credit}" />
+		                    </apex:outputText>		                   
+		                </td>
+		                <td width="80">		                
+		               	<apex:commandLink value="Edit " action="{!editItem}" id="idEdit" rerender="pmsgs,frm">
+		                    	<apex:param name="paramEdit" value="{!listJournal.ind}"/>
+		                    </apex:commandLink>
+		                    <apex:commandLink value=" Delete" id="idDelete" action="{!deleteItem}"  onclick="return deletionResponse();" >
+		                    	<apex:param name="paramDelete" value="{!listJournal.ind}"/> 				                     
+		                    </apex:commandLink> 
+		                </td>               
+	            	</tr> 
+	            </apex:repeat>		
+	            </apex:actionregion>			            
+	            <tr>
+	                <td colspan="4">
+	                    &nbsp;</td>
+	                    
+	                <td  width="60" align="right" colspan="2">			                
+	                        <apex:outputText id="Text48" value="{!currencySymbol}{0, number, 0.00}"  style="text-align: right;">
+			        			<apex:param value="{!totalDebit}" />
+			        		</apex:outputText>			        
+	                        </td>
+	                
+	                <td  width="60" align="right" colspan="2">			                 
+			                <apex:outputText value="{!currencySymbol}{0, number, 0.00}" id="Text52" style="text-align: right;">
+			                	<apex:param value="{!totalCredit}"/>
+			                </apex:outputText>
+			                </td>
+	                <td width="80">
+	                    &nbsp;</td>
+	            </tr>
+	            <tr>
+	                <td colspan="9">
+	                    &nbsp;</td>
+	            </tr>	                      
+	        </table>
+	        
+	        <!--  <apex:actionFunction name="doControllerSave" action="{!save}" rerender="jspanel"/>-->
+	        <apex:pageblockbuttons >
+	        	<apex:commandButton value="Save" id="idSave" action="{!save}" onclick="setBunload(false);"/>
+	        	<apex:commandButton value="Cancel" action="{!Discard}" id="idDiscard" onclick="setBunload(false);"/>	        	
+	        </apex:pageblockbuttons>
+		</apex:pageblock>
+	</apex:form>
+	<Script type="text/javascript"> 		
+	function deletionResponse()
+	{
+		var deletionResponse = confirm("Are you sure to delete this entry?");			 
+		if (deletionResponse == false)
+			return false;			
+		setBunload(false);								
+	}	
+	function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    function setBunload(on)
+    {
+        window.onbeforeunload = (on) ? unloadMessage : null;                
+    }
+    setBunload(true);    
+    </Script>    
+</apex:page>

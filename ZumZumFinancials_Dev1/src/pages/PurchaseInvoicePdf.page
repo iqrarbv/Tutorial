@@ -1,0 +1,102 @@
+<apex:page renderas="pdf" standardcontroller="Purchase_Invoice__c" Title="Purchase Invoice Pdf" extensions="PurchaseInvoicePdf">
+<apex:pagemessages id="errorMessages" />
+<table cellpadding="0" cellspacing="0" border="0" class="mytab">
+<tr><td height="800">
+<div style="height:10in; position:relative; margin:0in {!invoiceTmpl.Margins_left_right_Inches__c}in;" >
+<div style="position:relative; top:{!invoiceTmpl.Margins_top_bottom__c}in;">
+<apex:form rendered="{!showPdf}">
+<div valign="top" align="center" style="font-family:{!invoiceTmpl.Font_Face__c};font-weight:bold;font-size:{!invoiceTmpl.Font_Size__c};">{!invoiceTmpl.Heading_Text__c}</div>
+<div style="text-align: center;"><apex:image url="{!imageUrl}" /></div>
+<apex:pageblock title="Purchase Invoice Info" id="pbPurchaseInvoice">
+			<table  width="96%" cellpadding="0" cellspacing="" >
+			  <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>Owner Name:</strong></td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>{!POInvoiceInfo.Owner.Name}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px">&nbsp;</td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px">&nbsp;</td>
+	          </tr>    
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>PI Number</strong></td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>{!POInvoiceInfo.Name}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>Invoice Status</strong></td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>{!POInvoiceInfo.Status__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>Invoice Due Date</strong></td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>{!orderDate}
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>Total Net</strong></td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>
+	          	<apex:outputtext value="{0, number, 0.00}" >
+            	<apex:param value="{!POInvoiceInfo.Total_Net__c}" />
+            		</apex:outputtext>
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>Total VAT</strong></td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>
+	          	<apex:outputtext value="{0, number, 0.00}" >
+            	<apex:param value="{!POInvoiceInfo.Total_Tax__c}" />
+            		</apex:outputtext>
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>Total Gross</strong></td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><strong>
+	          		<apex:outputtext value="{0, number, 0.00}" >
+            			<apex:param value="{!POInvoiceInfo.Total_Gross__c}" />
+            		</apex:outputtext>
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px">&nbsp;</td>
+	          <td style="font-size:{!invoiceTmpl.Font_Size__c}px">&nbsp;</td>
+	          </tr>
+	        </table>
+		</apex:pageblock>
+<apex:pageblock title="Line Item Info">	
+		<table width="100%" cellpadding="0" cellspacing="0" border="1"  >
+			  <tr>
+			  	<td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>Nominal Account</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>Narrative</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>UID</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>Quantity</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  align="right" ><strong>Amount</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  align="right" ><strong>Total Net</strong></td>
+			    <!-- <td style="font-size:12px;background-color: #ccc;"  ><strong>Project</strong></td> -->
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>Tax Rate</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>Tax Amount</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>Total Amount</strong></td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px;background-color: #ccc;"  ><strong>Opportunity</strong></td>
+			  </tr>
+			<apex:repeat value="{!InvoiceDetailsList}" var="o">
+			<tr valign="top">
+			  	<td style="font-size:{!invoiceTmpl.Font_Size__c}px">{!o.NominalAccount}</td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px">{!o.purchaseInvoiceLineItems.Narrative__c}&nbsp;</td>    
+				<td style="font-size:{!invoiceTmpl.Font_Size__c}px">{!o.purchaseInvoiceLineItems.UID__c}</td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px" align="right" ><apex:outputfield value="{!o.purchaseInvoiceLineItems.Quantity__c}"  />&nbsp;</td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px" align="right" ><apex:outputfield value="{!o.purchaseInvoiceLineItems.Amount__c}" />&nbsp;</td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px" align="right" ><apex:outputfield value="{!o.purchaseInvoiceLineItems.Total_Net__c}"   />&nbsp;</td>
+			    <!-- <td style="font-size:{!invoiceTmpl.Font_Size__c}px"><apex:outputfield value="{!o.timeSheetDetail.Project__c}" />&nbsp;</td>-->
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px">{!o.strTaxRate}&nbsp;</td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px" align="right" ><apex:outputfield value="{!o.purchaseInvoiceLineItems.Total_VAT__c}" />&nbsp;</td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px" align="right" ><apex:outputfield value="{!o.purchaseInvoiceLineItems.Total_Gross__c}"   />&nbsp;</td>
+			    <td style="font-size:{!invoiceTmpl.Font_Size__c}px">{!o.OppName}&nbsp;</td>
+			</tr>
+			</apex:repeat>
+			</table>
+	</apex:pageblock>
+	</apex:form></div>
+	<div style="position:absolute; bottom:{!invoiceTmpl.Margins_top_bottom__c}in; font-family:{!invoiceTmpl.Font_Face__c}; text-align:center;font-size:{!invoiceTmpl.Font_Size__c}px; width:100%;" align="center">
+		{!invoiceTmpl.Footer_Text__c}
+	</div>
+	</div>
+	</td></tr>
+</table>
+</apex:page>

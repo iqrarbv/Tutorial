@@ -1,0 +1,143 @@
+<apex:page standardcontroller="BankReconcile__c" extensions="controllerBankReconcileAccount" id="pg" title="Bank Reconcile"> 
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.Reconcyl_CSS}"/>
+
+ 
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="pg:form1:block1:hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="pg:form1:block1:hiddenId1" nominalCode_textbox="relatedName1"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup2" selectedvalue_textbox="pg:form1:block1:hiddenId2" nominalCode_textbox="relatedName2"/>
+<apex:pageMessages id="pgMsg"/>
+	<apex:Form id="form1">
+	<apex:pageblock title="Reconcile Bank Account" id="block1">
+<table width="100%" class="grid">
+    <tr>
+        <td width="130">
+            Bank</td>
+        <td width="100">
+        <div class="requiredInput">
+	           <div class="requiredBlock"></div>
+			<apex:selectList value="{!BankId}" multiselect="false" size="1">			
+ 				<apex:selectOptions value="{!BankAccount}"/>
+ 				<apex:actionSupport event="onchange" action="{!NominalBalance}" rerender="nomBlnc,pgMsg,Blnc"/>
+			</apex:selectList>			
+		</div>					
+        </td>
+        <td width = "100">        
+        Nominal Balance
+        </td>
+		<td colspan="2">
+        <apex:outputText value="{!nomBalance}" id="nomBlnc"/>
+        </td>
+    </tr>
+    <tr>
+        <td width="130" class="style2">
+            Statement Reference</td>
+        <td colspan="3" class="style2">
+		    <apex:inputText id="relatedName1" styleClass="ref" value="{!objectBankReconcile.Reference__c}"/></td>
+    </tr>
+    <tr>
+        <td width="130">
+            Statement Ending Balance:</td>
+        <td width="80">
+        <div class="requiredInput">
+	        <div class="requiredBlock"></div>
+                  <apex:inputText id="Text33" styleClass="currency" value="{!objectBankReconcile.Ending_Balance__c}"  >
+                  	<apex:actionSupport event="onchange" action="{!findBalance}" rerender="Blnc,pgMsg"/>
+                  </apex:inputText>
+        	</div>
+        </td>
+        <td width="100">
+            Statement Date</td>
+        <td class="style1">
+        <div class="requiredInput">
+	        <div class="requiredBlock"></div>
+                <apex:inputField id="relatedName2"  value="{!objectBankReconcile.Statement_Date__c}" styleClass="date" />
+            </div>
+                &nbsp;                
+                </td>
+    </tr>
+</table>
+        <p>
+            <table width="100%" class="grid">
+                <tr>
+                    <td colspan="6" valign="60" width="80">
+                        <strong>Interest Earned</strong>&nbsp;
+                        </td>
+                </tr>
+                <tr>
+                    <td valign="60" width="70">
+                        Amount</td>
+                    <td width="72">
+                    <apex:inputText id="Text34" styleClass="currency" value="{!objectBankReconcile.Interest_Amount__c}" >
+                   		<apex:actionSupport event="onchange" action="{!findBalance}" rerender="Blnc,pgMsg"/>
+                    </apex:inputText></td>
+                    <td width="50">
+                        Date</td>
+                    <td width="72">
+                        <apex:inputField id="relatedName4" value="{!objectBankReconcile.Interest_Date__c}" styleClass="date" /></td>
+                    <td width="40">
+                        N/C</td>
+                    <td>
+                    <input type="text" id="lookup1" class="lookupField" />
+                    <apex:inputHidden id="hiddenId1" value="{!idNom1}"/> - <input id="relatedName1" readonly="readonly" type="text" class="lookupName" 
+                        />&nbsp;
+		                </td>
+                </tr>
+                <tr>
+                    <td colspan="6" valign="60" width="80">
+                        <strong>Amount Charges</strong>&nbsp;
+                        </td>
+                </tr>
+                <tr>
+                    <td valign="60" width="70">
+                        Amount </td>
+                    <td width="72">
+                    <apex:inputText id="Text1" styleclass="currency" value="{!objectBankReconcile.Charges_Amount__c}" >
+                    	<apex:actionSupport event="onchange" action="{!findBalance}" rerender="Blnc,pgMsg"/>
+                    </apex:inputText></td>
+                    <td width="50">
+                        Date</td>
+                    <td width="72">
+                        <apex:inputField id="relatedName5" value="{!objectBankReconcile.Charges_Date__c}" styleclass="date" /></td>
+                    <td width="40">
+                        N/C</td>
+                        <td>
+                    <input type="text" id="lookup2" class="lookupField" />
+                    <apex:inputHidden id="hiddenId2" value="{!idNom2}"/> - <input id="relatedName2" readonly="readonly" type="text" class="lookupName" 
+                        />&nbsp;
+		                </td>                    
+                </tr>
+            </table>            
+            </p>
+            <p>            
+            <table width="100%" class="grid">
+                <tr>
+                    <td align="right;" width="130">
+                        Analysis of Balance
+                    </td>                            
+					<td colspan="3">
+					<apex:outputText value="{!balance}" id="Blnc"></apex:outputText>
+					<!--  <div id="blnc" >
+					</div> -->						
+					</td>
+				</tr>
+			</table>
+			</p> 			
+            <br/>       
+        <apex:pageblockbuttons >
+        	<apex:commandButton value="Save" action="{!Save}"/> 
+        	<apex:commandButton value="Cancel" action="/apex/BankMenu" />
+        </apex:pageblockbuttons>
+    </apex:pageblock>
+    </apex:Form>
+    <script type="text/javascript">
+    document.getElementById('blnc').innerHTML = 0.0;
+    	function balance() 
+    	{    	
+			var balans = document.getElementById('pg:form1:block1:nomBlnc').innerHTML - Number(document.getElementById('pg:form1:block1:Text33').value);		    	       	  
+			var intrst = balans +  Number(document.getElementById('pg:form1:block1:Text34').value);		
+			var charges = intrst - Number(document.getElementById('pg:form1:block1:Text1').value);		       	 
+			document.getElementById('blnc').innerHTML  = charges;     		    		    		    	
+    	}
+    </script>
+</apex:page>

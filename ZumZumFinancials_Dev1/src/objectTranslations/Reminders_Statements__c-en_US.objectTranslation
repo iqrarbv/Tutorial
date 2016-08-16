@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Reminders &amp; Statements</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Reminders &amp; Statements</value>
+    </caseValues>
+    <fields>
+        <label><!-- Definition --></label>
+        <name>Definition__c</name>
+        <picklistValues>
+            <masterLabel>Reminder 1</masterLabel>
+            <translation><!-- Reminder 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reminder 2</masterLabel>
+            <translation><!-- Reminder 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Statement</masterLabel>
+            <translation><!-- Statement --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Frequency Period --></label>
+        <name>Frequency_Period__c</name>
+        <picklistValues>
+            <masterLabel>Day</masterLabel>
+            <translation><!-- Day --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Week</masterLabel>
+            <translation><!-- Week --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Frequency --></label>
+        <name>Frequency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

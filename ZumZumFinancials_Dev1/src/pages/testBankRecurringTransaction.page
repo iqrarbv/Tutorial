@@ -1,0 +1,203 @@
+<apex:page standardcontroller="RecurringTransaction__c" extensions="controllerRecurringTransaction" id="pg" title="Bank Recurring Transaction">
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.BnkRecurring_CSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="pg:frm1:block1:hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="pg:frm1:block1:hiddenId1" nominalCode_textbox="relatedName1"/>
+<apex:PageMessages id="pgMsg"/>
+<apex:form id="frm1">
+	<apex:pageblock title="New Bank Recurring Transaction" id="block1">
+<table class="grid" width="526" id="tblType">
+		        <tr>
+		            <td  width="150">
+		                Transaction Type</td>
+		            <td>     
+                        <apex:inputfield id="Select1" value="{!objectRecurringTransaction.TransactionType__c}" onchange="ToggleFields(this.value);" required="true" >
+                        	<apex:actionSupport event="onchange" rerender="tblAmounts,tbltransactions,block1,tblCodes">
+                        	</apex:actionSupport>
+                        </apex:inputfield>
+                    </td>
+		        </tr>
+		        </table>		    
+    
+    <p>&nbsp;</p>
+   
+				<table class="grid" width="526" id="tblCodes">
+					<tr>
+						<td width="150">Bank A/C</td>
+						<td>	
+					<div class="requiredInput">
+	                	<div class="requiredBlock"></div>					
+				    <apex:selectList id="select20" value="{!objectRecurringTransaction.Bank_Account__c}" multiselect="false" size="1" required="true">
+		            	<apex:SelectOptions value="{!BankAccount}"/>
+		            </apex:selectList>
+		            </div>
+                        </td>
+					</tr>
+					<tr>
+						<td width="150" >
+							<label id="NC">N/C</label></td>
+						<td>
+						<div class="requiredInput">
+	                		<div class="requiredBlock"></div>
+		                <input id="lookup1" type="text" class="lookupField"/>		                
+                        <apex:inputHidden id="hiddenId1" value="{!idNom}"/>                        
+                        - 
+                        <input id="relatedName1" readonly="readonly" type="text" 
+                                class="lookupName" />					
+                        </div>                        
+						&nbsp;						
+                        </td>
+					</tr>		
+					<tr>
+						<td width="150">
+							<label id="lblCstmr">CustomerAccount</label> 
+						</td>
+						<td>							
+                			<apex:inputField id="CstmrAcctt" value="{!objectRecurringTransaction.Customer_Account__c}"></apex:inputField>	                		
+						</td>
+					</tr>		
+				</table>
+        
+        <p>&nbsp;</p>
+        
+				<table  width="530" class="grid" id="tbltransactions">
+				<tr>
+					<td width="150" class="style1">
+						Transaction	Reference
+					</td>
+					<td class="style1">
+						<apex:inputText value="{!objectRecurringTransaction.Reference__c}" styleClass="ref"/>
+					</td>
+				</tr>
+				<tr>
+					<td width="150">
+						<lable id="lblTransdetails">Transaction Details</lable></td>
+					<td width="376">
+						<apex:inputText id="txtTransdetails" styleClass="detailTxtArea" value="{!objectRecurringTransaction.Details__c}"/>
+					</td>
+				</tr>		
+				</table>        
+        <p>&nbsp;</p>        
+				<table  class="grid" width="530" id="tblDetails">
+				<tr> 
+					<td width="150">
+						Every</td>
+					<td width="150">
+					<div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+						<apex:inputText value="{!frequency}" styleClass="numeric" required="true"/>																	
+						-
+						<div class="requiredInput">
+	                		<div class="requiredBlock"></div>  
+                        <apex:inputField id="Select2" value="{!objectRecurringTransaction.Name_of__c}"/>                        	
+                        
+                        </div>                     
+                        </div>       
+                     </td>
+					<td width="150">
+						Total Required Postings</td>
+					<td width="72">
+					<div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+						<apex:inputText value="{!objectRecurringTransaction.Required_Posting__c}" styleClass="numeric"/>
+					</div>
+					
+					</td>
+				</tr>
+				<tr>
+					<td width="150">
+						Start Date</td>
+					<td width="150">
+                        <apex:inputField id="relatedName2"  value="{!objectRecurringTransaction.Start_Date__c}" styleClass="date" />					
+						</td>
+					<td width="150">
+						Finish Date</td>
+					<td width="72">
+                        <apex:inputField id="relatedName3" styleclass="date" value="{!objectRecurringTransaction.Finish_Date__c}"/></td>
+				</tr>		
+				<tr>
+					<td width="150">
+						Last Posted</td>
+					<td width="150">
+                        <apex:inputText id="relatedName4"  value="{!objectRecurringTransaction.Last_Posted__c}" styleClass="date" disabled="true"/></td>
+					<td width="150">
+						Suspend Posting?</td>
+					<td width="72">
+                        <apex:inputField id="Checkbox1" value="{!objectRecurringTransaction.Suspend_Posting__c}"/></td>
+				</tr>		
+				</table>				
+        <p>&nbsp;</p>
+        
+		    <table class="grid" width="530" id="tblAmounts">
+		        <tr>
+		            <td width="150">
+		                Net Amount</td>
+		            <td width="72" align="right">
+		            <div class="requiredInput">
+	                	<div class="requiredBlock"></div> 
+                    <apex:inputText id="Text33" value="{!netAmount}" styleclass="currency" />
+                    </div>
+                    </td>
+		            <td width="80">
+		                <label id="lblTaxRate">Tax Rate</label></td>
+		            <td width="50">	
+		            <apex:selectList id="cmbTax" value="{!objectRecurringTransaction.Tax_Rate__c}" multiselect="false" size="1">
+		            	<apex:SelectOptions value="{!TaxRate}"/>
+		            </apex:selectList>                    
+                    </td>
+		            <td width="90">
+		                <label id="lblTaxAmnt" for="taxAmnt" title="Amount">VAT Amount</label></td>
+		            <td width="72" align="right">
+                    <apex:inputText id="txtTaxAmnt" value="{!objectRecurringTransaction.VAT__c}" styleclass="currency" /></td>
+		        </tr>
+		        </table>		    
+    
+        <apex:pageblockbuttons >
+			<apex:commandButton value="Save" action="{!Save}" rerender="pgMsg"/> 
+        	<apex:commandButton value="Cancel" action="{!Cancel}"/>        	
+        </apex:pageblockbuttons>
+</apex:pageblock>
+</apex:form>
+<script language="javascript">
+	document.getElementById("lblCstmr").style.display ="none";
+    document.getElementById("pg:frm1:block1:CstmrAcctt").style.display ="none";
+    function ToggleFields(val){       
+        if(val=="Bank/Cash/Credit Card Transfer")
+        {
+            document.getElementById("lblTransdetails").style.display = "block";
+            document.getElementById("pg:frm1:block1:txtTransdetails").style.display = "block";
+            document.getElementById("lblTaxRate").style.display = "none";
+            document.getElementById("pg:frm1:block1:cmbTax").style.display = "none";
+            document.getElementById("lblTaxAmnt").style.display = "none";
+            document.getElementById("pg:frm1:block1:txtTaxAmnt").style.display = "none";                        
+        }
+        else if(val=="Customer payment on Account")
+        {
+            document.getElementById("lblTransdetails").style.display = "none";
+            document.getElementById("pg:frm1:block1:txtTransdetails").style.display = "none";
+            document.getElementById("lblTaxRate").style.display = "none";
+            document.getElementById("pg:frm1:block1:cmbTax").style.display = "none";
+            document.getElementById("lblTaxAmnt").style.display = "none";
+            document.getElementById("pg:frm1:block1:txtTaxAmnt").style.display = "none";
+            //lookup1 : relatedName1
+            document.getElementById("NC").style.display = "none";
+            document.getElementById("lookup1").style.display = "none";
+            document.getElementById("relatedName1").style.display ="none";
+            document.getElementById("lblCstmr").style.display ="block";
+            document.getElementById("pg:frm1:block1:CstmrAcctt").style.display ="block";
+            
+        }
+        else
+        {
+            document.getElementById("lblTransdetails").style.display = "block";
+            document.getElementById("pg:frm1:block1:txtTransdetails").style.display = "block";
+            document.getElementById("lblTaxRate").style.display = "block";
+            document.getElementById("pg:frm1:block1:cmbTax").style.display = "block";
+            document.getElementById("lblTaxAmnt").style.display = "block";
+            document.getElementById("pg:frm1:block1:txtTaxAmnt").style.display = "block";
+            document.getElementById("lblCstmr").style.display ="none";
+            document.getElementById("pg:frm1:block1:CstmrAcctt").style.display ="none";
+        }                  
+    }
+</script>	
+</apex:page>

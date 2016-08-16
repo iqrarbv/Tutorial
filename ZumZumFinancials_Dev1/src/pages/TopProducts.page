@@ -1,0 +1,85 @@
+<apex:page >
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="/js/functions.js"></script>
+	<script src="/soap/ajax/9.0/connection.js"></script>
+	<script src="/soap/ajax/9.0/apex.js"></script>
+	<script type="text/javascript">
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    <script src="../../soap/ajax/21.0/connection.js"
+          type="text/javascript">
+</script>
+<script type="text/javascript">
+	google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+      function drawChart() {
+		// Karim Code
+		
+		var firstPPrice = 0.00 ;
+		var firstPName = '' ;
+		var secPPrice = 0.00 ;
+		var secPName = '' ;
+		var thrdPPrice = 0.00 ;
+		var thrdPName = '' ;
+		var frthPPrice = 0.00 ;
+		var frthPName = '' ;
+		var ffthtPPrice = 0.00 ;
+		var ffthPName = '' ;
+		result = sforce.connection.query("select sum(Total_Net__c) , Product__c , Product__r.Name from Sales_Invoice_Line_Item__c  group by   Product__c , Product__r.Name  limit 5");
+    	
+    	records = result.getArray("records");
+    	//alert(records);
+    	for (var i=0; i< records.length; i++) 
+    	{
+    		//alert('this is Name: '+ records[i].expr0 + ' this is price: ' + records[i].Name);
+    		if(i == 0)
+    		{	
+    			firstPPrice = records[i].expr0 ;
+    			firstPName = records[i].Name ;
+    		}
+    		if(i == 1)
+    		{	
+    			secPPrice = records[i].expr0 ;
+    			secPName = records[i].Name ;
+    		}
+    		if(i == 2)
+    		{	
+    			thrdPPrice = records[i].expr0 ;
+    			thrdPName = records[i].Name ;
+    		}
+    		if(i == 3)
+    		{	
+    			frthPPrice = records[i].expr0 ;
+    			frthPName = records[i].Name ;
+    		}
+    		if(i == 4)
+    		{	
+    			ffthPPrice = records[i].expr0 ;
+    			ffthPName = records[i].Name ;
+    		}
+    	}
+		// end of my code      
+      
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Task');
+        data.addColumn('number', 'Hours per Day');
+        data.addRows(5);
+        
+        data.setValue(0, 0, ffthPName);
+        data.setValue(0, 1, Number(firstPPrice) );
+        data.setValue(1, 0, secPName);
+        data.setValue(1, 1, Number(secPPrice) );
+        data.setValue(2, 0, thrdPName);
+        data.setValue(2, 1, Number(thrdPPrice));
+        data.setValue(3, 0, frthPName);
+        data.setValue(3, 1, Number(frthPPrice));
+        data.setValue(4, 0, ffthPName );
+        data.setValue(4, 1, Number(ffthPPrice));
+        
+        
+		var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, {width: 450, height: 300, title: 'Top 5 Products'});
+      }
+</script>
+    <div id="chart_div"></div>
+</apex:page>

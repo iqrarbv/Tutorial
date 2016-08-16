@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>RDI App Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>RDI App Settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Adaptive Password --></label>
+        <name>AdaptivePassword__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adaptive User Name --></label>
+        <name>AdaptiveUserName__c</name>
+    </fields>
+    <fields>
+        <help><!-- like &apos;Oct 10 Forecast&apos; or like &apos;Sep 10 Forecast&apos; --></help>
+        <label><!-- Adaptive Forecast Version --></label>
+        <name>Adaptive_Forecast_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hours Per Day --></label>
+        <name>HoursPerDay__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

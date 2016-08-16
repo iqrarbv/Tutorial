@@ -1,0 +1,29 @@
+<apex:page controller="AmendmentListController">
+<apex:pagemessages />
+<apex:pageblock title="Corrections">
+<apex:pageblocktable value="{!LedgerRecords}" var="ledger">
+<apex:column value="{!ledger.Trans_No__c}" headerValue="No" />
+<apex:column value="{!ledger.Type__c}" headerValue="Type" />
+<apex:column value="{!ledger.Sub_Account__c}" headerValue="Account" />
+<apex:column value="{!ledger.Nominal__c}" headerValue="Nominal" />
+<apex:column value="{!ledger.Details__c}" headerValue="Details" />
+<apex:column value="{!ledger.Trans_Date__c}" headerValue="Details" />
+<apex:column value="{!ledger.Reference__c}" headerValue="Ref" />
+<apex:column value="{!ledger.Ext_Reference__c}" headerValue="Ex. Ref" />
+<apex:column value="{!ledger.Net__c}" headerValue="Net" />
+<apex:column value="{!ledger.Tax__c}" headerValue="Tax" />
+<apex:column value="{!ledger.Tax_Code__c}" headerValue="Tax" />
+<apex:column value="{!ledger.Paid__c}" headerValue="Paid" />
+<apex:column value="{!ledger.Amount__c}" headerValue="Amount Paid" />
+<apex:column value="{!ledger.Bank_Reconcile__c}" headerValue="Bank" />
+<apex:column value="{!ledger.Bank_Reconcile_Date__c}" headerValue="Bank Rec Date" />
+<apex:column value="{!ledger.VAT__c}" headerValue="VAT" />
+<apex:column value="{!ledger.VAT_Return_No__c}" headerValue="VAT Rtn No" />
+<apex:column value="{!ledger.VAT_Return_Date__c}" headerValue="VAT Rec Date" />
+<apex:column >
+<apex:outputlink value="/apex/AmendLedgerEntry?operation=edit&id={!ledger.Id}">Edit</apex:outputlink>&nbsp;&nbsp;
+<apex:outputlink value="/apex/AmendLedgerEntry?operation=delete&id={!ledger.Id}">Delete</apex:outputlink>
+</apex:column>
+</apex:pageblocktable>
+</apex:pageblock>
+</apex:page>

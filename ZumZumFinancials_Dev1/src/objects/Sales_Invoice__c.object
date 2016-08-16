@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <content>DeleteSalesInvoice</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>EditSalesInvoice</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>NewSalesInvoice</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Account__c</fullName>
+        <label>Customer Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Sales Invoices</relationshipLabel>
+        <relationshipName>Sales_Invoices</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Dimension__c</fullName>
+        <label>Dimension</label>
+        <referenceTo>Dimension__c</referenceTo>
+        <relationshipLabel>Sales Invoices</relationshipLabel>
+        <relationshipName>Sales_Invoices</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Format_Type__c</fullName>
+        <label>Format Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Date__c</fullName>
+        <label>Invoice Date</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Due_Date__c</fullName>
+        <label>Invoice Due Date</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Template__c</fullName>
+        <label>Invoice Template</label>
+        <referenceTo>Invoice_Template__c</referenceTo>
+        <relationshipLabel>Sales Invoices</relationshipLabel>
+        <relationshipName>Sales_Invoices</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Sales Invoices</relationshipLabel>
+        <relationshipName>Sales_Invoices</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Paid_Amount__c</fullName>
+        <label>Paid Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Paid__c</fullName>
+        <defaultValue>&apos;N&apos;</defaultValue>
+        <label>Paid</label>
+        <length>1</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Quote_Number__c</fullName>
+        <label>Quote Number</label>
+        <length>50</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>SOP_Number__c</fullName>
+        <label>SOP Number</label>
+        <length>50</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Order__c</fullName>
+        <label>Sales Order</label>
+        <referenceTo>Sales_Order__c</referenceTo>
+        <relationshipLabel>Sales Invoices</relationshipLabel>
+        <relationshipName>Sales_Invoices</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Settlement_Discount__c</fullName>
+        <label>Settlement Discount</label>
+        <precision>5</precision>
+        <scale>2</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Settlement_Due_Days__c</fullName>
+        <label>Settlement Due Days</label>
+        <precision>3</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Posted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Total_Gross__c</fullName>
+        <label>Total Gross</label>
+        <summarizedField>Sales_Invoice_Line_Item__c.Total_Gross__c</summarizedField>
+        <summaryForeignKey>Sales_Invoice_Line_Item__c.Sales_Invoice__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Net__c</fullName>
+        <label>Total Net</label>
+        <summarizedField>Sales_Invoice_Line_Item__c.Total_Net__c</summarizedField>
+        <summaryForeignKey>Sales_Invoice_Line_Item__c.Sales_Invoice__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_VAT__c</fullName>
+        <label>Total VAT</label>
+        <summarizedField>Sales_Invoice_Line_Item__c.VAT_Amount__c</summarizedField>
+        <summaryForeignKey>Sales_Invoice_Line_Item__c.Sales_Invoice__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Sales Invoice</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sales Credit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <label>Sales Invoice</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>SI Number</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Sales Invoices</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Generate_PDF</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasScrollbars>true</hasScrollbars>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Generate PDF</masterLabel>
+        <openType>newWindow</openType>
+        <page>SalesInvoicePDf</page>
+        <position>none</position>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Post_Invoice</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Post Invoice</masterLabel>
+        <openType>sidebar</openType>
+        <page>PostInvoice</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

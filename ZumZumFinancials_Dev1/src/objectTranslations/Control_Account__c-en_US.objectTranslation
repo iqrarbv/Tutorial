@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Control Account</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Control Accounts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Accruals --></label>
+        <name>Accruals__c</name>
+        <relationshipLabel><!-- Control Accounts (Accruals) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Bad Debts --></label>
+        <name>Bad_Debts__c</name>
+        <relationshipLabel><!-- Control Accounts (Bad Debts) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Credit Charges --></label>
+        <name>Credit_Charges__c</name>
+        <relationshipLabel><!-- Control Accounts (Credit Charges) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Creditors Control --></label>
+        <name>Creditors_Control__c</name>
+        <relationshipLabel><!-- Control Accounts (Creditors Control) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Debtors Control --></label>
+        <name>Debtors_Control__c</name>
+        <relationshipLabel><!-- Control Accounts (Debtors Control) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Default Bank --></label>
+        <name>Default_Bank__c</name>
+        <relationshipLabel><!-- Control Accounts (Default Bank) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Default Sales --></label>
+        <name>Default_Sales__c</name>
+        <relationshipLabel><!-- Control Accounts (Default Sales) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Exchange Rate Variance --></label>
+        <name>Exchange_Rate_Variance__c</name>
+        <relationshipLabel><!-- Control Accounts (Exchange Rate Variance) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Manual Adjustments --></label>
+        <name>Manual_Adjustments__c</name>
+        <relationshipLabel><!-- Control Accounts (Manual Adjustments) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Mispostings --></label>
+        <name>Mispostings__c</name>
+        <relationshipLabel><!-- Control Accounts (Mispostings) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Nominal Account --></label>
+        <name>Nominal_Account__c</name>
+        <relationshipLabel><!-- Control Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Prepayments --></label>
+        <name>Prepayments__c</name>
+        <relationshipLabel><!-- Control Accounts (Prepayments) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Purchase Discount --></label>
+        <name>Purchase_Discount__c</name>
+        <relationshipLabel><!-- Control Accounts (Purchase Discount) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Retained Earnings --></label>
+        <name>Retained_Earnings__c</name>
+        <relationshipLabel><!-- Control Accounts (Retained Earnings) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales Discount --></label>
+        <name>Sales_Discount__c</name>
+        <relationshipLabel><!-- Control Accounts (Sales Discount) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Suspense --></label>
+        <name>Suspense__c</name>
+        <relationshipLabel><!-- Control Accounts (Suspense) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- VAT Liability --></label>
+        <name>VAT_Liability__c</name>
+        <relationshipLabel><!-- Control Accounts (VAT Liability) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- VAT on Purchases --></label>
+        <name>VAT_on_Purchases__c</name>
+        <relationshipLabel><!-- Control Accounts (VAT on Purchases) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- VAT on Sales --></label>
+        <name>VAT_on_Sales__c</name>
+        <relationshipLabel><!-- Control Accounts (VAT on Sales) --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Control Accounts Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

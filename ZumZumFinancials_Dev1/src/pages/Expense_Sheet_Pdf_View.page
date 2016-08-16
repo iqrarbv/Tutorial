@@ -1,0 +1,128 @@
+<apex:page renderas="pdf" standardController="Expense_Sheet__c" title="Expense Sheet Pdf View" extensions="ExpenseSheet_Pdf">
+<apex:pagemessages id="errorMessages" />
+<table cellpadding="0" cellspacing="0" border="0" class="mytab">
+<tr><td height="800">
+<div style="height:10in; position:relative; margin:0in {!invoiceTmpl.Margins_left_right_Inches__c}in;" >
+<div style="position:relative; top:{!invoiceTmpl.Margins_top_bottom__c}in;">
+<apex:form rendered="{!showPdf}">
+<div valign="top" align="center" style="font-family:{!invoiceTmpl.Font_Face__c};font-weight:bold;font-size:{!invoiceTmpl.Font_Size__c};">{!invoiceTmpl.Heading_Text__c}</div>
+<div valign="top" align="center" style="font-family:Arial, Helvetica, sans-serif;font-weight:bold;font-size:20;">EXPENSE SHEET</div>
+<br/>
+<div style="text-align: center;"><apex:image url="{!imageUrl}" /></div>
+		<apex:pageblock title="Expense Sheet Info" id="expenseSheet">
+			<table  width="96%" cellpadding="0" cellspacing="" >
+			  <tr>
+	          <td style="font-size:10px"><strong>Month:</strong></td>
+	          <td style="font-size:10px"><strong>{!expenseSheetInfo.Month__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px">&nbsp;</td>
+	          <td style="font-size:10px">&nbsp;</td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px"><strong>Claim No:</strong></td>
+	          <td style="font-size:10px"><strong>{!expenseSheetInfo.Claim_No__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px"><strong>Approval Status:</strong></td>
+	          <td style="font-size:10px"><strong>{!expenseSheetInfo.Status__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px"><strong>TotalMiles:</strong></td>
+	          <td style="font-size:10px"><strong>{!expenseSheetInfo.Total_Miles__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px"><strong>Total Net Amount:</strong></td>
+	          <td style="font-size:10px"><strong>{!expenseSheetInfo.Total_Net__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px"><strong>Total VAT Amount: </strong></td>
+	          <td style="font-size:10px"><strong>{!expenseSheetInfo.Total_VAT__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px"><strong>Total Gross Amount:</strong></td>
+	          <td style="font-size:10px"><strong>{!expenseSheetInfo.Total_Gross__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:10px">&nbsp;</td>
+	          <td style="font-size:10px">&nbsp;</td>
+	          </tr>
+	        </table>
+		</apex:pageblock>
+		<apex:pageBlock title="Expense Sheet Line Items">
+			<table width="96%" cellpadding="0" cellspacing="0" border="1"  >
+				  <tr>
+				  	<td style="font-size:10px;background-color: #ccc;" ><strong>Approval Status</strong></td>
+				  	<td style="font-size:10px;background-color: #ccc;" ><strong>Date</strong></td>
+				  	<td style="font-size:10px;background-color: #ccc;" ><strong>UID</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Expense Type (Nominal Code)</strong></td> 
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Description</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Project</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Project Code</strong></td>
+					<td style="font-size:10px;background-color: #ccc;"  ><strong>Quantity</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Amount</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Miles</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Tax Rate</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Tax Amount</strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Total Amount </strong></td>
+				    <td style="font-size:10px;background-color: #ccc;"  ><strong>Business Passenger</strong></td>
+				  </tr>
+				  <apex:repeat value="{!lstExpenseSheetDetail}" var="o" id="timesheetList">
+					<tr valign="top">
+						<td style="font-size:10px">
+						{!o.status}
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Date_String__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.UID__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Nominal_Account__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Narrative__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Project__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Project__r.Code__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Quantity__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Unit_Amount__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Miles__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Tax_Rate__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Total_VAT__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Total_Gross__c}" />
+						</td>
+						<td style="font-size:10px">
+						<apex:outputField value="{!o.detail.Business_Passenger__c}" />
+						</td>
+					</tr> 
+				</apex:repeat>
+				</table>
+				<br/>
+				<br/>
+		</apex:pageblock>
+	</apex:form>
+	</div>
+	<div style="position:absolute; bottom:{!invoiceTmpl.Margins_top_bottom__c}in; font-family:{!invoiceTmpl.Font_Face__c}; text-align:center;font-size:{!invoiceTmpl.Font_Size__c}px; width:100%;" align="center">
+		{!invoiceTmpl.Footer_Text__c}
+	</div>
+	</div>
+	</td></tr>
+</table>
+</apex:page>

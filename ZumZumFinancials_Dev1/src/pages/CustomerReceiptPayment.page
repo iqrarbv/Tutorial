@@ -1,0 +1,339 @@
+<apex:page controller="CustomerReceiptPaymentController" id="page">
+	<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}" />	
+	<apex:stylesheet value="{!$Resource.CstmrRcptPmnt_CSS}" />
+	<script type="text/javascript">
+	currentInvoice = null;
+	currentIndex = null;
+	currentInvoiceAmount = null;	
+	totalLines = 0;
+	
+	chequeAmount = 0;
+	analysisTotal = 0;
+	
+	SISP = 0;
+	SCSA = 0;
+	
+	userEnteredChequeAmount = false;
+	parentComponentId = null;
+	
+	function UserEntersAmount(chq)
+	{
+		if(chq.value<analysisTotal)
+		{
+			alert("Cheque amount cannot be less than analysis total.");
+			chq.value = chequeAmount;
+			return;
+		}
+		chequeAmount = chq.value;
+		userEnteredChequeAmount = true;
+		ShowTotals();
+	}
+	
+	function ShowTotals()
+	{
+		document.getElementById('txtAnalysisTotal').value = roundNumber(analysisTotal,2);
+		document.getElementById('page:frm:pb:txtChequeAmount').value = roundNumber(chequeAmount,2); 
+		document.getElementById(hdnAnalysisTotalId).value = roundNumber(analysisTotal,2);
+	}
+	
+	function SetCurrentInvoice(thisInvoice, thisIndex)
+	{
+		currentInvoice = thisInvoice;
+		currentIndex = thisIndex;
+		currentInvoiceAmount = thisInvoice.value==null || thisInvoice.value==''?0:thisInvoice.value;
+	}
+	
+	function roundNumber(num, dec)
+	{
+		var number = parseFloat(num);
+		var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+		return result;
+	}
+	
+	function OnAmountChanged()
+	{
+		payable = parseFloat(currentInvoice.value);
+		paymentType = document.getElementById(parentComponentId+':'+currentIndex+':lblType').innerHTML;
+		if(paymentType=='SI' || paymentType=='SP')
+		{	
+			analysisTotal = parseFloat(analysisTotal) - parseFloat(currentInvoiceAmount);
+			SISP = parseFloat(SISP) - parseFloat(currentInvoiceAmount);
+			
+			if(userEnteredChequeAmount == true && chequeAmount<(SISP + payable - SCSA))
+			{
+				alert("Payment amount exceeds cheque amount");
+				payable = currentInvoice.value = roundNumber(currentInvoiceAmount,2);
+				return;
+			}		
+			
+			analysisTotal = parseFloat(analysisTotal) + payable;
+			SISP = parseFloat(SISP) + payable;
+			
+			if(userEnteredChequeAmount == false)
+			{
+				chequeAmount = parseFloat(SISP) - parseFloat(SCSA);
+				chequeAmount = (parseFloat(SISP) - parseFloat(SCSA))>0?parseFloat(SISP) - parseFloat(SCSA):0;
+			}			
+		}
+		else
+		{
+			analysisTotal = parseFloat(analysisTotal) + parseFloat(currentInvoiceAmount);
+			SCSA = parseFloat(SCSA) - parseFloat(currentInvoiceAmount);
+			
+			if(userEnteredChequeAmount == false && chequeAmount<(SISP - payable - SCSA))
+			{
+				alert("Payment amount exceeds cheque amount");
+				payable = currentInvoice.value = roundNumber(currentInvoiceAmount,2);
+				return;
+			}
+			
+			analysisTotal = parseFloat(analysisTotal) - payable;
+			SCSA = parseFloat(SCSA) + payable;
+			
+			if(userEnteredChequeAmount == false)
+			{
+				chequeAmount = (parseFloat(SISP) - parseFloat(SCSA))>0?parseFloat(SISP) - parseFloat(SCSA):0;
+			}
+		}
+		ShowTotals();
+	}
+	
+	function PayInFull2()
+	{
+		if(currentInvoice==null)
+		{
+			currentIndex = 0;
+			currentInvoice = document.getElementById(parentComponentId+':'+currentIndex+':txtReceiptAmount');
+			currentInvoiceAmount = 0;
+			currentInvoice.focus();
+		}
+		payable = roundNumber(document.getElementById(parentComponentId+':'+currentIndex+':lblRemainingAmount').innerHTML,2);
+		paymentType = document.getElementById(parentComponentId+':'+currentIndex+':lblType').innerHTML;
+		if(paymentType=='SI' || paymentType=='SP')
+		{
+			analysisTotal = parseFloat(analysisTotal) - parseFloat(currentInvoiceAmount);
+			SISP = parseFloat(SISP) - parseFloat(currentInvoiceAmount);
+						
+			if(userEnteredChequeAmount == false)
+			{
+				chequeAmount = (parseFloat(SISP) + payable - parseFloat(SCSA))>0?(parseFloat(SISP) + payable - parseFloat(SCSA)):0;
+			}
+			else
+			{
+				var toPay = payable+parseFloat(SISP);
+				var payFrom = parseFloat(chequeAmount)+parseFloat(SCSA);				
+				if(toPay>payFrom)
+				{
+					payable = parseFloat(chequeAmount)+parseFloat(SCSA)-parseFloat(SISP);
+				}				
+			}
+			currentInvoice.value = currentInvoiceAmount = payable
+			analysisTotal = parseFloat(analysisTotal) + payable;
+			SISP = parseFloat(SISP) + payable;
+		}
+		else
+		{
+			analysisTotal = parseFloat(analysisTotal) + parseFloat(currentInvoiceAmount);
+			SCSA = parseFloat(SCSA) - parseFloat(currentInvoiceAmount);
+			
+			currentInvoice.value = currentInvoiceAmount = payable;
+			analysisTotal = parseFloat(analysisTotal) - payable;
+			SCSA = parseFloat(SCSA) + payable;
+		}
+		ShowTotals();
+		if(currentIndex<totalLines-1)
+		{
+			currentIndex = currentIndex+1;
+			currentInvoice = document.getElementById(parentComponentId+':'+currentIndex+':txtReceiptAmount');
+			currentInvoiceAmount = currentInvoice.value;
+			currentInvoice.focus();
+		}		
+	}
+	
+	function AutomaticPayment2()
+	{
+		if(chequeAmount==null || chequeAmount==0)
+		{
+			alert("Please enter a cheque amount first");
+			return;
+		}
+		analysisTotal = 0;
+		SISP = 0;
+		SCSA = 0;
+		for(var i=0; i<totalLines; i++)
+		{
+			paymentType = document.getElementById(parentComponentId+':'+i+':lblType').innerHTML;
+			//alert("paymentType: "+paymentType);
+			currentIndex = i;
+			currentInvoice = document.getElementById(parentComponentId+':'+currentIndex+':txtReceiptAmount');
+			currentInvoice.focus();
+			payable = roundNumber(document.getElementById(parentComponentId+':'+i+':lblRemainingAmount').innerHTML,2);
+			if(paymentType=='SI' || paymentType=='SP')
+			{				
+				var toPay = payable+parseFloat(SISP);
+				var payFrom = parseFloat(chequeAmount)+parseFloat(SCSA);				
+				if(toPay>payFrom)
+				{
+					payable = parseFloat(chequeAmount)+parseFloat(SCSA)-parseFloat(SISP);
+				}
+				currentInvoice.value = payable;
+				analysisTotal = parseFloat(analysisTotal) + payable;
+				SISP = parseFloat(SISP) + payable;									
+			}
+			else
+			{
+				//analysisTotal = parseFloat(analysisTotal) - payable;
+				//SCSA = parseFloat(SCSA) + payable;
+				//currentInvoice.value = payable;
+				currentInvoice.value = 0.00;
+			}
+			ShowTotals();
+		}
+	}
+	
+	function ValidateSubmit()
+	{
+		if(parseFloat(chequeAmount)<=parseFloat(SISP) && parseFloat(analysisTotal)<0)
+		{
+			alert("There is an unallocated balance of "+roundNumber(analysisTotal,2)+"\nPlease remove this before posting transaction.");
+			return false;
+		}
+		var balance = parseFloat(chequeAmount) - parseFloat(analysisTotal);		
+		if(balance>0)
+		{
+			var cfrm = confirm("There is an unallocated balance of "+roundNumber(balance,2)+"\nDo you want to post this as Payment on Account?");
+			return cfrm;
+		}
+		return true;
+	}
+	
+	function ConfirmDiscard()
+	{
+		var cfrm = confirm("Are you sure you wish to discard any changes?");
+		return cfrm;		
+	}
+	</script>
+	<apex:pagemessages />
+	<apex:form id="frm">
+		<apex:pageBlock title="New Customer Receipt" id="pb">
+			<table width="100%" class="grid">
+				<tr valign="top">
+					<td>
+					<table>
+						<th>Bank Details</th>
+						<tfoot>
+							<tr />
+								<td width="70">Account Ref</td>
+								<apex:actionRegion >
+								<td width="145"><apex:selectlist value="{!BankId}"
+									multiselect="false" size="1">
+									<apex:selectoptions value="{!bankSelectOptions}" />
+									<apex:actionsupport event="onchange" action="{!SetBankBalance}" immediate="false" rerender="lblBalance"/> 
+								</apex:selectlist></td>
+								</apex:actionRegion>
+							<tr>
+								<td width="100">Balance</td>
+								<td width="150" style="text-align: right;"><apex:outputfield value="{!BankBalanceCurrency.Currency__c}" id="lblBalance"/></td>
+							</tr>
+						</tfoot>
+					</table>
+					</td>
+					<td>
+					<table>
+						<th>Customer Details</th>
+						<tr />
+							<td width="70px">Account</td>
+							<td><apex:inputField value="{!CustomerLookup.Customer_Account__c}"
+								required="true">
+								<apex:actionSupport event="onchange"
+									action="{!FetchInvoicesAndPayments}" />
+							</apex:inputField></td>
+					</table>
+					</td>
+					<td>
+					<table>
+						<th>Receipt Details</th>
+						<tr />
+							<td width="100">Date</td>
+							<td width="145"><apex:inputField value="{!dateCalender.Date__c}" /></td>
+						<tr>
+							<td width="100">Amount</td>
+							<td width="145">{!CurrencySymbol}<apex:inputtext value="{!SettlementAmount}"
+								styleClass="currency" onchange="UserEntersAmount(this);" id="txtChequeAmount"/></td>
+						</tr>
+						<tr>
+							<td width="100">Reference</td>
+							<td width="145"><apex:inputtext value="{!Reference}"
+								styleClass="ref" /></td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+			</table>
+			<apex:outputPanel id="lst">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+			<colgroup span="10"></colgroup>
+			  <thead class="rich-table-head">
+			  <tr class="headerRow">			    
+			    <th colspan="1" scope="col" width="42" align="left">No.</th>
+				<th colspan="1" scope="col" width="42" align="left">Type</th>
+				<th colspan="1" scope="col" align="left" width="127">A/c</th>
+				<th colspan="1" scope="col" width="72" align="left">Date</th>
+				<th colspan="1" scope="col" width="72" align="left">Ref</th>
+				<th colspan="1" scope="col" align="left">Details</th>
+				<th colspan="1" scope="col" width="50" align="left">T/C</th>
+				<th colspan="1" scope="col" width="72" align="left">Amount</th>
+				<th colspan="1" scope="col" width="72" align="left">Receipt</th>
+				<th colspan="1" scope="col" width="80" align="left">Discount</th>
+			  </tr>
+			  </thead>
+			  <tbody>
+			<apex:variable value="{!0}" var="rowNum" />  
+			<apex:repeat value="{!invoicesAndPayments}" var="record" 
+				id="pbt">
+				<tr class="dataRow">
+				<td class="dataCell" width="42" colspan="1">{!record.Entry.Trans_No__c}</td>					
+				<td class="dataCell" width="42" colspan="1"><apex:outputText value="{!record.Entry.Type__c}" id="lblType" /></td>					
+				<td class="dataCell" width="127" colspan="1">{!record.Entry.Sub_Account__c}</td>					
+				<td class="dataCell" width="72" colspan="1">
+					<apex:outputField value="{!record.Entry.Trans_Date__c}" />				
+				</td>
+				<td class="dataCell" width="72" colspan="1">{!record.Entry.Reference__c}</td>
+				<td class="dataCell" colspan="1">{!record.Entry.Details__c}</td>
+				<td class="dataCell" width="50" colspan="1">{!record.Entry.Tax_Code__c}</td>
+				<td class="dataCell" width="72" colspan="1" style="text-align: right;"><apex:outputtext value="{!record.RemainingAmount.Currency__c}" Id="lblRemainingAmount"/></td>
+				<td class="dataCell" width="72" colspan="1">
+					<apex:inputtext value="{!record.Receipt}"
+						styleClass="currency" id="txtReceiptAmount" onfocus="SetCurrentInvoice(this,{!rowNum});" onchange="OnAmountChanged();"/>
+				</td>
+				<td class="dataCell" width="80" colspan="1">
+					<apex:inputtext value="{!record.Discount}"
+						styleClass="currency" id="txtDiscountAmount"/>
+				</td>
+				</tr>
+				<apex:variable var="rowNum" value="{!rowNum+1}" />
+			</apex:repeat>
+			
+			<tr class="totalRow">
+					<td class="dataCell" colspan="9" style="text-align: right;">Analysis Total</td>
+					<td class="dataCell" colspan="1" width="80">{!CurrencySymbol}<input type="text" class="currency" id="txtAnalysisTotal" value="{!analysisTotal}" readonly="readonly" />
+					<apex:inputhidden value="{!AnalysisTotal}" id="hdnAnalysisTotal"/>
+					</td>
+			</tr>
+			</tbody>
+			</table>
+			<script type="text/javascript">
+			totalLines = {!rowNum};
+			parentComponentId = '{!$component.pbt}';
+			hdnAnalysisTotalId = '{!$component.hdnAnalysisTotal}';
+			</script>
+			</apex:outputPanel>
+			<apex:pageblockbuttons location="bottom">
+				<apex:commandbutton value="Save" action="{!Save}" onclick="javascript:return ValidateSubmit();"/>
+				<apex:commandButton value="Discard" action="{!Discard}" immediate="true" onclick="javascript: return ConfirmDiscard();"/>
+				<button type="button" onclick="PayInFull2();">Pay in Full</button>
+				<button type="button" onclick="AutomaticPayment2();">Automatic</button>
+			</apex:pageblockbuttons>
+		</apex:pageBlock>
+	</apex:form>
+	</apex:page>

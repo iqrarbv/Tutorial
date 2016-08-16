@@ -1,0 +1,253 @@
+<apex:page standardcontroller="VAT_Return__c" extensions="controllerVATReturn" id="pg" title="VAT Return">
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.VATRtn_CSS}"/>
+<apex:pageMessages id="pgMsgs"/> 
+<apex:form id="frm"> 
+	<apex:pageblock title="Company Vat Return" id="pb1">	
+		    <table width="100%" class="grid" id="tbl1">
+		        <tr>
+		            <td width="70">
+		                Date from</td>
+		            <td>
+		            <div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+		                <apex:inputField styleclass="date" id="Text47" value="{!objectVATReturn.Date_From__c}"/>
+		            </div>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Date to</td>
+		            <td>
+		            <div class="requiredInput"> 
+	                	<div class="requiredBlock"></div>
+		                <apex:inputField styleclass="date" id="Text48" value="{!objectVATReturn.Date_To__c}"/>
+		            </div>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="70">VAT Method</td>
+	              <td><apex:outputText value="{!objectCompany.VatMethod__c}" id="method">
+	              </apex:outputText>
+	              </td>
+		        </tr>
+		    </table>		    
+    <p></p>    
+        <table width="100%" class="grid" title="From 25 February 2010 To 24 February 2011" id="tbl2"  style="visibility:hidden">
+            <tr>
+                <td>
+                    <b>Description</b></td>
+                <td width="70" align="right;">
+                    <b>Value</b></td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 1</b></td> 
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT due on sales and other outputs</td>
+                <td align="right" width="70">
+                    <apex:outputText value="{!currencySymbol}{0, number, 0.00}" id="box1">
+                    	<apex:param value="{!objectVATReturn.Box_1__c}" />
+                    </apex:outputText>                     
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 2</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT due from you on acquisitions from other EU countries</td>
+                <td align="right" width="70">
+                    <apex:outputText value="{!currencySymbol}{0, number, 0.00}" id="box2">
+                    	<apex:param value="{!objectVATReturn.Box_2__c}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 3</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total VAT due</td>
+                <td align="right" width="70">
+					<apex:outputText value="{!currencySymbol}{0, number, 0.00}" id="box3">
+						<apex:param value="{!objectVATReturn.Box_3__c}" />
+					</apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 4</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT reclaimable on your purchases</td>
+                <td align="right" width="70">
+                	<apex:outputText value="{!currencySymbol}{0, number, 0.00}" id="box4">
+                		<apex:param value="{!objectVATReturn.Box_4__c}" />
+                	</apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 5</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT payable or reclaimable </td>
+                <td align="right" width="70">
+                	<apex:outputText value="{!currencySymbol}{0, number, 0.00}"  id="box5">
+                		<apex:param value="{!objectVATReturn.Box_5__c}" />
+                	</apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 6</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total sales excluding VAT</td>
+                <td align="right" width="70">
+                	<apex:outputText value="{!currencySymbol}{0, number, 0.00}"  id="box6">
+                		<apex:param value="{!objectVATReturn.Box_6__c}" />
+                	</apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 7</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total purchases excluding VAT</td>
+                <td align="right" width="70">
+                	<apex:outputText value="{!currencySymbol}{0, number, 0.00}"  id="box7">
+                		<apex:param value="{!objectVATReturn.Box_7__c}" />
+                	</apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 8</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total value of goods you supplied to other EU countries</td>
+                <td align="right" width="70">
+                	<apex:outputText value="{!currencySymbol}{0, number, 0.00}"  id="box8">
+                		<apex:param value="{!objectVATReturn.Box_8__c}" />
+                	</apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 9</b></td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total value of goods you acquired from other EU countries</td>
+                <td align="right" width="70">
+                	<apex:outputText value="{!currencySymbol}{0, number, 0.00}"  id="box9">
+                		<apex:param value="{!objectVATReturn.Box_9__c}" />
+                	</apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="70">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Is posted</td>
+                <td align="right" width="70">
+                	<apex:inputField value="{!objectVATReturn.Is_posted__c}" id="chkBox1"/>
+                </td>
+            </tr>
+</table>
+            <p>&nbsp;</p>
+        <apex:pageblockbuttons > 
+        	<apex:commandButton value="Calculate" action="{!calculate}"  rerender="frm,pgMsgs" oncomplete="show();"/>
+        	<apex:commandButton value="Reconcile and Save" action="{!Save}" onclick="setBunload(false);" rerender="pgMsgs"/> 
+        	<apex:commandButton value="Cancel" action="{!Discard}" onclick="setBunload(false);"/>
+        	</apex:pageblockbuttons>
+       	</apex:pageblock>
+   </apex:form> 
+   
+<Script type="text/javascript">
+document.getElementById('tbl2').style.visibility='hidden';
+function setFocusOnLoad(){}
+
+function show()
+{
+  if((document.getElementById('pg:frm:pb1:Text47').value == null || document.getElementById('pg:frm:pb1:Text47').value == '' ) || (document.getElementById('pg:frm:pb1:Text48').value == null || document.getElementById('pg:frm:pb1:Text48').value == '' ))
+  {
+  }	
+  else
+  {
+  	document.getElementById('tbl2').style.visibility='visible' ;
+  }
+  setBunload(false);
+} 
+	function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    function setBunload(on)
+    {
+        window.onbeforeunload = (on) ? unloadMessage : null;                
+    }
+    setBunload(true);    
+</Script>
+
+</apex:page>

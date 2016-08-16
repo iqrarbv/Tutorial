@@ -1,0 +1,9 @@
+<apex:page ></apex:page>
+<!-- 
+<apex:page standardController="Sales_Order__c" extensions="SalesOrderSubmit_Controller" title="Submit Sales Order For Approval" action="{!init}">
+<apex:pagemessages id="errorMessages"  />
+<apex:form >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Back to Sales Order"  action="{!back}" rendered="{!sendBack}"/> 
+</apex:form>
+</apex:page>
+ -->

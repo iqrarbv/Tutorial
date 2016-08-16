@@ -1,0 +1,6 @@
+<apex:page standardcontroller="Purchase_Invoice__c" extensions="PostPIInvoice" action="{!init}">
+<apex:pagemessages id="errormessages" />
+<apex:form id="mainForm" >
+	<apex:commandbutton value="Back to Purchase Invoice" action="{!back}"/>
+</apex:form>
+</apex:page>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <fields>
+        <fullName>Current_POP_Number__c</fullName>
+        <defaultValue>-1</defaultValue>
+        <label>Current POP Number</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Current_PO_Number__c</fullName>
+        <defaultValue>-1</defaultValue>
+        <label>Current PO Number</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>POP_Starting_Number__c</fullName>
+        <label>POP Starting Number</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Purchase_Order_Starting_Number__c</fullName>
+        <label>Purchase Order Starting Number</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Number__c</fullName>
+        <defaultValue>-1</defaultValue>
+        <label>Sales Order Number</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Starting_Number__c</fullName>
+        <label>Sales Order Starting Number</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <label>Company Setup</label>
+</CustomObject>

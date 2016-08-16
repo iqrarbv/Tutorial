@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>VAT Return</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>VAT Return</value>
+    </caseValues>
+    <fields>
+        <label><!-- Box 1 --></label>
+        <name>Box_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 2 --></label>
+        <name>Box_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 3 --></label>
+        <name>Box_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 4 --></label>
+        <name>Box_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 5 --></label>
+        <name>Box_5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 6 --></label>
+        <name>Box_6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 7 --></label>
+        <name>Box_7__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 8 --></label>
+        <name>Box_8__c</name>
+    </fields>
+    <fields>
+        <label><!-- Box 9 --></label>
+        <name>Box_9__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Calculated --></label>
+        <name>Date_Calculated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date From --></label>
+        <name>Date_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Posted --></label>
+        <name>Date_Posted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date To --></label>
+        <name>Date_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is posted --></label>
+        <name>Is_posted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trans. No. --></label>
+        <name>Trans_No__c</name>
+    </fields>
+    <layouts>
+        <layout>VAT Return Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Download_PDF --></label>
+        <name>Download_PDF</name>
+    </webLinks>
+</CustomObjectTranslation>

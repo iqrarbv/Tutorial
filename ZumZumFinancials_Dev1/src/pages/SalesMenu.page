@@ -1,0 +1,25 @@
+<apex:page >
+	<apex:stylesheet value="{!URLFOR($Resource.ZF_BtnCSS)}"/>	
+<apex:pageblock title="Sales">
+<apex:pageblocksection >
+	<table align="center" width="100%">
+	    <tr>
+	        <td align="center">
+			<input type="button" class="roundbutton" value="Sales Order List" onclick="window.location='/{!$ObjectType.Sales_Order__c}'" /></td>
+			        <td align="center">
+			<input type="button" class="roundbutton" value="Add new Sales Order" onclick="window.location='/apex/NewSalesOrder'" /></td>            
+			     <td align="center">
+			<input type="button" class="roundbutton" value="Sales Invoice List" onclick="window.location='/{!$ObjectType.Sales_Invoice__c}'" /></td>
+			        <td align="center">
+			<input type="button" class="roundbutton" value="Add new Sales Invoice" onclick="window.location='/apex/NewSalesInvoice'" /></td>        
+		</tr>
+		<tr>
+			<td align="center">
+				<input type="button" class="roundbutton" value="Recurring Invoice List" onclick="window.location='/{!$ObjectType.RecurringInvoice__c}'" /></td>	     
+			<td align="center">
+				<input type="button" class="roundbutton" value="Add new Credit Note" onclick="window.location='/apex/NewSalesInvoice?scredit=yes'" /></td>        			       
+	    </tr>
+	</table>    
+</apex:pageblocksection>
+</apex:pageblock>
+</apex:page>

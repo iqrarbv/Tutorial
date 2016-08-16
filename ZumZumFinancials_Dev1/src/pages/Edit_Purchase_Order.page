@@ -1,0 +1,435 @@
+<apex:page standardController="Purchase_Order__c" extensions="Edit_Purchase_Order" title="Edit Purchase Order" sidebar="0" id="pgEditPOrderPage">
+<apex:stylesheet value="{!URLFOR($Resource.ajaxWaitIndicatorZip,'ajaxWaitIndicator_css.css')}"></apex:stylesheet>
+<apex:includeScript value="{!URLFOR($Resource.ajaxWaitIndicatorZip, 'ajaxWaitIndicator.js')}"/>
+<link rel="stylesheet" type="text/css" href="ZumzumFinacials.css" />
+<script type="text/javascript" src="/js/functions.js"></script>
+	<script src="/soap/ajax/9.0/connection.js"></script>
+	<script src="/soap/ajax/9.0/apex.js"></script>
+	<script type="text/javascript">
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    <script src="../../soap/ajax/21.0/connection.js"
+          type="text/javascript">
+</script>
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+	<apex:pagemessages id="errorMessage" />
+	<apex:form id="mainForm" rendered="{!allowEdit}">
+			<apex:pageblock id="PurchaseOrderinfo" title="Edit Purchase Order" >
+			<apex:pageBlockSection columns="1" >
+			<apex:pageblockSectionItem >
+		            <apex:outputText value="Placed By" />
+		            <apex:outputText value="{!$User.FirstName} {!$User.LastName}" />
+		          </apex:pageblockSectionItem>
+			<apex:pageblockSectionItem >
+				<apex:outputLabel for="grd">Supplier Name</apex:outputLabel>
+		                       <apex:panelgrid columns="2" id="AccName">
+				<apex:panelgroup id="pAccName">
+		            <div class="requiredInput">
+		              <div class="requiredBlock"></div>
+		              <apex:inputField Id="Account" value="{!PurchaseOrderInfo.Account__c}" onchange="getAccountTax(this.value);" />
+		            </div>
+		            </apex:panelgroup></apex:panelgrid>
+		          </apex:pageblockSectionItem>
+		         <apex:pageblockSectionItem >
+				<apex:outputLabel for="grd">Order Date</apex:outputLabel>
+		                       <apex:panelgrid columns="2" id="AccName">
+				<apex:panelgroup id="pAccName">
+		            <div class="requiredInput">
+		              <div class="requiredBlock"></div>
+		             	 <apex:inputField Id="OrderDate" value="{!PurchaseOrderInfo.Order_Date__c}"  />
+		            </div>
+		            </apex:panelgroup></apex:panelgrid>
+		          </apex:pageblockSectionItem>
+		          <apex:inputField Id="Supplier" value="{!PurchaseOrderInfo.Supplier_Reference__c}" />
+		      </apex:pageBlockSection>
+			<apex:pageBlockButtons location="top">
+			<apex:commandbutton value="Save" action="{!savePO}" onclick="setBunload(false);"/>
+			<apex:commandbutton value="Cancel" action="{!cancel}" onclick="setBunload(false);"/>
+			</apex:pageBlockButtons>
+		</apex:pageblock>
+		<apex:pageblock id="purchaseOrderLineItems" title="Purchase Order Line Items" >
+        
+				<table width="100%" class="grid">
+				  <tr>
+				    <td align="right" width="25"><b>S.No</b></td>
+				    <td align="left" width="152"><b>Product Name</b></td>
+				    <td align="left"><b>Narrative</b></td>
+				    <td align="left" width="42" align="right"><b>Qty</b></td>
+				    <td align="left" width="72" colspan="2" align="right"><b>Price</b></td>
+				    <td align="left" width="50"><b>T/C</b></td>
+				    <td align="left" width="70" align="right"><b>Tax Rate</b></td>
+				    <td align="left" width="50" colspan="2" align="right"><b>Tax</b></td>
+				    <td align="left" width="72" colspan="2" align="right"><b>Net</b></td>
+				    <td align="left" width="152"><b>Opportunity</b></td>
+				    <td align="left" width="80"><b>Options</b></td>
+			      </tr>
+				  <tr>
+				      <td align="right" width="25"><b><apex:inputHidden value="{!ecsRates}" id="isECSCountry" /></b></td>
+				      <td width="152"><div class="requiredInput">
+				      <div class="requiredBlock"></div>
+				      <apex:selectlist id="Product"  value="{!poItem.purchaseOrderLineItems.Product__c}" multiselect="false" size="1" style="width:150px;">
+							      <apex:selectoptions value="{!ALLProducts}" />
+							      <apex:actionsupport event="onchange" action="{!getProductPrice}" rerender="purchaseOrderLineItems" onsubmit="Mask.show();" oncomplete="Mask.hide();"/>
+					  </apex:selectlist>
+				      </div></td>
+				    <td><div class="requiredInput">
+				      <div class="requiredBlock"></div>
+				      <apex:inputTextarea id="Narrative"  value="{!poItem.purchaseOrderLineItems.Narrative__c}" rows="3" cols="35" />
+				      </div></td>
+				    <td width="42"><div class="requiredInput">
+				      <div class="requiredBlock"></div>
+				      <apex:inputfield id="Quantity" value="{!poItem.purchaseOrderLineItems.Quantity__c}" onchange="changeTax (this.id , this.value , this.title)" styleClass="numeric" style="text-align: right;class;" />
+				      </div></td>
+				      <td style="border:none;width:10px;">{!currencySymbol}</td>
+				    <td align="right" width="72"><div class="requiredInput">
+				      <div class="requiredBlock"></div>
+				      <apex:inputfield id="Amount"  styleClass="currency" value="{!poItem.purchaseOrderLineItems.Amount__c}"  onchange="validatefield_Amount(this.id , this.value , this.title)" style="text-align: right;"/>
+				      </div></td>
+				    <td width="50"><div class="requiredInput">
+				      <div class="requiredBlock"></div>
+				      <apex:selectlist id="TaxCode" value="{!poItem.purchaseOrderLineItems.Tax_Rate__c}" multiselect="false" size="1" style="width:150px;">
+                      	<apex:selectoptions value="{!AllTaxes}" />
+                      	<apex:actionsupport event="onchange" action="{!selectedTax}" rerender="purchaseOrderLineItems" onsubmit="Mask.show();" oncomplete="Mask.hide();"/>
+                      	<input value = "{!tax_rate}" id = "TaxRateValue" type = "hidden" />
+                    </apex:selectlist>
+				      </div></td>
+				    <td align="right" width="70">
+				    	<apex:outputtext styleClass="numeric" id="TaxRate" value="{0, number, 0.00}"  >
+				            	<apex:param value="{!tax_rate}" />
+				        </apex:outputtext>
+				    	</td>
+				    	<td style="border:none;width:10px;">{!currencySymbol}</td>
+				    <td align="right" width="50">
+				    	 <input id="TotalTax" src="25" type="text" size="6" style="text-align: right;" readonly="readonly" value="{!poItem.totalTax}"/>
+                    </td>
+                    <td style="border:none;width:10px;">{!currencySymbol}</td>
+				    <td align="right" width="72">
+				    	<input id="TotalAmount" src="25" type="text" size="6" style="text-align: right;" readonly="readonly" value="{!poItem.totalAmount}"/>
+				    </td>
+				    <td width="152">
+				      <!-- 
+				      <apex:selectlist id="Opportunity" value="{!poItem.purchaseOrderLineItems.Opportunity__c}" multiselect="false" size="1" style="width:150px;">
+							      <apex:selectoptions value="{!AllProjects}" />
+					  </apex:selectlist>
+					   -->
+					   <apex:inputfield value="{!poItem.purchaseOrderLineItems.Opportunity__c}" />
+				    </td>
+				    <td width="80" align="center">
+						<apex:commandbutton rerender="purchaseOrderLineItems,errorMessage,pgEditPOrderPage:mainForm:TotalAmount,pgEditPOrderPage:mainForm:TotalNet,pgEditPOrderPage:mainForm:TotalVAT" value="Add" action="{!addproductnewproductitem}" style="width:65px; font-size:10px;" onClick="Mask.show();" onComplete="Mask.hide();"/>
+						<apex:commandbutton value="Cancel" style="width:65px; font-size:10px;" />
+                		<apex:commandbutton onclick="getNetAmount();"  rerender="errorMessages" value="Calc. Net" style="width:65px; font-size:10px;" />
+						
+					</td>
+			      </tr>
+				  <tr align="center">
+				    <td colspan="13">&nbsp;</td>
+			      </tr>
+				  <apex:repeat value="{!Lineitems}" var="o" >    
+				  <tr>
+				     <td width="25" align="right"> 
+				    	<br>{!o.serialNumber}</br>
+				    </td>
+				    <td width="152"> 
+				    	{!o.ProducName}
+				    </td>
+				    <td> 
+				    	{!o.purchaseOrderLineItems.Narrative__c}
+				    </td>
+				    <td width="42" align="right">
+				    	<apex:outputtext id="Qty" value="{0, number, integer}"  >
+				            	<apex:param value="{!o.purchaseOrderLineItems.Quantity__c}" />
+				        </apex:outputtext>
+				    	
+				    </td>
+				    <td align="right" width="72" colspan="2" > 
+				    	{!currencySymbol}
+				    	<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!o.purchaseOrderLineItems.Amount__c}" />
+				         </apex:outputtext>
+				    </td>
+				    <td width="50">
+				    	{!o.strTaxRate}
+				    </td>
+				    <td align="right" width="70">
+				    	 <apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!o.taxRate}" />
+				         </apex:outputtext>
+				    </td>
+				    <td align="right" width="50" colspan="2">
+				    	{!currencySymbol}
+				    	<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!o.purchaseOrderLineItems.Total_VAT__c}" />
+				            </apex:outputtext>
+				    </td>
+				    <td align="right" width="72" colspan="2"> 
+				    	{!currencySymbol}
+				    	<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!o.purchaseOrderLineItems.Total_Gross__c}" />
+				            </apex:outputtext>
+				    </td>
+				    <td width="152">
+				    	<apex:outputfield value="{!o.purchaseOrderLineItems.Opportunity__c}" />
+				    </td>
+				    <td width="80" align="center">
+				    	<apex:commandLink value="Edit" action="{!editLineItem}" rerender="purchaseOrderLineItems,errorMessage,pgEditPOrderPage:mainForm:TotalAmount,pgEditPOrderPage:mainForm:TotalNet,pgEditPOrderPage:mainForm:TotalVAT" >
+                            <apex:param name="editId" value="{!o.serialNumber}"/>
+							</apex:commandLink>&nbsp;&nbsp;&nbsp;
+							<apex:commandLink value="Delete" action="{!deletLineItem}" onclick="return confirmDelete();">
+							<apex:param name="deleteId" value="{!o.serialNumber}"/>
+							</apex:commandLink>
+				    </td>
+			      </tr>
+			      </apex:repeat>
+				  <tr>
+				    <td width="25"><b></b></td>
+				    <td width="152"><b></b></td>
+				    <td><b></b></td>
+				    <td width="42"><b></b></td>
+				    <td align="right" width="72" colspan="2"><b>
+				    	{!currencySymbol}
+				    	<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!wtAmount}" />
+				        </apex:outputtext>
+				    </b></td>
+				    <td width="50">&nbsp;</td>
+				    <td width="70">&nbsp;</td>
+				    <td align="right" width="50" colspan="2"><b>
+				    	{!currencySymbol}
+				    	<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!totalTax}" />
+				        </apex:outputtext>
+				    </b></td>
+				    <td align="right" width="72" colspan="2"><b>
+				    	{!currencySymbol}
+				    	<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!PoAmount}" />
+				        </apex:outputtext>
+				    </b></td>
+				    <td width="152"><b></b></td>
+				    <td width="80" align="center"><b></b></td>
+			      </tr>
+		  </table>
+		</apex:pageblock>
+	    <table width="100%">
+	      <tr>
+				<td align="right"><strong>Total Excl. VAT: </strong></td>
+				<td width="100" align="right">
+					{!currencySymbol}
+					<apex:outputtext value="{0, number, 0.00}" id="TotalNet" >
+					     	<apex:param value="{!wtAmount}" />
+					</apex:outputtext>
+				</td>
+			</tr>
+			<tr>
+				<td align="right"><strong>Total VAT: </strong></td>
+				<td width="100" align="right">
+					{!currencySymbol}
+					<apex:outputtext value="{0, number, 0.00}" id="TotalVAT" >
+					     	<apex:param value="{!totalTax}" />
+					</apex:outputtext>
+				</td>
+			</tr>
+	      <tr>
+	        <td align="right"><strong>Total
+	          Amount: </strong></td>
+	        <td width="100" align="right">
+	        		{!currencySymbol}
+	        		<apex:outputtext value="{0, number, 0.00}" id="TotalAmount" >
+				            	<apex:param value="{!PoAmount}" />
+				        </apex:outputtext>
+			</td>
+          </tr>
+	      </table>
+	    </apex:form>
+	    <script type = "text/javascript">
+		var item_name;
+		var item_qty ;
+		var item_amount ;
+		function validatefield_Amount(fieldsName , val , title)
+		{
+			var value = Number(val.replace(",",""));
+			if (value > 0 )
+			{
+				var taxamount = Number(document.getElementById('TotalTax').value) ;
+				var rate  = Number(document.getElementById('TaxRateValue').value);
+				var amount = Number(document.getElementById('pgEditPOrderPage:mainForm:purchaseOrderLineItems:Amount').value.replace(",","")) ;
+				taxamount = (amount/100)*rate;
+				var quantity  = Number(document.getElementById('pgEditPOrderPage:mainForm:purchaseOrderLineItems:Quantity').value);
+				amount = Number(amount);
+				taxamount = Number(taxamount) * quantity;
+				var totalamount = (amount * quantity ) + taxamount ;
+				taxamount = roundNumber(taxamount,2); 
+				totalamount = roundNumber(totalamount,2);
+				document.getElementById('TotalTax').value = taxamount.toFixed(2) ;   //taxamount ;
+				document.getElementById('TotalAmount').value = totalamount.toFixed(2) ;
+			}
+			else 
+			{
+				document.getElementById(fieldsName).focus();
+				alert( 'Amount Must be greater then 1') ;
+				document.getElementById(fieldsName).value = value ;
+			}
+		}
+		function changeTax(fieldsName , val , title)
+		{
+			var value = Number(val.replace(",",""));
+			if (value > 0 )
+			{
+				var taxamount = Number(document.getElementById('TotalTax').value) ;
+				var rate  = Number(document.getElementById('TaxRateValue').value);
+				var amount = Number(document.getElementById('pgEditPOrderPage:mainForm:purchaseOrderLineItems:Amount').value.replace(",","")) ;
+				taxamount = (amount/100)*rate;
+				var quantity  = Number(document.getElementById('pgEditPOrderPage:mainForm:purchaseOrderLineItems:Quantity').value);
+				amount = Number(amount);
+				taxamount = Number(taxamount) * quantity;
+				var totalamount = (amount * quantity ) + taxamount ;
+				taxamount = roundNumber(taxamount,2); 
+				totalamount = roundNumber(totalamount,2);
+				document.getElementById('TotalTax').value = taxamount.toFixed(2) ;   //taxamount ;
+				document.getElementById('TotalAmount').value = totalamount.toFixed(2) ;
+			}
+			else 
+			{
+				document.getElementById(fieldsName).focus();
+				alert( 'Amount Must be greater then 1') ;
+				document.getElementById(fieldsName).value = value;
+			}
+		}
+		function getNetAmount()
+		{			
+			//alert('calculating Net Amount');				
+			var GAmount = Number(document.getElementById('pgEditPOrderPage:mainForm:purchaseOrderLineItems:Amount').value.replace(",","")) ;
+			//alert('GAmount:'+GAmount);
+			//alert('Tax:'+document.getElementById('TaxRateValue'));
+			var TaxRate = Number(document.getElementById('TaxRateValue').value.replace(",","")) ;
+			//alert('TaxRate:'+TaxRate);
+			var Quantity = Number(document.getElementById('pgEditPOrderPage:mainForm:purchaseOrderLineItems:Quantity').value.replace(",","")) ;
+			//alert('Quantity:'+Quantity);			
+			var TaxAmount = (GAmount * TaxRate)/(100 + TaxRate) ;			
+			var tmpNetAmount = ( GAmount - TaxAmount)*Quantity ;
+			TaxAmount = (TaxAmount * Quantity).toFixed(2); ;
+			tmpNetAmount = roundNumber(tmpNetAmount,2).toFixed(2);
+			//alert('calculating Net Amount 2');
+			document.getElementById('TotalTax').value = TaxAmount ; 
+			document.getElementById('pgEditPOrderPage:mainForm:purchaseOrderLineItems:Amount').value = roundNumber((tmpNetAmount/Quantity) , 2).toFixed(2);			
+			document.getElementById('TotalAmount').value = ((GAmount * Quantity )-TaxAmount).toFixed(2) ;
+			//document.getElementById('TotalGrossAmount').value =  (GAmount * Quantity ).toFixed(2) ;
+			//alert('calculating Net Amount 3');
+		}	
+		function roundNumber(num, dec) 
+		{
+			var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+			return result;
+		}
+		// on exit warning code
+		function unloadMessage()
+		{
+	        //message = "Wait! You haven't finished."
+	        message = "Your Purchase Order Information is not Saved yet!\n Are you sure you to exit?";
+	        return message;
+	    }
+	    function setBunload(on)
+	    {
+	        window.onbeforeunload = (on) ? unloadMessage : null;
+	    }
+	    setBunload(true);
+	    // end of warningn code
+	    // Confirm on Delete Code
+	    function confirmDelete()
+		{
+			var confirmdelete = confirm("Are you Sure to delete this Entry ?");
+			if (confirmdelete == false)
+			{
+				return false;
+			} 
+			setBunload(false);
+		}
+	    // end of code
+	    
+	    
+	    function getAccountTax(AccountName)
+	    {
+	    	countryName = sforce.connection.query("Select Tax_Rate__c , Tax_Rate__r.Name , Tax_Rate__r.Tax_Rate__c  , Country__c from Account where Name = '"+AccountName+"'");
+	    	countryName = countryName.getArray("records");
+	    	var optTaxCode = document.getElementById("pgEditPOrderPage:mainForm:purchaseOrderLineItems:TaxCode");
+	    	var optTaxRates = document.getElementById("pgEditPOrderPage:mainForm:purchaseOrderLineItems:TaxRate");
+	    	if(countryName[0].Tax_Rate__c !=null)
+	    	{
+	    		optTaxCode.value = countryName[0].Tax_Rate__c ;
+	    		optTaxRates.innerHTML = countryName[0].Tax_Rate__r.Tax_Rate__c;	    			    	
+	    	}
+	    	else
+	    	{ 
+	    		taxRateName = sforce.connection.query("select Id , Tax_Rate__c , is_default__c from Tax_Rate__c where is_default__c = true");
+		    	taxRateName = taxRateName.getArray("records");		    
+		    	optTaxCode.value = taxRateName[0].Id ;
+		    	optTaxRates.innerHTML = taxRateName[0].Tax_Rate__c;
+	    	}	
+	    }
+	    
+	    /* This code finds account country & List Tax Rates for that coutry & deprecated
+	    function getCountryRegion(AccountName)
+	    {
+	    	//alert(AccountName);
+	    	countryName = sforce.connection.query("Select Country__c from Account where Name = '"+AccountName+"'");
+	    	countryName = countryName.getArray("records");
+	    	countryName = countryName[0].Country__c ;
+	    	result = sforce.connection.query("Select Country_Name__c , Country_Code__c , Region__c from ISO_Countries__c ");
+	    	//alert('this is countries list: ' + result ) ;
+	    	records = result.getArray("records");
+	    	//alert("this is copuntry code: " + records[0].Country_Name__c) ;
+	    	for (var i=0; i< records.length; i++) 
+	    	{
+	    		//alert("this is copuntry code: " + records[i].Country_Name__c) ;
+	    		if(records[i].Country_Name__c == countryName)
+	    		{	
+	    			//alert('this is your region : ' + records[i].Region__c + ' This is your Coutry Code : ' + records[i].Country_Code__c)	;
+	    			if(records[i].Region__c == 'Europe' && countryName != 'UNITED KINGDOM')
+	    				getECSTaxes() ;
+	    			else
+	    				getAllTaxes();	
+	    		}
+	    	}
+	    }
+	    function getECSTaxes()
+	    {
+	    	//alert('i am a ESC country');
+	    	result = sforce.connection.query("Select is_no_tax__c, is_EC_Sales__c, Tax_Rate__c, Name, Id From Tax_Rate__c where is_EC_Sales__c = true");
+	    	records = result.getArray("records");
+	    	//alert(records);
+	    	var optTaxRates = document.getElementById("pgEditPOrderPage:mainForm:purchaseOrderLineItems:TaxCode");
+	    	optTaxRates.options.length = 0;
+	    	optTaxRates.options[optTaxRates.options.length] = new Option('Select Tax Rate' , '' );
+	    	document.getElementById("pgEditPOrderPage:mainForm:purchaseOrderLineItems:isECSCountry").value = true ;
+	    	for (var i=0; i< records.length; i++) 
+	    	{
+	    		//alert(records[i].Name);
+	    		optTaxRates.options[optTaxRates.options.length] = new Option(Number(records[i].Tax_Rate__c).toFixed(2) + '% ' + records[i].Name , records[i].Id);
+	    	}
+	    }
+	    function getAllTaxes()
+	    {
+	    	//alert('i am a ESC country');
+	    	result = sforce.connection.query("Select is_no_tax__c, is_EC_Sales__c, Tax_Rate__c, Name, Id From Tax_Rate__c ");
+	    	records = result.getArray("records");
+	    	//alert(records);
+	    	var optTaxRates = document.getElementById("pgEditPOrderPage:mainForm:purchaseOrderLineItems:TaxCode");
+	    	optTaxRates.options.length = 0;
+	    	optTaxRates.options[optTaxRates.options.length] = new Option('Select Tax Rate' , '' );
+	    	document.getElementById("pgEditPOrderPage:mainForm:purchaseOrderLineItems:isECSCountry").value = false ;
+	    	for (var i=0; i< records.length; i++) 
+	    	{
+	    		//alert(records[i].Name);
+	    		optTaxRates.options[optTaxRates.options.length] = new Option(Number(records[i].Tax_Rate__c).toFixed(2) + '% ' + records[i].Name , records[i].Id);
+	    	}
+	    }
+	    // end of code
+	    */
+	</script>
+	<apex:form id="frmBack" rendered="{!allowEdit==false}">
+		<script type="text/javascript" src="{!URLFOR($Resource.jsGlobalFunctions)}"></script>
+		<iframe  onload="getWarningOff();" width="0"  height="0">
+		</iframe >
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton action="{!back}" value="Back to Purchase Order"  />
+	</apex:form>
+</apex:page>

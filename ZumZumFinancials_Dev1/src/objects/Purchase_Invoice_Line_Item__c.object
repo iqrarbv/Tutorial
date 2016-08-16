@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <content>InvalidOperationPI</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <content>InvalidOperationPI</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>InvalidOperationPI</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>InvalidOperationPI</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Amount__c</fullName>
+        <label>Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Item_Received__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Item Received</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Narrative__c</fullName>
+        <label>Narrative</label>
+        <length>255</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Nominal_Account__c</fullName>
+        <label>Nominal Account</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Purchase Invoice Line Items</relationshipLabel>
+        <relationshipName>Purchase_Invoice_Line_Items_del</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Purchase Invoice Line Items</relationshipLabel>
+        <relationshipName>Purchase_Invoice_Line_Items</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Purchase_Invoice__c</fullName>
+        <label>Purchase Order</label>
+        <referenceTo>Purchase_Invoice__c</referenceTo>
+        <relationshipLabel>Purchase Invoice Line Items</relationshipLabel>
+        <relationshipName>Purchase_Invoice_Line_Items</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Ready_To_Pay__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Ready To Pay</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Serial_No__c</fullName>
+        <label>Serial No</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Tax_Rate__c</fullName>
+        <label>Tax Rate</label>
+        <referenceTo>Tax_Rate__c</referenceTo>
+        <relationshipName>Purchase_Invoice_Line_Items</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Total_Amount__c</fullName>
+        <label>Total Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Gross__c</fullName>
+        <label>Total Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Net__c</fullName>
+        <label>Total Net</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_VAT__c</fullName>
+        <label>Total VAT</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UID__c</fullName>
+        <displayFormat>PI-{000000}</displayFormat>
+        <label>UID</label>
+        <type>AutoNumber</type>
+    </fields>
+    <label>Purchase Invoice Line Item</label>
+    <nameField>
+        <label>Custom Object Label Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Purchase Invoice Line Items</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

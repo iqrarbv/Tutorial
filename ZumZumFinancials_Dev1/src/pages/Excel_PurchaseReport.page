@@ -1,0 +1,41 @@
+<apex:page controller="PurchaseReportController" action="{!CalculateforExcel}" contenttype="application/vnd.ms-excel" showheader="false" sidebar="false" >
+<h1>Purchase Report</h1>
+	<apex:pageMessages id="pgMsgs"/>
+	<apex:pageBlock >
+		<table width="100%" cellpadding="0" cellspacing="0" class="grid" id="tbl1">
+			<tr>
+                <td colspan="3">                    
+					<b> From {!objectLedger.Trans_Date__c} To  {!objectLedger.Bank_Reconcile_Date__c}</b>
+				</td>
+			</tr>	
+			<tr>			
+			<td>
+			<b>Month</b>
+			</td>
+			<td>
+			<b>Sales</b>
+			</td>
+			<td>
+			<b>Credit Notes</b>
+			</td>			
+			</tr>
+			<apex:repeat value="{!PurchaseReport}" var="items" id="theRepeat">
+				<tr>
+					<td>
+						<apex:outputText value="{!items.monthNyearReport}" id="VAT" />
+					</td>
+					<td>
+						<apex:outputText value="{!currencySymbol}{0,number, 0.00}" id="Rate" >
+							<apex:param value="{!items.purchase}" />
+						</apex:outputText>
+					</td>
+					<td>
+						<apex:outputText value="{!currencySymbol}{0,number, 0.00}" id="Net">
+							<apex:param value="{!items.creditNotes}" />
+						</apex:outputText>
+					</td>									
+				</tr>
+			</apex:repeat>
+			</table>	
+	</apex:pageBlock>
+</apex:page>

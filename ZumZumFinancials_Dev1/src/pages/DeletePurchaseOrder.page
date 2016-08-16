@@ -1,0 +1,7 @@
+<apex:page standardController="Purchase_Order__c" extensions="DeletePurchaseorder" title="Delete Purchase Order" action="{!init}">
+<!-- Begin Default Content REMOVE THIS -->
+<apex:pagemessages id="errorMessage" />
+<apex:form >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Back to Purchase Order"  action="{!back}" />
+</apex:form>
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page standardController="Sales_Invoice_Line_Item__c" extensions="InvalidOperationSI" title="Invalid Operation On Sales Invoice" action="{!init}">
+<!-- Begin Default Content REMOVE THIS -->
+<h1>Congratulations</h1>
+This is your new Page
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

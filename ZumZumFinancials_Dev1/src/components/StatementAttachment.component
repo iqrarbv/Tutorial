@@ -1,0 +1,27 @@
+<apex:component controller="StatementAttachmentController"
+	access="global">
+	<apex:attribute name="AccountId" Type="string" assignTo="{!AccountId}"
+		required="True" description="Account Id for fetching ledger records." access="global"/>
+	<div valign="top" align="center" style="font-family:{!HTMLENCODE(template.Font_Face__c)};font-weight:bold;font-size:{!(template.Font_Size__c)};" escape="false">{!HTMLENCODE(template.Heading_Text__c)}</div>
+	<apex:datatable value="{!LedgerList}" var="ledger">
+		<apex:column headerValue="Trans. No." 
+			value="{!ledger.Name}"/>
+		<apex:column headerValue="Trans. Date"
+			value="{!ledger.Trans_Date__c}" />
+		<apex:column headerValue="Trans. Type"
+			value="{!ledger.Type__c}" />
+		<apex:column headerValue="Doc. No."
+			value="{!ledger.Doc_ID__c}" />
+		<apex:column headerValue="Net Amt."
+			value="{!ledger.Net__c}" />
+		<apex:column headerValue="Paid Amt."
+			value="{!ledger.Amount__c}" />
+		<apex:column headerValue="Paid"
+			value="{!ledger.Paid__c}" />
+		<apex:column headerValue="Details"
+			value="{!ledger.Details__c}" />					
+	</apex:datatable>
+	<div style="position:absolute; bottom:{!template.Margins_top_bottom__c}in; font-family:{!template.Font_Face__c}; text-align:center;font-size:{!template.Font_Size__c}px; width:100%;" align="center">
+		{!template.Footer_Text__c}
+	</div>
+</apex:component>

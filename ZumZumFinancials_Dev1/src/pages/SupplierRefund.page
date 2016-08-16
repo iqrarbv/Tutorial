@@ -1,0 +1,82 @@
+<apex:page Controller="controllerSupplierRefund" title="Supplier Refund" id="pg">
+<apex:stylesheet value="{!$Resource.SplyrRfnd_CSS}"/>
+<apex:PageMessages id="pgMsg"/>
+<apex:form >
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+	<apex:pageblock title="Supplier Refund">
+<table width="100%" class="grid">
+		        <tr>
+		            <td width="50">
+		                Bank</td>
+		            <td width="210">
+		            <div class="requiredInput">
+	                <div class="requiredBlock"></div>		            			        
+			            <apex:selectList value="{!NominalId}" multiselect="false" size="1" styleClass="dropdown">
+			            	<apex:selectOptions value="{!BankAccount}" >
+			            	</apex:selectOptions>
+			            </apex:selectList>
+			        </div>
+                    </td>		           
+		            <td width="50">
+		                Date</td>
+		            <td width="60">
+		            <div class="requiredInput">
+	                <div class="requiredBlock"></div>
+		            <apex:inputField value="{!objectLookup.Date__c}">
+		            </apex:inputField>
+		            </div>		           
+		            </td>
+		            <td class="style1" width="60">
+		                Cheque No.</td>
+		            <td width="2" align="right"/>
+		            <td width="72">
+		            <apex:inputText value="{!cheque}" styleClass="currency"></apex:inputText>		                
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="50">
+		                Payee</td>
+		            <td width="210">	
+		            <div class="requiredInput">
+	                <div class="requiredBlock"></div>	            
+		            <apex:inputField value="{!objectLookup.SupplierAccount__c}" styleClass="lookupName">		            
+		            </apex:inputField>
+		            </div>
+		            </td>		            		            		            
+		            <td class="style1" width="60">&nbsp;
+                  </td>
+		            <td width="72">&nbsp;
+                  </td>
+                  <td width="50">
+		                Amount</td>		            
+		            <td width="2" align="right"><apex:outputText value="{!currencySymbol}"/>
+		            <td width="60" align="left">
+		            <div class="requiredInput">
+	                <div class="requiredBlock"></div>
+		            	<apex:inputText value="{!pay}" styleClass="currency"></apex:inputText>
+		            </div>		            
+		            </td> 
+		            </td>
+		        </tr>
+		    </table>
+        <apex:pageblockbuttons >
+        <apex:commandButton value="Save" action="{!Save}" rerender="pgMsg" onclick="setBunload(false);"/>
+        <apex:commandButton value="Cancel" action="{!Cancel}" onclick="setBunload(false);"/>
+        	      
+        </apex:pageblockbuttons>
+	</apex:pageblock>
+	</apex:form>
+	<script language="javascript" TYPE="text/javascript">
+	function setFocusOnLoad(){}	
+	function unloadMessage(){
+        message = "Record Saved."
+        return message;
+    }
+    function setBunload(on){
+        window.onbeforeunload = (on) ? unloadMessage : null;
+    }
+    setBunload(true);
+	</script>	
+</apex:page>

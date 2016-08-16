@@ -1,0 +1,80 @@
+<apex:page >
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+	<apex:pageblock title="Send Reminders and Statements">		       
+            <table class="grid" width="100%">
+            <tr>
+            <td width="120">
+                Selection definition
+            </td>
+            <td><div class="requiredInput">
+				      <div class="requiredBlock"></div>    
+                <select >
+                    <option>--None--</option>
+                    <option>Reminder 1 - Invoice Due</option>
+                    <option>Reminder 2</option>
+                    <option>Statement</option>
+              </select>
+              </div>
+              </td>
+              </tr>
+                <tr>
+                  <td>Start Date</td>
+                  <td><div class="requiredInput">
+				      <div class="requiredBlock"></div><input id="relatedName2" type="text" value="01/01/2011" 
+                            class="date" /></div></td>
+                </tr>
+                <tr>
+                <td width="120">
+						Frequency</td>
+			  <td><div class="requiredInput">
+				      <div class="requiredBlock"></div>
+						<input type="Text" value="1" class="numeric"/> - 
+                        <select id="Select2" name="D2">
+                            <option value="Days">Day(s)</option>
+                            <option value="Weeks">Week(s)</option>
+                            <option value="Months" selected>Month(s)</option>
+                        </select></div></td>
+              </tr>
+      </table>
+                <table width="100%">
+                <tr>
+                  <td colspan="2">Select Customers</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><table width="100%" class="grid">
+                    <tr>
+                      <td width="8"><input type="checkbox"/></td>
+                      <td width="75%">Name</td>
+                      <td>Email</td>
+                    </tr>
+                    <tr>
+                      <td width="8"><input type="checkbox"/></td>
+                      <td width="75%">ABC Company 1</td>
+                      <td>abc@company.com</td>
+                    </tr>
+                    <tr>
+                      <td width="8"><input type="checkbox"/></td>
+                      <td width="75%">ABC Company 1</td>
+                      <td>abc@company.com</td>
+                    </tr>
+                    <tr>
+                      <td width="8"><input type="checkbox"/></td>
+                      <td width="75%">ABC Company 1</td>
+                      <td>abc@company.com</td>
+                    </tr>
+                    <tr>
+                      <td width="8"><input type="checkbox"/></td>
+                      <td width="75%">ABC Company 1</td>
+                      <td>abc@company.com</td>
+                    </tr>
+                  </table></td>
+                </tr>
+      </table>
+        <apex:pageblockbuttons >
+<input type="submit" value="Save" />
+        	<input type="submit" value="Discard" />
+        </apex:pageblockbuttons>
+	</apex:pageblock>
+</apex:page>

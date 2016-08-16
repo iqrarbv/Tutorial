@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Tax</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Tax</value>
+    </caseValues>
+    <fields>
+        <label><!-- Tax Rate --></label>
+        <name>Tax_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- is EC Sales --></label>
+        <name>is_EC_Sales__c</name>
+    </fields>
+    <fields>
+        <label><!-- is default --></label>
+        <name>is_default__c</name>
+    </fields>
+    <fields>
+        <label><!-- is no tax --></label>
+        <name>is_no_tax__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,55 @@
+<apex:page standardcontroller="Ledger__c" extensions="CorrectionsController" id="pg">
+	<apex:pageMessages id="pgMsgs"/>
+	<apex:form id="frm">
+		<apex:PageBlock >			
+			<apex:PageBlockSection title="Corrections">
+				<apex:pageBlockSectionItem >
+					Trans No. : <apex:inputField value="{!objectLedger.Trans_No__c}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					Type : <apex:inputField value="{!objectLedger.Type__c}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					Sub Account Name : <apex:inputField value="{!LookupAccount.CustomerAccount__c}">
+						<apex:actionSupport event="onchange" action="{!SubAccountChanged}" rerender="frm, pgMsgs"/>
+					</apex:inputField>
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					Sub Account Number: <apex:outputText value="{!AccttNum}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					Nominal Name : <apex:inputField value="{!LookupAccount.Nominal_Account__c}" >
+						<apex:actionSupport event="onchange" action="{!NominalAccountChanged}" rerender="frm, pgMsgs"/>
+					</apex:inputField>
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >					
+					Nominal Code : <apex:outputText value="{!NomCode}"/>
+				</apex:pageBlockSectionItem>								
+				<apex:pageBlockSectionItem >
+					Details : <apex:inputField value="{!objectLedger.Details__c}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					Reference : <apex:inputField value="{!objectLedger.Reference__c}" /> 
+				</apex:pageBlockSectionItem>
+				
+				<apex:pageBlockSectionItem >
+					Net Amount : <apex:inputField value="{!objectLedger.Net__c}" /> 
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					Tax Rate : <apex:inputField value="{!objectLedger.Tax__c}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					Tax Code : <apex:inputField value="{!objectLedger.Tax_Code__c}" /> 
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem > 
+					Amount Paid : <apex:outputField value="{!objectLedger.Amount__c}" />
+				</apex:pageBlockSectionItem>
+			</apex:PageBlockSection>		
+			
+			<apex:PageBlockButtons >
+				<apex:commandButton value="Save"/>
+				<apex:commandButton value="Cancel"/>
+ 			</apex:PageBlockButtons> 
+		</apex:PageBlock> 
+	</apex:form>
+</apex:page>

@@ -1,0 +1,9 @@
+<apex:page >
+ <c:AutoCompleteNomCodes autocomplete_textbox="lookup" selectedvalue_textbox="hiddenId" nominalCode_textbox="relatedName"/>
+  <apex:pageblock title="Autocomplete Search Demo">
+  <b>Nominal Codes Search</b>
+  <input type="text" id="lookup" />
+  <input type="text" id="hiddenId" />
+  <input type="text" id="relatedName" />
+  </apex:pageblock>
+</apex:page>

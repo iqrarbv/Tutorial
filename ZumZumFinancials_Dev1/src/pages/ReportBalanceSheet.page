@@ -1,0 +1,203 @@
+<apex:page controller="ReportBalanceSheetController" id="page">
+<apex:sectionHeader title="Balance Sheet Report" />
+	<apex:pageMessages />
+	<apex:form id="frm">
+		<apex:pageblock id="pb">
+			<apex:pageblocksection id="pbs">
+				<apex:pageblocksectionitem id="pbsi_start">
+				<apex:outputLabel for="cmbStartMonth" value="Period From" />
+				<apex:selectlist value="{!fiscalStartPeriod}" multiselect="false" size="1" Id="cmbStartMonth">
+					<apex:selectOptions value="{!FiscalMonthsList}" />
+				</apex:selectlist>
+				</apex:pageblocksectionitem>
+				<apex:pageblocksectionitem id="pbsi_end">
+				<apex:outputLabel for="cmbEndMonth" value="Period To" />
+				<apex:selectlist value="{!fiscalEndPeriod}" multiselect="false" size="1" Id="cmbEndMonth">
+					<apex:selectOptions value="{!FiscalMonthsList}" />
+				</apex:selectlist>
+				</apex:pageblocksectionitem>
+				<script type="text/javascript">
+				function OpenExcelReport()
+				{
+					var startDate = document.getElementById('{!$Component.frm.pb.pbs.pbsi_start.cmbStartMonth}').value;
+					var endDate = document.getElementById('{!$Component.frm.pb.pbs.pbsi_end.cmbEndMonth}').value;
+					window.open('/apex/ReportBalanceSheet_Excel?fiscalStartPeriod='+startDate+'&fiscalEndPeriod='+endDate,'excelReport');
+				}
+				</script>
+			</apex:pageblocksection>
+			<apex:pageblockbuttons location="bottom">
+				<apex:commandButton value="Run Report" action="{!RunReport}" />
+				<input type="button" value="Run Report in Excel" onclick="OpenExcelReport();" class="btn"/>
+					
+			</apex:pageblockbuttons>
+		</apex:pageblock>
+	</apex:form>
+	<apex:pageblock >
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+		<colgroup span="6"></colgroup>
+		  <thead class="rich-table-head">
+		  <tr class="headerRow ">
+		    <th width="25%" colspan="1" scope="col"><div align="center"></div></th>
+		    <th width="15%" colspan="1" scope="col"><div align="center"></div></th>
+		    <th width="15%" colspan="1" scope="col"><div align="center">Period</div></th>
+		    <th width="15%" colspan="1" scope="col"><div align="center"></div></th>
+		    <th width="15%" colspan="1" scope="col"><div align="center">Year To Date </div></th>
+		    <th width="15%" colspan="1" scope="col"><div align="center"></div></th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><strong>Fixed Assets</strong></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  <apex:repeat value="{!FixedAssetsDetail}" var="record">		  
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><apex:outputText value="{!record.Name}" /></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.PeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.ToDateTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  </apex:repeat>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!FixedAssetsPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!FixedAssetsToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><strong>Current Assets</strong></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  <apex:repeat value="{!CurrentAssetsDetail}" var="record">		  
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><apex:outputText value="{!record.Name}" /></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.PeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.ToDateTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  </apex:repeat>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CurrentAssetsPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CurrentAssetsToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><strong>Current Liabilities</strong></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  <apex:repeat value="{!CurrentLiabilitiesDetail}" var="record">		  
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><apex:outputText value="{!record.Name}" /></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.PeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.ToDateTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  </apex:repeat>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CurrentLiabilitiesPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CurrentLiabilitiesToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>
+		  <tr class="totalRow">
+		    <td class="dataCell" colspan="2" width="40%" style="text-align: right"><strong>Current Assets Less Current Liabilities</strong></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CurrentAssetsLessCurrentLiabilitiesPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CurrentAssetsLessCurrentLiabilitiesToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>
+		  <tr class="totalRow">
+		    <td class="dataCell" colspan="2" width="40%" style="text-align: right"><strong>Total Assets Less Current Liabilities</strong></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!TotalAssetsLessCurrentLiabilitiesPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!TotalAssetsLessCurrentLiabilitiesToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><strong>Long Term Liabilities</strong></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  <apex:repeat value="{!LongTermLiabilitiesDetail}" var="record">		  
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><apex:outputText value="{!record.Name}" /></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.PeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.ToDateTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  </apex:repeat>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!LongTermLiabilitiesPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!LongTermLiabilitiesToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>
+		  <tr class="totalRow">
+		    <td class="dataCell" colspan="2" width="40%" style="text-align: right"><strong>Total Assets Less Total Liabilities</strong></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!TotalAssetsLessTotalLiabilitiesPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!TotalAssetsLessTotalLiabilitiesToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><strong>Capital And Reserves</strong></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  <apex:repeat value="{!CapitalAndReservesDetail}" var="record">		  
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%"><apex:outputText value="{!record.Name}" /></td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.PeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!record.ToDateTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		  </tr>
+		  </apex:repeat>
+		  <tr class="dataRow">
+		    <td class="dataCell" colspan="1" width="25%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%">&nbsp;</td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CapitalAndReservesPeriodTotalCurrency.Amount__c}" /></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"></div></td>
+		    <td class="dataCell" colspan="1" width="15%"><div align="right"><apex:outputField value="{!CapitalAndReservesToDateTotalCurrency.Amount__c}" /></div></td>
+		  </tr>	
+		  </tbody>	  
+		</table>
+	</apex:pageblock>
+</apex:page>

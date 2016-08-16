@@ -1,0 +1,105 @@
+<apex:page renderas="pdf" standardController="Purchase_Order__c" extensions="PurchaseOrder_Pdf" title="Purchase Order Pdf Veiw" sidebar="false" action="{!init}" >
+<apex:pagemessages id="errorMessages" />
+<table cellpadding="0" cellspacing="0" border="0" class="mytab">
+<tr><td height="800">
+<div style="height:10in; position:relative; margin:0in {!invoiceTmpl.Margins_left_right_Inches__c}in;" >
+<div style="position:relative; top:{!invoiceTmpl.Margins_top_bottom__c}in;">
+<apex:form rendered="{!showPdf}">
+<div valign="top" align="center" style="font-family:{!invoiceTmpl.Font_Face__c};font-weight:bold;font-size:{!invoiceTmpl.Font_Size__c};">{!invoiceTmpl.Heading_Text__c}</div>
+<div valign="top" align="center" style="font-family:Arial, Helvetica, sans-serif;font-weight:bold;font-size:20;">PURCHASE ORDER</div>
+<br/> 
+<div style="text-align: center;"><apex:image url="{!imageUrl}" /></div>
+<apex:pageblock title="Purchase Order Info" id="pbPurchaseInvoice">
+			<table  width="96%" cellpadding="0" cellspacing="" >
+			  <tr>
+	          <td style="font-size:12px"><strong>Owner Name:</strong></td>
+	          <td style="font-size:12px"><strong>{!PurchaseOrderinfo.CreatedBy.Name}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px">&nbsp;</td>
+	          <td style="font-size:12px">&nbsp;</td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px"><strong>PO Number</strong></td>
+	          <td style="font-size:12px"><strong>{!PurchaseOrderinfo.Name}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px"><strong>Invoice Status</strong></td>
+	          <td style="font-size:12px"><strong>{!PurchaseOrderinfo.Status__c}</strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px"><strong>Invoice Due Date</strong></td>
+	          <td style="font-size:12px"><strong>{!orderDate}
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px"><strong>Total Net</strong></td>
+	          <td style="font-size:12px"><strong>
+	          	<apex:outputtext value="{0, number, 0.00}" >
+            	<apex:param value="{!PurchaseOrderinfo.Total_Net__c}" />
+            		</apex:outputtext> 
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px"><strong>Total VAT</strong></td>
+	          <td style="font-size:12px"><strong>
+	          	<apex:outputtext value="{0, number, 0.00}" >
+            	<apex:param value="{!PurchaseOrderinfo.Total_VAT__c}" />
+            		</apex:outputtext>
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px"><strong>Total Gross</strong></td>
+	          <td style="font-size:12px"><strong>
+	          		<apex:outputtext value="{0, number, 0.00}" >
+            			<apex:param value="{!PurchaseOrderinfo.Total_Gross__c}" />
+            		</apex:outputtext>
+	          </strong></td>
+	          </tr>
+	          <tr>
+	          <td style="font-size:12px">&nbsp;</td>
+	          <td style="font-size:12px">&nbsp;</td>
+	          </tr>
+	        </table>
+		</apex:pageblock>
+<apex:pageblock title="Line Item Info">	
+		<table width="96%" cellpadding="0" cellspacing="0" border="1"  >
+			  <tr>
+			  	<td style="font-size:12px;background-color: #ccc;"  ><strong>Product</strong></td>
+			    <td style="font-size:12px;background-color: #ccc;"  ><strong>Narrative</strong></td>
+			    <td style="font-size:12px;background-color: #ccc;"  ><strong>UID</strong></td>
+			    <td style="font-size:12px;background-color: #ccc;"  ><strong>Quantity</strong></td>
+			    <td style="font-size:12px;background-color: #ccc;"  align="right" ><strong>Amount</strong></td>
+			    <!-- <td style="font-size:12px;background-color: #ccc;"  align="right" ><strong>Total Net</strong></td> -->
+			    <!-- <td style="font-size:12px;background-color: #ccc;"  ><strong>Project</strong></td> -->
+			    <td style="font-size:12px;background-color: #ccc;"  ><strong>Tax Rate</strong></td>
+			    <td style="font-size:12px;background-color: #ccc;"  ><strong>Tax Amount</strong></td>
+			    <td style="font-size:12px;background-color: #ccc;"  ><strong>Total Amount</strong></td>
+			    <td style="font-size:12px;background-color: #ccc;"  ><strong>Opportunity</strong></td>
+			  </tr>
+			<apex:repeat value="{!Lineitems}" var="o">
+			<tr valign="top">
+			  	<td style="font-size:12px">{!o.ProducName}</td>
+			    <td style="font-size:12px">{!o.purchaseOrderLineItems.Narrative__c}&nbsp;</td>    
+				<td style="font-size:12px">{!o.purchaseOrderLineItems.UID__c}</td>
+			    <td style="font-size:12px" align="right" ><apex:outputfield value="{!o.purchaseOrderLineItems.Quantity__c}"  />&nbsp;</td>
+			    <td style="font-size:12px" align="right" ><apex:outputfield value="{!o.purchaseOrderLineItems.Amount__c}" />&nbsp;</td>
+			    <!-- <td style="font-size:12px" align="right" ><apex:outputfield value="{!o.purchaseOrderLineItems.Total_Amount__c}"   />&nbsp;</td> -->
+			    <!-- <td style="font-size:12px"><apex:outputfield value="{!o.timeSheetDetail.Project__c}" />&nbsp;</td>-->
+			    <td style="font-size:12px">{!o.taxRate}&nbsp;</td>
+			    <td style="font-size:12px" align="right" ><apex:outputfield value="{!o.purchaseOrderLineItems.Total_VAT__c}" />&nbsp;</td>
+			    <td style="font-size:12px" align="right" ><apex:outputfield value="{!o.purchaseOrderLineItems.Total_Gross__c}"   />&nbsp;</td>
+			    <td style="font-size:12px">{!o.OppName}&nbsp;</td>
+			</tr>
+			</apex:repeat>
+			</table>
+	</apex:pageblock>
+	</apex:form>
+	</div>
+	<div style="position:absolute; bottom:{!invoiceTmpl.Margins_top_bottom__c}in; font-family:{!invoiceTmpl.Font_Face__c}; text-align:center;font-size:{!invoiceTmpl.Font_Size__c}px; width:100%;" align="center">
+		{!invoiceTmpl.Footer_Text__c}
+	</div>
+	</div>
+	</td></tr>
+</table>
+</apex:page>

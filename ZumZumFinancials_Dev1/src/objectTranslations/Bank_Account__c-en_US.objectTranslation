@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Bank Account</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Bank Accounts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account IBAN Code --></label>
+        <name>Account_IBAN_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Number --></label>
+        <name>Account_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Nominal Account --></label>
+        <name>Nominal_Account__c</name>
+        <relationshipLabel><!-- Bank Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sort/Branch Code --></label>
+        <name>Sort_Branch_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deleted</masterLabel>
+            <translation><!-- Deleted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Current/Saving</masterLabel>
+            <translation><!-- Current/Saving --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Equity</masterLabel>
+            <translation><!-- Equity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loan/Credit-Card</masterLabel>
+            <translation><!-- Loan/Credit-Card --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PayPal</masterLabel>
+            <translation><!-- PayPal --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Bank Account Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You must select Nominal Account --></errorMessage>
+        <name>Mandatory_Nominal_Field</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select a status --></errorMessage>
+        <name>StatusIsRequired</name>
+    </validationRules>
+</CustomObjectTranslation>

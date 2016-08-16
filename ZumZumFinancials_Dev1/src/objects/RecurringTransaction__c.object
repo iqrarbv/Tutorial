@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <comment>testing with this controller that will it send the data to the page attached to it</comment>
+        <content>testBankRecurringTransaction</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <comment>same page as on edit</comment>
+        <content>testBankRecurringTransaction</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Made by BOSS</description>
+    <fields>
+        <fullName>Bank_Account__c</fullName>
+        <label>Bank Account</label>
+        <referenceTo>Bank_Account__c</referenceTo>
+        <relationshipLabel>RecurringTransaction</relationshipLabel>
+        <relationshipName>RecurringTransaction</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Account__c</fullName>
+        <label>Customer Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>RecurringTransaction</relationshipLabel>
+        <relationshipName>RecurringTransaction</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Details__c</fullName>
+        <label>Details</label>
+        <length>32000</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Finish_Date__c</fullName>
+        <label>Finish Date</label>
+        <required>true</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Posted__c</fullName>
+        <label>Last Posted</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Name_of__c</fullName>
+        <label>Frequency Period</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Day(s)</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Week(s)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Month(s)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Net_Amount__c</fullName>
+        <label>Net Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Next_Transaction_Date__c</fullName>
+        <label>Next Transaction Date</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>No_of__c</fullName>
+        <label>Frequency</label>
+        <precision>2</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Nominal_Account__c</fullName>
+        <label>Nominal Account</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>RecurringTransaction</relationshipLabel>
+        <relationshipName>RecurringTransaction</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Reference__c</fullName>
+        <label>Reference</label>
+        <length>225</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Required_Posting__c</fullName>
+        <label>Required Posting</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <label>Start Date</label>
+        <required>true</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Suspend_Posting__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Suspend Posting</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Tax_Rate__c</fullName>
+        <label>Tax Rate</label>
+        <referenceTo>Tax_Rate__c</referenceTo>
+        <relationshipLabel>RecurringTransaction</relationshipLabel>
+        <relationshipName>RecurringTransaction</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TransactionType__c</fullName>
+        <label>Transaction Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Bank/Cash/Credit Card Payment</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bank/Cash/Credit Card Receipt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bank/Cash/Credit Card Transfer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer payment on Account</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>VAT__c</fullName>
+        <label>VAT Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <label>RecurringTransaction</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>TransactionType__c</columns>
+        <columns>Start_Date__c</columns>
+        <columns>Finish_Date__c</columns>
+        <columns>Name_of__c</columns>
+        <columns>No_of__c</columns>
+        <columns>Net_Amount__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Recurring Transaction Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>RecurringTransaction</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Last_Posted_field_read_only</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISCHANGED(Last_Posted__c)</errorConditionFormula>
+        <errorMessage>You can&apos;t edit Last posted field</errorMessage>
+    </validationRules>
+</CustomObject>

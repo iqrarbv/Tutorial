@@ -1,0 +1,12 @@
+<messaging:emailTemplate subject="Account Statement" recipientType="Contact" relatedToType="Account">
+<messaging:htmlEmailBody >
+<p>Dear {!Recipient.Name},</p>
+<p>Please find the attached transaction statement for your account at {!$Organization.Name}.</p>
+<p>Thanks,<br />
+{!$Organization.Name}
+</p>
+</messaging:htmlEmailBody>
+<messaging:attachment renderAs="PDF" filename="AccountStatement.pdf">
+<c:StatementAttachment AccountId="{!relatedTo.Id}" id="attachment"/>
+</messaging:attachment>
+</messaging:emailTemplate>

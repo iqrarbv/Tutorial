@@ -1,0 +1,87 @@
+<apex:page controller="OpeningBalances" title="New Opening Balance">
+<apex:stylesheet value="{!$Resource.OB_CSS}"/>
+	<apex:PageMessages id="pgMsgs" />
+	<apex:form >
+		<apex:pageblock title="New Opening Balance" >
+			<table class="grid" id="tbl1">				
+			<tr>
+				<td>	
+					Opening Balance Date :
+				</td>
+				<td colspan="2">
+				<td/> 
+				<td>
+					<div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+	                	<apex:inputfield value="{!objectLedger.Trans_Date__c}" />
+	                </div>	               
+	            </td>
+	          </td>
+			</tr>
+			<tr>
+				<td>
+					Nominal Account :
+				</td>
+				<td colspan="2">
+				<td/> 
+				<td>
+					<div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+	                	<apex:inputfield value="{!objectNominal.Nominal_Account__c}" /> 
+					</div>
+				</td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Type : 
+				</td>
+				<td colspan="2">
+				<td/>
+				<td>
+					<apex:selectList id="BalanceType" value="{!BType}" size="1">						
+						<apex:selectOption itemValue="Debit" itemLabel="Debit"/>
+						<apex:selectOption itemValue="Credit" itemLabel="Credit"/>
+					</apex:selectList>
+				</td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Details : 
+				</td>
+				<td colspan="2">
+				<td/>
+				<td>
+					<apex:inputfield value="{!objectLedger.Details__c}" style="height:80px; width:250px;" />
+				</td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Net Amount :
+				</td>
+				<td colspan="2">
+					<td>
+						<apex:outputText value="{!currencySymbol}" />
+					</td>
+					<td>
+						<div class="requiredInput"> 									
+		                	<div class="requiredBlock"></div>
+		            		<apex:inputText value="{!Amount}" />
+		            	</div>
+		            </td>					
+				</td>
+			</tr>				 
+			</table>				
+		<apex:pageblockbuttons >
+			<apex:commandbutton value="Save" action="{!save}" rerender="pgMsgs"/>
+			<apex:commandbutton value="save & New" action="{!SaveAndNew}" rerender="pgMsgs"/>	
+			<apex:commandbutton value="Cancel" action="{!Cancel}" /> 
+		</apex:pageblockbuttons> 
+		</apex:pageblock>
+	</apex:form>
+	<script type="text/javascript">
+	function setFocusOnLoad(){}
+	</script>
+</apex:page>

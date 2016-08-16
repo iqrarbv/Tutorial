@@ -1,0 +1,172 @@
+<apex:page standardcontroller="VAT_Return__c">
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+	<apex:pageblock title="Company Vat Return">
+		    <table width="100%" class="grid">
+		        <tr>
+		            <td width="70">
+		                Date from</td>
+		            <td>
+		                <input type="text" class="date" id="Text47" value="28/12/2007"/></td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Date to</td>
+		            <td>
+		                <input type="text" class="date" id="Text48" value="28/12/2007"/></td>
+		        </tr>
+		        <tr>
+		            <td width="70">VAT Method</td>
+	              <td>Cash Accounting
+	              </td>
+		        </tr>
+		    </table>		    
+    <p></p>
+        <table width="100%" class="grid" 
+    title="From 25 February 2010 To 24 February 2011">
+            <tr>
+                <td>
+                    <b>Description</b></td>
+                <td width="50">
+                    <b>Value</b></td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 1</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT due on sales and other outputs</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 2</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT due from you on acquisitions from other EU countries</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 3</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total VAT due</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 4</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT reclaimable on your purchases</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 5</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    VAT payable or reclaimable </td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 6</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total sales excluding VAT</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 7</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total purchases excluding VAT</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 8</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total value of goods you supplied to other EU countries</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+            <tr>
+                <td>&nbsp;                    </td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Box 9</b></td>
+                <td align="right" width="50">&nbsp;                    </td>
+            </tr>
+            <tr>
+                <td>
+                    Total value of goods you acquired from other EU countries</td>
+                <td align="right" width="50">
+                    7.75</td>
+            </tr>
+</table>
+            <p>&nbsp;</p>
+        <apex:pageblockbuttons >
+        	<input type="submit" value="Calculate" />
+        	<input type="submit" value="Reconcile and Save" />
+        	<input type="submit" value="Discard" /></apex:pageblockbuttons></apex:pageblock></apex:page>

@@ -1,0 +1,13 @@
+#Fri Jul 22 11:11:12 UZT 2011
+eclipse.preferences.version=1
+endpointApiVersion=19.0
+endpointEnvironment=Production/Developer Edition
+endpointServer=www.salesforce.com
+httpsProtocol=true
+ideVersion=19.0
+keependpoint=false
+metadataFormatVersion=19.0
+namespacePrefix=
+packageName=unpackaged
+readTimeout=400
+username=zumzumfinancialsapp.dev@gmail.com

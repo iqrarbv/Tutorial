@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
+    <backgroundEndColor>#FFFFFF</backgroundEndColor>
+    <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
+    <backgroundStartColor>#FFFFFF</backgroundStartColor>
+    <dashboardType>SpecifiedUser</dashboardType>
+    <leftSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <componentType>VisualforcePage</componentType>
+            <header>Balance Sheet</header>
+            <page>DashBoard_Balance_Sheet</page>
+            <pageHeightInPixels>300</pageHeightInPixels>
+        </components>
+        <components>
+            <chartAxisRange>Auto</chartAxisRange>
+            <componentType>Column</componentType>
+            <displayUnits>Auto</displayUnits>
+            <header>Sales Tax</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>Zumzum_Financials/Sales_Tax</report>
+            <sortBy>RowLabelAscending</sortBy>
+        </components>
+        <components>
+            <chartAxisRange>Auto</chartAxisRange>
+            <componentType>Column</componentType>
+            <displayUnits>Auto</displayUnits>
+            <header>Purchase Tax</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>Zumzum_Financials/Purchase_Tax1</report>
+            <sortBy>RowLabelAscending</sortBy>
+        </components>
+    </leftSection>
+    <middleSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <componentType>VisualforcePage</componentType>
+            <header>Aged Receivables</header>
+            <page>DashBoardAgedRecieveables</page>
+            <pageHeightInPixels>300</pageHeightInPixels>
+        </components>
+        <components>
+            <componentType>VisualforcePage</componentType>
+            <header>Aged Payable</header>
+            <page>DashBoardAgedPayable</page>
+            <pageHeightInPixels>300</pageHeightInPixels>
+        </components>
+        <components>
+            <chartAxisRange>Auto</chartAxisRange>
+            <componentType>Pie</componentType>
+            <displayUnits>Auto</displayUnits>
+            <header>Top 5 Customer</header>
+            <legendPosition>Bottom</legendPosition>
+            <report>Developer_Reports/Top_5_Customer</report>
+            <showValues>true</showValues>
+            <sortBy>RowLabelAscending</sortBy>
+        </components>
+    </middleSection>
+    <rightSection>
+        <columnSize>Wide</columnSize>
+        <components>
+            <componentType>VisualforcePage</componentType>
+            <header>This Month Top Products</header>
+            <page>TopProducts</page>
+            <pageHeightInPixels>300</pageHeightInPixels>
+        </components>
+        <components>
+            <componentType>VisualforcePage</componentType>
+            <header>Profit &amp; Loss Report</header>
+            <page>DashBoardProfitandLoss</page>
+            <pageHeightInPixels>300</pageHeightInPixels>
+        </components>
+        <components>
+            <componentType>VisualforcePage</componentType>
+            <header>Sales report for last 3 months</header>
+            <page>DashboardSalesReport</page>
+            <pageHeightInPixels>300</pageHeightInPixels>
+        </components>
+    </rightSection>
+    <runningUser>zumzumfinancialsapp.dev@gmail.com</runningUser>
+    <textColor>#000000</textColor>
+    <title>ZumZum Financials Dashboard</title>
+    <titleColor>#000000</titleColor>
+    <titleSize>12</titleSize>
+</Dashboard>

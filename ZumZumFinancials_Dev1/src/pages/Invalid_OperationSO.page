@@ -1,0 +1,3 @@
+<apex:page standardController="Sales_Order_Line_Items__c" extensions="InvalidOperationSO" title="Invalid Operation"  action="{!init}">
+<apex:pagemessages id="errorMessages" />
+</apex:page>

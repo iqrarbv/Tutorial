@@ -1,0 +1,2 @@
+<apex:page standardController="Company_Setup__c" extensions="CompanySetupController" action="{!init}">
+</apex:page>

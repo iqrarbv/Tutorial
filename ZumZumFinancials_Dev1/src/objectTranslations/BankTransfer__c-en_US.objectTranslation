@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>BankTransfer</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>BankTransfer</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account To --></label>
+        <name>Account_To__c</name>
+        <relationshipLabel><!-- BankTransfer (Account To) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Accounts From --></label>
+        <name>Accounts_From__c</name>
+        <relationshipLabel><!-- BankTransfer (Accounts From) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Value --></label>
+        <name>Payment_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference --></label>
+        <name>Reference__c</name>
+    </fields>
+    <layouts>
+        <layout>BankTransfer Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

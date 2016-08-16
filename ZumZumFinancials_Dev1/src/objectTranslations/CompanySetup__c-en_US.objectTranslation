@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Company Setup</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Company Setup</value>
+    </caseValues>
+    <fields>
+        <label><!-- Current POP Number --></label>
+        <name>Current_POP_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current PO Number --></label>
+        <name>Current_PO_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- POP Starting Number --></label>
+        <name>POP_Starting_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Purchase Order Starting Number --></label>
+        <name>Purchase_Order_Starting_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Number --></label>
+        <name>Sales_Order_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Starting Number --></label>
+        <name>Sales_Order_Starting_Number__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

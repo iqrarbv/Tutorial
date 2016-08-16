@@ -1,0 +1,36 @@
+<apex:page standardcontroller="Control_Account__c">
+<apex:form title="Control Accounts">
+<apex:pageBlock title="Control Account Edit" >
+<apex:pageBlockSection title="Information" columns="1">
+<div class="requiredInput">
+	<div class="requiredBlock"></div>
+		<apex:inputField value="{!Control_Account__c.Name}"/>
+	</div>
+	<apex:inputField value="{!Control_Account__c.Accruals__c}"/>
+	<apex:inputField value="{!Control_Account__c.Bad_Debts__c}"/>
+	<apex:inputField value="{!Control_Account__c.Credit_Charges__c}"/>
+	<apex:inputField value="{!Control_Account__c.Debtors_Control__c}"/>
+	<apex:inputField value="{!Control_Account__c.Creditors_Control__c}"/>
+	<apex:inputField value="{!Control_Account__c.Default_Bank__c}"/>
+	<apex:inputField value="{!Control_Account__c.Default_Sales__c}"/>
+	<apex:inputField value="{!Control_Account__c.Exchange_Rate_Variance__c}"/>
+	<apex:inputField value="{!Control_Account__c.Manual_Adjustments__c}"/>
+	<apex:inputField value="{!Control_Account__c.Mispostings__c}"/>
+	<apex:inputField value="{!Control_Account__c.Prepayments__c}"/>
+	<apex:inputField value="{!Control_Account__c.Purchase_Discount__c}"/>
+	<apex:inputField value="{!Control_Account__c.Retained_Earnings__c}"/>
+	<apex:inputField value="{!Control_Account__c.Sales_Discount__c}"/>	
+	<apex:inputField value="{!Control_Account__c.Suspense__c}"/>
+	<apex:inputField value="{!Control_Account__c.VAT_Liability__c}"/>
+	<apex:inputField value="{!Control_Account__c.VAT_on_Purchases__c}"/>
+	<apex:inputField value="{!Control_Account__c.VAT_on_Sales__c}"/>
+	
+</apex:pageBlockSection>
+	<apex:pageBlockButtons >
+		<apex:commandButton value="Save" action="{!Save}"/>
+		<apex:commandButton value="Cancel" action="{!Cancel}"/>			
+	</apex:pageBlockButtons>
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

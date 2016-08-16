@@ -1,0 +1,648 @@
+<apex:page standardController="Expense_Sheet__c" extensions="ExpenseSheet_Controller" title="New Expense Sheet" sidebar="false" id="pgMainPage" >
+<apex:stylesheet value="{!URLFOR($Resource.ajaxWaitIndicatorZip,'ajaxWaitIndicator_css.css')}"></apex:stylesheet>
+<apex:includeScript value="{!URLFOR($Resource.ajaxWaitIndicatorZip, 'ajaxWaitIndicator.js')}"/> 
+<link rel="stylesheet" type="text/css" href="ZumzumFinacials.css" />
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<style>
+.grid{font-family:Arial, Helvetica, sans-serif;font-size:12px;}
+.grid thead tr th{width:90px;border:1px solid #000;}
+.grid tbody tr td{width:90px;border:1px solid #000;}
+
+.grid2{font-family:Arial, Helvetica, sans-serif;font-size:12px;}
+.grid2 tbody tr td{width:90px;border:0px solid #000;}
+.grid2 tbody tr td input, .grid2 tbody tr td select{width:80px;}
+.dt input{width:100px !important;}
+.grid2 tbody tr td.minus input{width:170px;}
+.button input {width:80px;}
+.grid2 .plus{border-right:0;}
+.grid2 .plus2{border-left:0;}
+
+.cust01 {width:130px !important;}
+.cust01 select{width:130px !important;}
+</style>
+
+<apex:pagemessages id="errorMessages" />
+	<apex:form id="frmMainForm" >
+	<apex:sectionHeader title="New Expense Sheet" />
+		<apex:pageblock title="Expense Sheet Info" id="timesheet">
+			<table width="1200" cellpadding="0" cellspacing="0">
+			  
+			  <tr>
+			   
+			    <td height="20" width="40"><strong>Opportunity:</strong></td>
+			    <td height="20" width="180">
+			    <apex:selectlist value="{!project}" size="1" multiselect="false" style="width:150px;"> 
+								<apex:selectoptions value="{!Projects}" />
+				</apex:selectlist>
+			    </td>
+			    <td height="20" width="100"><strong>Nominal Account:</strong></td>
+			    <td height="20" width="180">
+			    <apex:selectlist value="{!activityCodess}" size="1" multiselect="false" style="width:150px;"> 
+								<apex:selectoptions value="{!NominalAccounts}" />	
+				</apex:selectlist>
+			    </td>
+			    <td height="20" width="50"><strong>Start Date:</strong></td>
+			    <td height="20" width="90">
+			    	<apex:inputtext value="{!filterDate}" style="width:75px;"/>
+			    </td>
+			    <td height="20" width="45"><strong>End Date:</strong></td>
+			    <td height="20" width="60">
+			   		<apex:inputtext value="{!filterendDate}" style="width:75px;"/>
+			    </td>
+				<td width="50" >
+				<apex:commandbutton value="Filter" action="{!filterTimeSheet}" style="width:60px;" onclick="setBunload(false);"/>
+				</td>
+				<td width="50">
+				<apex:commandbutton value="Clear Filter" action="{!clearfilter}" style="width:70px;" onclick="setBunload(false);"/>
+				</td>
+			  </tr>
+			</table>
+			<br/>
+			<br/>
+		  <table  cellpadding="0" cellspacing="" >
+		  <tr>
+          <td height="20" width="163"><strong>Expense Year:</strong></td>
+          <td height="20" width="972"><strong>
+          	<div class="requiredInput">
+	            <div class="requiredBlock"></div>
+          		<!-- <apex:inputtext value="{!yearName}" style="width:88px;"/>-->
+          		<apex:selectList id="selectYear" value="{!yearName}" size="1" style="width:88px;">
+				<apex:selectOption itemValue="2010" itemLabel="2010"/>
+				<apex:selectOption itemValue="2011" itemLabel="2011"/>
+				<apex:selectOption itemValue="2012" itemLabel="2012"/>
+				<apex:selectOption itemValue="2013" itemLabel="2013"/>
+				<apex:selectOption itemValue="2014" itemLabel="2014"/>
+				<apex:selectOption itemValue="2015" itemLabel="2015"/>
+				<apex:selectOption itemValue="2016" itemLabel="2016"/>
+				<apex:selectOption itemValue="2017" itemLabel="2017"/>
+				<apex:selectOption itemValue="2018" itemLabel="2018"/>
+				<apex:selectOption itemValue="2019" itemLabel="2019"/>
+				<apex:selectOption itemValue="2020" itemLabel="2020"/>
+				<apex:selectOption itemValue="2021" itemLabel="2021"/>
+				<apex:selectOption itemValue="2022" itemLabel="2022"/>
+				<apex:selectOption itemValue="2023" itemLabel="2023"/>
+				<apex:selectOption itemValue="2024" itemLabel="2024"/>
+				<apex:selectOption itemValue="2025" itemLabel="2025"/>
+				<apex:selectOption itemValue="2026" itemLabel="2026"/>
+				<apex:selectOption itemValue="2027" itemLabel="2027"/>
+				<apex:selectOption itemValue="2028" itemLabel="2028"/>
+				<apex:selectOption itemValue="2029" itemLabel="2029"/>
+				<apex:selectOption itemValue="2030" itemLabel="2030"/>
+				</apex:selectList>
+          	</div>
+          	</strong>
+          </td>
+          </tr>
+          <tr>
+          <td height="20" width="163"><strong>Expense Month:</strong></td>
+          <td height="20" width="972"><strong>
+          <div class="requiredInput">
+	            <div class="requiredBlock"></div>
+          		<apex:selectList id="selectMonth" value="{!monthName}" size="1">
+				<apex:selectOption itemValue="1" itemLabel="January"/>
+				<apex:selectOption itemValue="2" itemLabel="February"/>
+				<apex:selectOption itemValue="3" itemLabel="March"/>
+				<apex:selectOption itemValue="4" itemLabel="April"/>
+				<apex:selectOption itemValue="5" itemLabel="May"/>
+				<apex:selectOption itemValue="6" itemLabel="June"/>
+				<apex:selectOption itemValue="7" itemLabel="Jully"/>
+				<apex:selectOption itemValue="8" itemLabel="August"/>
+				<apex:selectOption itemValue="9" itemLabel="September"/>
+				<apex:selectOption itemValue="10" itemLabel="October"/>
+				<apex:selectOption itemValue="11" itemLabel="November"/>
+				<apex:selectOption itemValue="12" itemLabel="December"/>
+				</apex:selectList>
+				</div>
+          </strong>
+          </td>
+          </tr>
+          <!-- 
+          <tr>
+          <td height="20" width="163"><strong>Sheet Type:</strong></td>
+          <td height="20" width="972"><apex:inputfield value="{!expenseSheetInfo.Type__c}" required="true" /></td>
+          </tr> --> 
+          <tr>
+          <td height="20" width="163">&nbsp;</td>
+          <td height="20" width="972">&nbsp;</td>
+          </tr>
+		  <tr>
+          <td height="20" width="163">&nbsp;</td>
+          <td height="20" width="972">&nbsp;</td>
+          </tr>
+          
+          <tr>
+          <td height="20" width="163"><strong>Claim No:</strong></td>
+          <td height="20" width="972"><strong>{!expenseSheetInfo.Claim_No__c}</strong></td>
+          </tr>
+          <tr>
+          <td height="20" width="163"><strong>Total Excl. VAT:</strong></td>
+          <td height="20" width="972"><strong>
+          	{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+		            <apex:param value="{!totalNetAmount}" />
+		            </apex:outputtext>
+          </strong></td>
+          </tr>
+          <tr>
+          <td height="20" width="163"><strong>Total VAT: </strong></td>
+          <td height="20" width="972"><strong>
+          		{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+		            <apex:param value="{!totalVAT}" />
+		            </apex:outputtext>
+          </strong>
+          </td>
+          </tr>
+          <tr>
+          <td height="20" width="163"><strong>Total Incl. VAT:</strong></td>
+          <td height="20" width="972"><strong>
+          	{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+		            <apex:param value="{!totalGrossAmount}" />
+		            </apex:outputtext>
+          </strong></td>
+          </tr>
+          <tr>
+          <td height="20" width="163"><strong>Sheet Type:</strong></td>
+          <td height="20" width="972"><strong>
+          		<div class="requiredInput">
+	            <div class="requiredBlock"></div>
+          		<apex:inputfield value="{!expenseSheetInfo.Type__c}"  />
+          		</div>
+          </strong>
+          </td>
+          </tr>
+          <tr>
+          <td height="20" width="163">&nbsp;</td>
+          <td height="20" width="972">&nbsp;</td>
+          </tr>
+        </table>
+        <apex:pageblock id="ExpenseSheetDetails" title="Expense Sheet Line Items" >
+			<table width="100%" class="grid">
+        		<tr>
+                        <td align="left" width="152">
+                            <b>Date</b></td>
+                        <td align="left">
+              			<b>Day</b></td>
+                        <td align="left" width="42">
+						<b>Opportunity</b></td>
+                        <td align="left" width="72">
+                            <b>Account</b></td>
+                            <td align="left" width="72">
+                            <b>Nominal Account</b></td>
+                        <td align="left" width="50">
+                            <b>Narrative</b></td>
+                        <td align="left" width="70">
+                            <b>Miles</b></td>
+                        <td align="left" width="70">
+                            <b>Name of Passenger</b></td>
+                        <td align="right" width="70">
+                            <b>Qty</b></td>
+                        <td align="right" width="70" colspan="2">
+                            <b>Unit Amount</b></td>
+                        <td align="left" width="70">
+                         	<b>T/C</b>
+                        </td>
+                        <td align="right" width="80">
+                        	<b>VAT Rate</b>
+                        </td>
+                        <td align="right" width="80" colspan="2">
+                        	<b>VAT Amount</b>
+                        </td>
+                        <td align="right" width="80" colspan="2">
+                        	<b>Total Net</b>
+                        </td>
+                        <td align="right" width="80" colspan="2">
+                        	<b>Total Amount</b>
+                        </td>
+                        <td align="left" width="80">
+                        	<b>Options</b>
+                        </td>
+              </tr>
+              <tr>
+                <td width="152" colspan="2">						      
+                              <div class="requiredInput">   
+	              <div class="requiredBlock"></div>
+					<apex:inputfield value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Date__c}" /> 
+				  </div>
+				</td>
+                <td>
+                	<!--  
+                	<apex:selectlist value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Project__c}" tabindex="1"  size="1" style="width:120px;">
+								<apex:selectoptions value="{!Projects}" />
+					</apex:selectlist>
+					-->
+					<apex:inputfield value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Project__c}" />
+                </td>
+                        <td width="42"><apex:inputField Id="Account" value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Account__c}" /></td>
+				  <td>
+				<div class="requiredInput">
+                <div class="requiredBlock"></div>
+	                <apex:selectlist value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Nominal_Account__c}" tabindex="3"  size="1" style="width:120px;">
+								<apex:selectoptions value="{!NominalAccounts}" />
+								<apex:actionsupport event="onchange" action="{!getTaxPrice}" rerender="timesheet,errorMessages" onsubmit="Mask.show();" oncomplete="Mask.hide();" />
+								<input value = "{!gtaxrate}" id = "taxrateId" type = "hidden" />
+					</apex:selectlist>
+                </div></td>
+                  <td align="right" width="72"><div class="requiredInput">
+	              <div class="requiredBlock"></div>
+						<apex:inputfield style="width:140px;" value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Narrative__c}"  />
+					</div>
+				  </td>
+				  <td align="right">
+				  		<apex:inputfield value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Miles__c}"  styleclass="currency" style="width:70px;text-align: right;" id="txtMiles"  />
+				  </td>
+				  <td>
+						<apex:inputfield value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Business_Passenger__c}" style="width:150px;height:40px;text-align: left;" id="txtBusnissPessenger"  />
+					</td>
+                  <td width="50">
+                  		<div class="requiredInput">
+	              		<div class="requiredBlock"></div>
+							<apex:inputfield value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Quantity__c}"  styleclass="currency" style="width:70px;text-align: right;" id="txtQty" onchange="validatefield_Amount(this.id , this.value , this.title)" />
+						</div>
+				  </td>
+				  <td style="border:none;width:10px;">{!currencySymbol}</td>				  
+                  <td align="right" width="70"><div class="requiredInput">
+                        <div class="requiredBlock"></div>
+							<apex:inputfield value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Unit_Amount__c}"  styleclass="currency" style="width:70px;text-align: right;" id="txtUnitAmount" onchange="validatefield_Amount(this.id , this.value , this.title)" />
+						</div>
+				  </td>
+                 <td>
+                 	<div class="requiredInput">
+                	<div class="requiredBlock"></div>
+	                 	<apex:selectlist value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Tax_Rate__c}" size="1" style="width:120px;" tabindex="7">
+									<apex:selectoptions value="{!AllTaxRates}" />
+									<apex:actionsupport event="onchange" action="{!changeTaxRate}" rerender="timesheet  , errorMessages" onsubmit="Mask.show();" oncomplete="Mask.hide();"/>  
+									<input value = "{!gtaxrate}" id = "taxrateId" type = "hidden" />
+						</apex:selectlist>
+					</div>	
+                 </td>
+                 <td align="right" width="72">
+                 	<apex:outputtext value="{0, number, 0.00}" styleclass="numeric" id="cTaxRate" style="width:50px;">
+				            <apex:param value="{!gtaxrate}" />
+				    	</apex:outputtext>
+                 </td>
+                 <td style="border:none;width:10px;">{!currencySymbol}</td>
+                <td align="right" width="72">
+                		<input type= "text" value="{!wrapplstExpenseSheetVar.totalTax}" style="width:70px;text-align: right;" id = "taxamount"  disabled="disabled" />
+						<apex:inputhidden id="hdnTotalVat" value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Total_VAT__c}"/>  
+				</td>
+				 <td style="border:none;width:10px;">{!currencySymbol}</td>
+				<td align="right" width="72">
+                		    <input type= "text" value="{!wrapplstExpenseSheetVar.totalNetAmount}" style="width:70px;text-align: right;" id = "totalNet"   disabled="disabled"/>
+                		    <apex:inputhidden id="hdnTotalNet" value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Total_Net__c}"/>  
+				</td>
+				 <td style="border:none;width:10px;">{!currencySymbol}</td>
+                <td align="right" width="72">
+                        	<input type= "text" value="{!wrapplstExpenseSheetVar.totalAmount}" style="width:70px;text-align: right;" id = "totalamount"   disabled="disabled"/><!-- disabled="disabled" -->
+                    		<apex:inputhidden id="hdnTotalGross" value="{!wrapplstExpenseSheetVar.expenseSheetDetail.Total_Gross__c}"/>   
+                </td>
+                <td width="80" align="center">
+                    <apex:commandbutton onClick="Mask.show();" onComplete="Mask.hide();" value="Add" rerender="frmMainForm,errorMessages" action="{!addExpenseSheetItem}" style="width:65px; font-size:10px;" />
+					<apex:commandbutton onClick="Mask.show();" onComplete="Mask.hide();" value="Cancel" rerender="frmMainForm,errorMessages" action="{!clearExpenseSheetValues}"  style="width:65px; font-size:10px;" />
+                	<apex:commandbutton onclick="getNetAmount();"  rerender="errorMessages" value="Calc. Net" style="width:65px; font-size:10px;" />
+                </td>
+              </tr>
+              <tr align="center">
+                      <td colspan="20">&nbsp;
+		      		  </td>
+		      </tr>
+			  <apex:repeat value="{!wrapexpenseSheet}" var="o" id="timesheetList" rendered="{!fullSheet=true}">	
+					<tr>
+	                  <td width="152">
+					   <apex:outputField value="{!o.expenseSheetDetail.Date_String__c}" />
+					</td>
+					<td width="152">
+					   <apex:outputField value="{!o.expenseSheetDetail.Day__c}" />
+					</td>
+					<td>
+						<apex:outputfield value="{!o.expenseSheetDetail.Project__c}"/>
+					</td>
+	                <td width="42">
+	                      <apex:outputField value="{!o.expenseSheetDetail.Account__c}" />
+	                </td>
+	                <td width="42">
+	                      <apex:outputtext value="{!o.nominalAccount}" />
+	                </td>
+	                <td width="72">
+	                      <apex:outputField value="{!o.expenseSheetDetail.Narrative__c}" />
+	                </td>
+	                <td align="right">
+	                	<apex:outputField value="{!o.expenseSheetDetail.Miles__c}" />
+	                </td>
+	                <td>
+	                	<apex:outputField value="{!o.expenseSheetDetail.Business_Passenger__c}" />
+	                </td>
+	                <td align="right" width="50">
+	                      <apex:outputField value="{!o.expenseSheetDetail.Quantity__c}" />
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                      {!currencySymbol}<apex:outputtext value="{0, number, 0.00}" >
+				            <apex:param value="{!o.expenseSheetDetail.Unit_Amount__c}" />
+				    	</apex:outputtext>
+	                </td>
+	                <td align="right" width="50">
+	                      {!o.strTaxRate}
+	                      
+	                </td>    
+	                <td align="right" width="50">
+	                     <apex:outputtext value="{0, number, 0.00}" >
+				            <apex:param value="{!o.taxRate}" />
+				    	</apex:outputtext>
+	                     
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                     {!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!o.expenseSheetDetail.Total_VAT__c}" />
+				        	</apex:outputtext>
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                     {!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!o.expenseSheetDetail.Total_Net__c}" />
+				        	</apex:outputtext>
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                     {!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+				            	<apex:param value="{!o.expenseSheetDetail.Total_Gross__c}" />
+				        	</apex:outputtext>
+	                </td>
+	                <td width="80" align="center">
+	                    <apex:commandLink value="Edit" action="{!editListItems}" rerender="timesheet,errorMessages" >
+							<apex:param name="editId" value="{!o.Index}"/>
+						</apex:commandLink>&nbsp;  &nbsp;
+						<apex:commandLink value="Delete" action="{!deletListItems}" onclick="return confirmDelete();">
+							<apex:param name="deletId" value="{!o.Index}"/>
+						</apex:commandLink>&nbsp;  &nbsp;
+						<apex:commandLink value="Clone" action="{!CloneEntry}" rerender="timesheet,errorMessages" >
+							<apex:param name="cloneId" value="{!o.Index}" />
+						</apex:commandLink>
+	                </td>
+	              </tr>
+	          </apex:repeat>  
+	          <apex:repeat value="{!filteredExpenseSheet}" var="o" id="filteredList" rendered="{!filterSheet=true}">	
+					<tr>
+	                  <td width="152">
+					   <apex:outputField value="{!o.expenseSheetDetail.Date_String__c}" />
+					</td>
+					<td width="152">
+					   <apex:outputField value="{!o.expenseSheetDetail.Day__c}" />
+					</td>
+					<td>
+						<apex:outputfield value="{!o.expenseSheetDetail.Project__c}"/>
+					</td>
+	                <td width="42">
+	                      <apex:outputField value="{!o.expenseSheetDetail.Account__c}" />
+	                </td>
+	                <td width="42">
+	                      <apex:outputtext value="{!o.nominalAccount}" />
+	                </td>
+	                <td width="72">
+	                      <apex:outputField value="{!o.expenseSheetDetail.Narrative__c}" />
+	                </td>
+	                <td align="right">
+	                	<apex:outputField value="{!o.expenseSheetDetail.Miles__c}" />
+	                </td>
+	                <td>
+	                	<apex:outputField value="{!o.expenseSheetDetail.Business_Passenger__c}" />
+	                </td>
+	                <td align="right" width="50">
+	                      <apex:outputField value="{!o.expenseSheetDetail.Quantity__c}" />
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                      {!currencySymbol}
+	                      <apex:outputtext value="{0, number, 0.00}" >
+				            <apex:param value="{!o.expenseSheetDetail.Unit_Amount__c}" />
+				    	</apex:outputtext>
+	                </td>
+	                <td align="right" width="50">
+	                      {!o.strTaxRate}
+	                </td>    
+	                <td align="right" width="50">
+	                      <apex:outputtext value="{0, number, 0.00}" >
+				            <apex:param value="{!o.taxRate}" />
+				    	</apex:outputtext>
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                     {!currencySymbol}
+	                     <apex:outputtext value="{0, number, 0.00}" >
+				            <apex:param value="{!o.expenseSheetDetail.Total_VAT__c}" />
+				    	</apex:outputtext>
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                     {!currencySymbol}
+	                     <apex:outputtext value="{0, number, 0.00}" >
+				            <apex:param value="{!o.expenseSheetDetail.Total_Net__c}" />
+				    	</apex:outputtext>
+	                </td>
+	                <td align="right" width="50" colspan="2">
+	                     {!currencySymbol}
+	                     <apex:outputtext value="{0, number, 0.00}" >
+				            <apex:param value="{!o.expenseSheetDetail.Total_Gross__c}" />
+				    	</apex:outputtext>
+	                </td>
+	                <td width="80" align="center">
+	                    <apex:commandLink value="Edit" action="{!editListItems}" rerender="timesheet,errorMessages" >
+							<apex:param name="editId" value="{!o.Index}"/>
+						</apex:commandLink>&nbsp;  &nbsp;
+						<apex:commandLink value="Delete" action="{!deletListItems}" onclick="return confirmDelete();">
+							<apex:param name="deletId" value="{!o.Index}"/>
+						</apex:commandLink>&nbsp;  &nbsp;
+						<apex:commandLink value="Clone" action="{!CloneEntry}" rerender="timesheet,errorMessages" >
+							<apex:param name="cloneId" value="{!o.Index}" />
+						</apex:commandLink>
+	                </td>
+	              </tr>
+	          </apex:repeat>   
+              <tr>
+                        <td width="152" colspan="2">
+                            <b></b></td>
+                        <td>
+                            <b></b></td>
+                        <td width="42">
+                            <b></b></td>
+                        <td align="right" width="72">
+                            </td>
+                       <td align="right" width="50">
+                            </td>
+                       <td align="right">
+                            <b>
+                            	<apex:outputtext value="{0, number, 0.00}"  >
+							            <apex:param value="{!totalMiles}" />
+							    </apex:outputtext>
+                            </b>
+                       </td>
+                       <td>
+                       </td>
+                      <td width="50">&nbsp;
+                      </td>
+                      <td align="right" width="50" colspan="2">
+                          <b>
+                          	{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+							            <apex:param value="{!totalUnitAmount}" />
+							    </apex:outputtext>
+                          </b>
+                      </td>
+                      <td align="right" width="72">
+                          <b></b>
+                      </td>
+                      <td align="right" width="152">
+                          <b></b>
+                      </td>
+                      <td align="right" width="80" colspan="2" >
+                       	<b>
+                       		{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+							            <apex:param value="{!totalVAT}" />
+							    </apex:outputtext>
+                       	</b>
+                      </td>
+                      <td align="right" width="80"  colspan="2">
+                       	<b>
+                       		{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+							            <apex:param value="{!totalNetAmount}" />
+							    </apex:outputtext>
+                       	</b>
+                      </td>
+                      	 <td width="80" align="right" colspan="2">
+                       	<b>
+                       		{!currencySymbol}<apex:outputtext value="{0, number, 0.00}"  >
+							            <apex:param value="{!totalGrossAmount}" />
+							    </apex:outputtext>
+                       	</b>
+                      </td>
+                       <td></td>
+              </tr>
+		</table>
+		</apex:pageblock>
+			<br/>
+			<br/>	  
+			<apex:pageblockbuttons location="top">
+				<apex:commandbutton value="Save Expense Sheet" action="{!saveTimeSheet}" onclick="setBunload(false);"/>
+				<apex:commandbutton value="Cancel Expense Sheet" action="{!cancel}" onclick="setBunload(false);"/>
+			</apex:pageblockbuttons>
+		</apex:pageblock>
+	</apex:form>
+	<script type = "text/javascript">
+		var item_name;
+		var item_qty ;
+		var item_amount ;
+		function validatefield_Amount(fieldsName , val , title)
+		{
+			var value = Number(val.replace(",",""));
+			if (value > 0 )
+			{
+				var taxamount = Number(document.getElementById('taxamount').value) ;
+				var rate  = Number(document.getElementById('taxrateId').value);
+				var amount = Number(document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:txtUnitAmount').value.replace(",","")) ;
+				taxamount = (amount/100)*rate;
+				var quantity  = Number(document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:txtQty').value);
+				amount = Number(amount);
+				taxamount = Number(taxamount) * quantity;
+				var totalamount = (amount * quantity ) + taxamount ;
+				taxamount = roundNumber(taxamount,2); 
+				totalamount = roundNumber(totalamount,2);
+				document.getElementById('taxamount').value = taxamount.toFixed(2) ;   //taxamount ;
+				document.getElementById('totalamount').value = totalamount.toFixed(2) ;
+				document.getElementById('totalNet').value = (amount * quantity ).toFixed(2) ;
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalGross').value = totalamount.toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalVat').value = taxamount.toFixed(2) ;
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalNet').value = (amount * quantity ).toFixed(2) ;
+			}
+			else 
+			{
+				document.getElementById(fieldsName).focus();
+				alert( 'Amount Must be greater then 1') ;
+				document.getElementById(fieldsName).value = value ;
+				document.getElementById('taxamount').value = roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('totalamount').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('totalNet').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalGross').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalVat').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalNet').value =  roundNumber(0,2).toFixed(2) ; 
+			}
+		}
+		function chageTax(fieldsName , val , title)
+		{
+			var value = Number(val.replace(",",""));
+			if (value > 0 )
+			{
+				var taxamount = Number(document.getElementById('taxamount').value) ;
+				var rate  = Number(document.getElementById('taxrateId').value);
+				var amount = Number(document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:txtUnitAmount').value.replace(",","")) ;
+				taxamount = (amount/100)*rate;
+				var quantity  = Number(document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:txtQty').value);
+				amount = Number(amount);
+				taxamount = Number(taxamount) * quantity;
+				var totalamount = (amount * quantity ) + taxamount ;
+				taxamount = roundNumber(taxamount,2); 
+				totalamount = roundNumber(totalamount,2);
+				document.getElementById('taxamount').value = taxamount.toFixed(2) ;   //taxamount ;
+				document.getElementById('totalamount').value = totalamount.toFixed(2) ;
+				document.getElementById('totalNet').value = (amount * quantity ).toFixed(2) ;
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalGross').value = totalamount.toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalVat').value = taxamount.toFixed(2)  ;
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalNet').value = (amount * quantity ).toFixed(2) ;
+			}
+			else 
+			{
+				document.getElementById(fieldsName).focus();
+				alert( 'Amount Must be greater then 1') ;
+				document.getElementById(fieldsName).value = value ; 
+				document.getElementById('taxamount').value = roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('totalamount').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('totalNet').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalGross').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalVat').value =  roundNumber(0,2).toFixed(2) ; 
+				document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalNet').value =  roundNumber(0,2).toFixed(2) ; 
+			}
+		}
+		function roundNumber(num, dec) 
+		{
+			var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+			return result;
+		}
+		// code for delete warning & close warning
+		function confirmDelete()
+		{
+			var confirmdelete = confirm("Are you Sure to delete this Entry ?");
+			if (confirmdelete == false)
+			{
+				return false;
+			} 
+			setBunload(false);
+		}
+		function unloadMessage()
+		{
+	        message = "Your Expense Sheet Information is not Saved yet!\n Are you sure you to exit ?";
+	        return message;
+	    }
+	    function setBunload(on)
+	    {
+	        window.onbeforeunload = (on) ? unloadMessage : null;
+	    }
+	    setBunload(true);
+		// end of code
+		//start on net calculator
+		function getNetAmount()
+		{
+			
+			//alert('calculating Net Amount');	
+			//var GAmount = Number(document.getElementById('totalamount').value.replace(",","")) ;
+			var GAmount = Number(document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:txtUnitAmount').value.replace(",","")) ;
+			var TaxRate = Number(document.getElementById('taxrateId').value.replace(",","")) ;
+			var Quantity = Number(document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:txtQty').value.replace(",","")) ;
+			//var TaxAmount = (TaxRate/100)  * GAmount;
+			//var divider = (GAmount + TaxAmount) ;
+			//TaxAmount = (GAmount * TaxAmount)/divider;
+			var TaxAmount = (GAmount * TaxRate)/(100 + TaxRate) ;
+			//TaxAmount =  roundNumber(TaxAmount , 2 ).toFixed(2);
+			var tmpNetAmount = ( GAmount - TaxAmount)*Quantity ;
+			TaxAmount = (TaxAmount * Quantity).toFixed(2); ;
+			tmpNetAmount = roundNumber(tmpNetAmount,2).toFixed(2);
+			document.getElementById('taxamount').value = TaxAmount ; 
+			document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:txtUnitAmount').value = roundNumber((tmpNetAmount/Quantity) , 2).toFixed(2);
+			document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalGross').value = GAmount * Quantity; 
+			document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalVat').value = TaxAmount ;
+			document.getElementById('pgMainPage:frmMainForm:timesheet:ExpenseSheetDetails:hdnTotalNet').value = (GAmount * Quantity ).toFixed(2) ;
+			document.getElementById('totalNet').value = ((GAmount * Quantity )-TaxAmount).toFixed(2) ;
+			document.getElementById('totalamount').value =  (GAmount * Quantity ).toFixed(2) ;
+		}
+		//end of net calculator
+	</script>
+</apex:page>

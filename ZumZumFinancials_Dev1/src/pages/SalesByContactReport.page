@@ -1,0 +1,95 @@
+<apex:page controller="SalesByContactController" id="pg"> 
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:pageMessages id="pgMsgs"/>
+	<apex:form id="frm">
+		<apex:pageBlock id="pb" title="Sales By Contact Report">
+		<apex:pageblockbuttons location="bottom">				
+				<apex:commandButton value="Calculate" action="{!Calculate}" rerender="frm,pgMsgs" oncomplete="show();"/>
+				<input type="button" value="Run Report in Excel" onclick="OpenExcelReport();" class="btn"/>				
+		</apex:pageblockbuttons>
+		 <table width="100%" class="grid" id="tbl">
+		        <tr>
+		            <td width="70" > 
+		                Date from</td>
+		            <td>
+		            <div class="requiredInput">
+	                	<div class="requiredBlock"></div>
+		                <apex:inputField styleclass="date" id="Text47" value="{!objectLedger.Trans_Date__c}"/>
+		            </div>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Date to</td>
+		            <td>
+		            <div class="requiredInput"> 
+	                	<div class="requiredBlock"></div>
+		                <apex:inputField styleclass="date" id="Text48" value="{!objectLedger.Bank_Reconcile_Date__c}"/>
+		            </div>		            		            	
+		            </td>
+		        </tr>		        
+		    </table>
+		    <p></p> 					
+			<table width="100%" cellpadding="0" cellspacing="0" class="grid" id="tbl1" style="visibility:hidden">			
+			<tr>			
+			<td>
+			<b>Contact</b>
+			</td>
+			<apex:repeat value="{!MonthNames}" var="items" id="theColumns"> 
+			<td>
+				<b>
+					<apex:outputText value="{!items}" id="Customer" />
+				</b>
+			</td>						
+			</apex:repeat>
+			</tr>
+			 <apex:repeat value="{!CalculatedFields}" var="item" id="theRowsofCustomer">
+			 <tr>				
+					<td>
+						<apex:commandLink value="{!item.Customer}" id="VAT" action="{!customerRptPg}">	
+							<apex:param name="paramCstmr" value="{!item.Customer}"/>																			
+						</apex:commandLink> 
+					</td>					
+					<apex:repeat value="{!item.Sales}" var="itm" id="theColsofCustomer" >
+						<td>
+							<apex:outputText value="{!itm}" /> 
+						</td>
+					</apex:repeat> 		
+				</tr>						   
+			 </apex:repeat> 
+			</table>				 
+		</apex:pageBlock>
+	</apex:form>
+<script>
+document.getElementById('tbl1').style.visibility='hidden';
+	function setFocusOnLoad(){}	
+	function show()
+	{	
+  	if((document.getElementById('pg:frm:pb:Text47').value == null || document.getElementById('pg:frm:pb:Text47').value == '' ) || (document.getElementById('pg:frm:pb:Text48').value == null || document.getElementById('pg:frm:pb:Text48').value == ''))
+  	{}  	
+  	else
+  	{
+  		document.getElementById('tbl1').style.visibility='visible' ;
+  	}
+  	setBunload(false);
+	}	
+	function OpenExcelReport()
+	{
+		var StartDate = document.getElementById('{!$Component.pg.frm.pb.Text47}').value;
+		var EndDate = document.getElementById('{!$Component.pg.frm.pb.Text48}').value;
+		window.open('/apex/Excel_SalesByContactReport?StartDate='+StartDate+'&EndDate='+EndDate,'excelReport');
+		setBunload(false);
+	}
+		function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    function setBunload(on)
+    {
+        window.onbeforeunload = (on) ? unloadMessage : null;                
+    }
+    setBunload(true);
+        
+</script>
+</apex:page>

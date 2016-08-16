@@ -1,0 +1,41 @@
+<apex:page >
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+	<apex:pageblock title="Company Vat Transfer">		    
+<table width="100%" class="grid">
+		        <tr>
+		            <td width="70">
+		                A/C</td>
+		            <td>
+                    <input type="text" class="lookupField" id="lookup0"/>
+                    <input id="hiddenId0" type="hidden" />
+                    -
+                  <input type="text" class="lookupName" id="relatedName0"readonly="readonly" /></td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Date to</td>
+		            <td>
+		                <input type="text" class="date" id="Text48" value="28/12/2007"/></td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Purchases</td>
+		            <td>
+                    <input type="text" class="currency" id="Text33" value="12000.00" /></td>
+		        </tr>
+		        <tr>
+		            <td width="70">
+		                Sales</td>
+		            <td>
+                    <input type="text" class="currency" id="Text49" value="15000.00"/></td>
+		        </tr>
+		        <tr>
+		            <td width="70">&nbsp;
+		                </td>
+		            <td>
+        	<input type="submit" value="Save" /><input type="submit" value="Discard" /></td>
+		        </tr>
+		    </table>		    
+    </apex:pageblock>
+</apex:page>

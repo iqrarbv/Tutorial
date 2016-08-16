@@ -1,0 +1,65 @@
+<apex:page id="reminderid" standardcontroller="Schedule_Reminders__c" extensions="RemindersController" title="Schedule Reminders">
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:stylesheet value="{!$Resource.Remindrs_CSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+<apex:pageMessages id="pgMsgs" />
+<apex:form >
+	<apex:pageblock title="Schedule Reminders">		       
+            <table class="grid" width="100%">
+            <tr>
+            <td width="200">
+                Select Criteria
+            </td>
+            <td>
+            <div class="requiredInput">
+	            <div class="requiredBlock"></div>
+            <apex:inputText value="{!objectReminder.Frequency__c}" styleClass="ref"	/> days
+            </div>
+            <div class="requiredInput">
+            	<div class="requiredBlock"></div>
+            <apex:inputField value="{!objectReminder.Reminder_Criteria__c}"/>
+            </div>
+            </td>
+            </tr>
+            <tr>
+            <td width="200">
+			0 value would send it on the invoice due date</td>
+			<td>
+			<apex:inputField value="{!objectReminder.zero_val__c}" />
+			</td>                                      
+              </tr>                
+              <tr>
+                <td width="200">
+						Email Template</td>
+			  <td>
+			  <div class="requiredInput">
+	              <div class="requiredBlock"></div>
+			  <apex:selectList value="{!emailID}" multiselect="false" size="1">
+			  	<apex:selectOptions value="{!EmailTemplates}"></apex:selectOptions>
+			  </apex:selectList>
+			  </div>
+			  </td> 			  
+              </tr>
+      </table>
+      
+        <apex:pageblockbuttons >
+	        	<apex:commandButton value="Save" id="idSave" action="{!save}" onclick="setBunload(false);"/>
+	        	<apex:commandButton value="Cancel" action="{!Discard}" id="idDiscard" onclick="setBunload(false);"/>	        	
+	        </apex:pageblockbuttons>
+   </apex:pageblock>
+   </apex:form>
+<Script type="text/javascript">
+function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    function setBunload(on)
+    {
+        window.onbeforeunload = (on) ? unloadMessage : null;                
+    }
+    setBunload(true);    
+ </Script> 
+ 
+</apex:page>

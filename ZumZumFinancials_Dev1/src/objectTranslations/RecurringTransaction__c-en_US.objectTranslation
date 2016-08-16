@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>RecurringTransaction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>RecurringTransaction</value>
+    </caseValues>
+    <fields>
+        <label><!-- Bank Account --></label>
+        <name>Bank_Account__c</name>
+        <relationshipLabel><!-- RecurringTransaction --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Customer Account --></label>
+        <name>Customer_Account__c</name>
+        <relationshipLabel><!-- RecurringTransaction --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Details --></label>
+        <name>Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finish Date --></label>
+        <name>Finish_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Posted --></label>
+        <name>Last_Posted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Frequency Period --></label>
+        <name>Name_of__c</name>
+        <picklistValues>
+            <masterLabel>Day(s)</masterLabel>
+            <translation><!-- Day(s) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month(s)</masterLabel>
+            <translation><!-- Month(s) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Week(s)</masterLabel>
+            <translation><!-- Week(s) --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Net Amount --></label>
+        <name>Net_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Next Transaction Date --></label>
+        <name>Next_Transaction_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Frequency --></label>
+        <name>No_of__c</name>
+    </fields>
+    <fields>
+        <label><!-- Nominal Account --></label>
+        <name>Nominal_Account__c</name>
+        <relationshipLabel><!-- RecurringTransaction --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reference --></label>
+        <name>Reference__c</name>
+    </fields>
+    <fields>
+        <label><!-- Required Posting --></label>
+        <name>Required_Posting__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Suspend Posting --></label>
+        <name>Suspend_Posting__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tax Rate --></label>
+        <name>Tax_Rate__c</name>
+        <relationshipLabel><!-- RecurringTransaction --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Transaction Type --></label>
+        <name>TransactionType__c</name>
+        <picklistValues>
+            <masterLabel>Bank/Cash/Credit Card Payment</masterLabel>
+            <translation><!-- Bank/Cash/Credit Card Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bank/Cash/Credit Card Receipt</masterLabel>
+            <translation><!-- Bank/Cash/Credit Card Receipt --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bank/Cash/Credit Card Transfer</masterLabel>
+            <translation><!-- Bank/Cash/Credit Card Transfer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer payment on Account</masterLabel>
+            <translation><!-- Customer payment on Account --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- VAT Amount --></label>
+        <name>VAT__c</name>
+    </fields>
+    <layouts>
+        <layout>RecurringTransaction Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You can&apos;t edit Last posted field --></errorMessage>
+        <name>Last_Posted_field_read_only</name>
+    </validationRules>
+</CustomObjectTranslation>

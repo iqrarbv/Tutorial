@@ -1,0 +1,50 @@
+<apex:page standardcontroller="Ledger__c" Title="Aged Recieveable Report" extensions="AgedPayable" action="{!ExcelReport}" contenttype="application/vnd.ms-excel" showheader="false" sidebar="false">
+<apex:pagemessages id="errorMessage"/>
+<apex:form >
+	<apex:pageblock title="Sales Aged Recievable" >
+					<apex:pageblocksection >
+						<apex:pageblocktable value="{!lstPayable}" var="o" rendered="{!showreport}">
+							<apex:column headerValue="Account Number">
+								<apex:outputtext value="{!o.AccountName}"  />
+							</apex:column>
+							<apex:column headerValue="30 Days">
+								<apex:outputtext value="{!o.days30}"  />
+							</apex:column>
+							<apex:column headerValue="60 Days">
+								<apex:outputtext value="{!o.days60}"  />
+							</apex:column>
+							<apex:column headerValue="90 Days">
+								<apex:outputtext value="{!o.days90}"  />
+							</apex:column>
+							<apex:column headerValue="Older">
+								<apex:outputtext value="{!o.olderAmount}"  />
+							</apex:column>
+							<apex:column headerValue="Future">
+								<apex:outputtext value="{!o.featureAmount}"  />
+							</apex:column>
+							<!-- <apex:column headerValue="Total">
+								<apex:outputtext value="{!o.totalAmount}"  />
+							</apex:column>
+							
+							<apex:column headerValue="Balance">
+								<apex:outputtext value="{!o.totalBalance}"  />
+							</apex:column>
+							<apex:column headerValue="Paid Amount">
+								<apex:outputtext value="{!o.PaidAmount}"  />
+							</apex:column>
+							 -->
+						</apex:pageblocktable>
+				</apex:pageblocksection>
+	</apex:pageblock>
+</apex:form>			
+<!-- {!monthlyMap} -->
+<br/>
+<br/>
+<!-- {!oldPaymnets} -->
+<script type="text/javascript">
+	function setFocusOnLoad()
+	{
+		
+	}
+</script>
+</apex:page>

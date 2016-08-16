@@ -1,0 +1,39 @@
+<apex:page id="reminderid" standardcontroller="Reminders_Statements_Recipient__c">
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup0" selectedvalue_textbox="hiddenId0" nominalCode_textbox="relatedName0"/>
+<c:AutoCompleteNomCodes autocomplete_textbox="lookup1" selectedvalue_textbox="hiddenId1" nominalCode_textbox="relatedName1"/>
+	<apex:pageblock title="Schedule Reminders">		       
+            <table class="grid" width="100%">
+            <tr>
+            <td width="200">
+                Select Criteria
+            </td>
+            <td><input id="relatedName2" type="text" value="7" size = "3"
+                            class="integer" /> days
+                <select >
+                    <option>--None--</option>
+                    <option>Before Invoice Due Date</option>
+                    <option>After Invoice Due Date</option>
+              </select>
+              0 value would send it on the invoice due date
+              </td>
+              </tr>
+                
+              <tr>
+                <td width="200">
+						Email Template</td>
+			  <td>
+			          <select id="Select3" name="D3">
+                            <option value="1">Email Template 1 for reminder</option>
+                            <option value="2">Email Template 2 for reminder</option>
+                            <option value="3">Email Template 3 for reminders</option>
+                        </select></td>
+              </tr>
+      </table>
+      
+        <apex:pageblockbuttons >
+<input type="submit" value="Save" />
+        	<input type="submit" value="Discard" />
+        </apex:pageblockbuttons>
+   </apex:pageblock>
+</apex:page>

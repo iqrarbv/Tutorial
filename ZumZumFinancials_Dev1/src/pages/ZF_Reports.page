@@ -1,0 +1,171 @@
+<apex:page controller="ZFReportsController" id="pg"> 
+<apex:stylesheet value="{!URLFOR($Resource.ZF_BtnCSS)}"/>
+<script type="text/javascript" src="/js/functions.js"></script>
+	<script src="/soap/ajax/9.0/connection.js"></script>
+	<script src="/soap/ajax/9.0/apex.js"></script>
+	<script type="text/javascript">
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    <script src="../../soap/ajax/21.0/connection.js"
+          type="text/javascript">
+</script>
+	<apex:form >        
+         <apex:pageBlock title="ZumZum Financial Reports" >
+        <apex:pageBlock title="Salesforce Default Reports" >        
+                    <table >
+                            <tr>      
+                            <td>                                                            
+                                <input type="button" class="roundbutton" value="Ledger" onclick="LedgerReport();" />                                 
+                            </td>                                                       
+                            <td>
+                                
+                                <input type="button" class="roundbutton" value="Nominal Account Balances" onclick="NominalBalancesReport();" />
+                            </td>
+                            <td>
+                            	<input type="button" class="roundbutton" value="Nominal Monthly Actuals" onclick="ActualsReport();" />                                
+                            </td>
+                            <td>
+                            	<input type="button" class="roundbutton" value="Sales Tax" onclick="SalesTaxReport();" />                                                            
+                            </td>
+                         </tr>
+                         <tr>                                                                                                   
+                            <td>
+                            	<input type="button" class="roundbutton" value="Purchase Tax" onclick="PurchaseTaxReport();" />                                
+                            </td>
+                            <td>
+                            	<input type="button" class="roundbutton" value="Chart of Accounts" onclick="COA();" />                                
+                            </td>
+                                                        
+                          </tr>                                          
+                     </table>                
+                </apex:pageBlock>
+                <apex:pageBlock title="Visual Force Reports">            
+                <table style="width:100%;">
+                <tr>                
+                     <td>
+                     <input type="button" class="roundbutton" value="Aged Reciveables" onclick="window.location='/apex/agedpayable'"/>
+                     </td>
+                     <td>
+                     <input type="button" class="roundbutton" value="Aged Payable" onclick="window.location='/apex/AgedRecivables'"/>
+                     </td>
+                     <td>
+                     <input type="button" class="roundbutton" value="Balance Sheet" onclick="window.location='/apex/ReportBalanceSheet'"/>
+                     </td>
+                     <td>
+                     <input type="button" class="roundbutton" value="Profit & Loss Report" onclick="window.location='/apex/ReportProfitAndLoss'"/>
+                     </td>                     
+                </tr>
+                <tr>
+                	 <td>
+                     	<input type="button" class="roundbutton" value="Trail Balance" onclick="window.location='/apex/ReportTrialBalance'"/>
+                     </td>
+                     <td>
+                     	<input type="button" class="roundbutton" value="Sales Report" onclick="window.location='/apex/SalesReport'"/>
+                     </td>  
+                     <td>
+                     	<input type="button" class="roundbutton" value="Purchase Report" onclick="window.location='/apex/PurchaseReport'"/>
+                     </td>
+                     <td>
+                     	<input type="button" class="roundbutton" value="Sales By Contact Report" onclick="window.location='/apex/SalesByContactReport'"/>
+                     </td>                                  
+                </tr>                               
+                <tr> 
+                	<td>
+                        <input type="button" class="roundbutton" value="Customer Sales Invoice" onclick="window.location='/apex/Customer'"/>
+                     </td>
+                    <td>
+                        <input type="button" class="roundbutton" value="Days Sales Outstanding" onclick="window.location='/apex/DaysSalesOutstanding'"/>
+                    </td>   
+                </tr>
+                </table>
+                                
+        </apex:pageBlock>
+        </apex:pageBlock>        
+    </apex:form>
+    <script type="text/javascript">    
+    function LedgerReport()
+    {   
+    	result = sforce.connection.query("select id , DeveloperName , Name from Report where DeveloperName = 'Ledger1'");    	
+    	records = result.getArray("records");    	
+    	var record = records[0];    	
+    	if (record == '' || record == null)
+    	{   		    		
+    		alert('emp val');
+    	}
+    	else
+    	{
+    		window.location = "/"+records[0].Id ;
+    	}    	    	    	   
+    }
+    function NominalBalancesReport()
+    {   
+    	result = sforce.connection.query("select id , DeveloperName , Name from Report where DeveloperName = 'Nominal_Account_Balances'");    	
+    	records = result.getArray("records");    	
+    	var record = records[0];    	
+    	if (record == '' || record == null)
+    	{   		    		
+    		alert('emp val');
+    	}
+    	else
+    	{
+    		window.location = "/"+records[0].Id ;
+    	}    	    	    	   
+    }    
+    function ActualsReport()
+    {   
+    	result = sforce.connection.query("select id , DeveloperName , Name from Report where DeveloperName = 'Nominal_Monthly_Actuals1'");    	
+    	records = result.getArray("records");    	
+    	var record = records[0];    	
+    	if (record == '' || record == null)
+    	{   		    		
+    		alert('emp val');
+    	}
+    	else
+    	{
+    		window.location = "/"+records[0].Id ;
+    	}    	    	    	   
+    }
+    function PurchaseTaxReport()
+    {   
+    	result = sforce.connection.query("select id , DeveloperName , Name from Report where DeveloperName = 'Purchase_Tax1'");    	
+    	records = result.getArray("records");    	
+    	var record = records[0];    	
+    	if (record == '' || record == null)
+    	{   		    		
+    		alert('emp val');
+    	}
+    	else
+    	{
+    		window.location = "/"+records[0].Id ;
+    	}    	    	    	   
+    }
+    function SalesTaxReport()
+    {   
+    	result = sforce.connection.query("select id , DeveloperName , Name from Report where DeveloperName = 'Sales_Tax'");    	
+    	records = result.getArray("records");    	
+    	var record = records[0];    	
+    	if (record == '' || record == null)
+    	{   		    		
+    		alert('emp val');
+    	}
+    	else
+    	{
+    		window.location = "/"+records[0].Id ;
+    	}    	    	    	   
+    }
+    function COA()
+    {   
+    	result = sforce.connection.query("select id , DeveloperName , Name from Report where DeveloperName = 'COA'");    	
+    	records = result.getArray("records");    	
+    	var record = records[0];    	
+    	if (record == '' || record == null)
+    	{   		    		
+    		alert('emp val');
+    	}
+    	else
+    	{
+    		window.location = "/"+records[0].Id ;
+    	}    	    	    	   
+    }
+    </script>
+</apex:page>

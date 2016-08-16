@@ -1,0 +1,3 @@
+<apex:page standardcontroller="Expense_Sheet__c" title="Invalid Operation on Expense Sheet History">
+<apex:Sectionheader title="Invalid Operation on Expense Sheet History" />
+</apex:page>

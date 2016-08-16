@@ -1,0 +1,5 @@
+<messaging:emailTemplate subject="Invoice due reminder" recipientType="Contact" relatedToType="Sales_Invoice__c">
+<messaging:plainTextEmailBody >
+Hello World
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

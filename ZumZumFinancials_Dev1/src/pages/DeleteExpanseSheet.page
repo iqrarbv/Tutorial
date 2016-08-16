@@ -1,0 +1,6 @@
+<apex:page standardController="Expense_Sheet__c" extensions="DeleteExpenseSheet" title="Delete Expense Sheet" action="{!init}" >
+<apex:pagemessages id="errorMessages" />
+<apex:form >
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandButton value="Back to Expense Sheet" action="{!back}" />
+</apex:form>
+</apex:page>

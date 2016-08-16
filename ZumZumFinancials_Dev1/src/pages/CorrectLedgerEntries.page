@@ -1,0 +1,177 @@
+<apex:page standardController="Ledger__c" title="Correct Ledger Entries" extensions="CorrectionController" action="{!PageInit}">
+<link rel="stylesheet" type="text/css" href="ZumzumFinacials.css" />
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:pagemessages id="errorMsg" />
+<apex:form id="mainFrm" rendered="{!showPage}">
+	<c:AutoCompleteNomCodes autocomplete_textbox="lookup" selectedvalue_textbox="hiddenId" nominalCode_textbox="relatedName" />
+	<apex:pageblock >	
+	<apex:pageblock title="{!docTitle}">
+		<apex:pageblocksection columns="2" title="{!docTitle} Details"> 
+			<apex:pageblocksectionitem >
+				Transaction Number: 
+				<apex:outputtext value="{0, number, integer}"  >
+				            <apex:param value="{!newEntry.Trans_No__c}" />
+				</apex:outputtext>   
+			</apex:pageblocksectionitem> 
+			<apex:pageblocksectionitem rendered="{!isBPayment}">
+				Bank: <apex:outputtext value="{!newEntry.Sub_Account__c}" />    
+			</apex:pageblocksectionitem> 
+			<apex:pageblocksectionitem rendered="{!isInvoice}">
+				Account: <apex:outputtext value="{!newEntry.Sub_Account__c}" />    
+			</apex:pageblocksectionitem>    
+			<apex:pageblocksectionitem rendered="{!isBPayment}">
+				<!--  this is blank coz it bank Paymnet -->	 
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem rendered="{!isInvoice}">
+				 Due Date: <apex:outputtext value="{!dueDate}" /> 
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				 Reference: <apex:outputtext value="{!newEntry.Reference__c}" /> 
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				  Posted By: <apex:outputfield value="{!newEntry.ownerId}" /> 
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				 Description: <apex:outputtext value="{!newEntry.Details__c}" /> 
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				  Created On: <apex:outputtext value="{!createdOn}" />   
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				  Posted On: <apex:outputtext value="{!postedOn}" /> 
+			</apex:pageblocksectionitem>
+		</apex:pageblocksection>
+		<!-- 
+		<apex:pageblock title="Totals">
+			<table width="100%" class="grid">
+		        <tr>
+		        	<td>
+		        		<strong>Net: <apex:inputfield value="{!newEntry.Net__c}" /></strong>
+		        	</td>
+		        	<td>
+		        		<strong>Tax: <apex:outputfield value="{!newEntry.Tax__c}" /></strong>
+		        	</td>
+		        	<td>
+		        		<strong>Paid: <apex:outputfield value="{!newEntry.Amount__c}" /></strong>                  
+		        	</td>      
+		        </tr>
+		</table>   
+		</apex:pageblock>
+		--> 
+		<apex:pageblocksection columns="3" title="Totals">
+			<apex:pageblocksectionitem >
+				<strong>Net:</strong><apex:outputfield value="{!newEntry.Net__c}" />    
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem rendered="{!isInvoice}">
+				<strong>Tax :</strong> <apex:outputfield value="{!newEntry.Tax__c}" />    
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem rendered="{!isBPayment}">
+				<strong>Tax :</strong> <apex:outputfield value="{!newEntry.Tax__c}" />    
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem rendered="{!isDirectPayment}">
+				<strong>Tax :</strong> <apex:outputfield value="{!newEntry.Tax__c}" />    
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem rendered="{!isReciept}">
+				<strong>Tax :</strong> 0.00  
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				 <strong>Paid:</strong> <apex:outputfield value="{!newEntry.Amount__c}" />   
+			</apex:pageblocksectionitem>
+		</apex:pageblocksection>
+		</apex:pageblock>
+		<!--  
+		<apex:pageblocksection columns="5" title="Sales Invoice Line Item List">
+			<apex:pageblocksectionitem >
+				No: <apex:inputfield value="{!newEntry.Trans_No__c}" />    
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				N/C : <apex:inputfield value="{!newEntry.Nominal__c}" />    
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				 Net Amount: <apex:inputfield value="{!newEntry.Net__c}" />   
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				 Tax Code: <apex:outputfield value="{!newEntry.Tax_Code__c}" />   
+			</apex:pageblocksectionitem>
+			<apex:pageblocksectionitem >
+				 Tax Rate: <apex:inputfield value="{!newEntry.Tax__c}" />   
+			</apex:pageblocksectionitem>
+		</apex:pageblocksection>
+		-->
+		<apex:pageblock title="{!docTitle} Line Item List">
+			<table width="100%" class="grid">
+		        <tr>
+		        	<td >
+		        		<strong>No</strong>
+		        	</td>
+		        	<td>
+		        		<strong>N/C</strong>
+		        	</td>
+		        	<td>
+		        		<strong>Details</strong>
+		        	</td>
+		        	<td >
+		        		<strong>Gross</strong>
+		        	</td>
+		        	<td>
+		        		<strong>T/C</strong>
+		        	</td>
+		        	<td >
+		        		<strong>Tax</strong>                  
+		        	</td>      
+		        </tr>
+		        <tr>
+		        	<td>
+		        		<apex:outputfield value="{!newEntry.Trans_No__c}" />  
+		        		
+		        	</td>
+		        	<td>
+		        		<!-- <apex:inputfield value="{!newEntry.Nominal__c}" /> -->
+		        		<input type="text" class="lookupField" id="lookup" value="{!htmlNcId}" readonly="readonly" /> 
+		        		<input type="text" class="lookupName" id="relatedName" readonly="readonly" value="{!ncName}" />
+		        	</td>
+		        	<td>
+		        		<apex:inputtext value="{!newEntry.Reference__c}" />                          
+		        	</td>
+		        	<td  >
+		        		<apex:inputtext value="{!totalAmount}" /> 
+		        	</td>
+		        	<td>
+		        		<!-- <apex:outputfield value="{!newEntry.Tax_Code__c}" /> -->
+		        		<apex:selectlist size="1"  value="{!newEntry.Tax_Code__c}" rendered="{!isInvoice}" >
+		        			<apex:selectoptions value="{!AllTaxes}" />
+		        		</apex:selectlist>
+		        		<apex:selectlist size="1"  value="{!newEntry.Tax_Code__c}" rendered="{!isBPayment}" >
+		        			<apex:selectoptions value="{!AllTaxes}" />
+		        		</apex:selectlist>
+		        		<apex:selectlist size="1"  value="{!newEntry.Tax_Code__c}" rendered="{!isDirectPayment}" >
+		        			<apex:selectOption itemValue="" itemLabel="Select Tax"/>
+		        		</apex:selectlist>
+		        		<apex:selectlist size="1"  value="{!newEntry.Tax_Code__c}" rendered="{!isReciept}" >
+		        			<apex:selectOption itemValue="T9" itemLabel="No Tax T9"/>
+		        		</apex:selectlist>
+		        	</td>
+		        	<td  >    
+		        		<apex:inputfield value="{!newEntry.Tax__c}"  rendered="{!isInvoice}" />
+		        		<apex:inputfield value="{!newEntry.Tax__c}"  rendered="{!isBPayment}" />
+		        		<apex:outputText value="0.00"  rendered="{!isDirectPayment}" />
+		        		<apex:outputText value="0.00"  rendered="{!isReciept}" />
+		        	</td>
+		        </tr>
+		     </table>  
+		     <br/>
+		     <apex:pageblocksection columns="1" title="Ledger Payment History" rendered="{!containPaymentHis}"> 
+			   <apex:pageBlockTable value="{!History}" var="h" title="Ledger Payment History" >
+					<apex:column title="Details" value="{!h.history.Details__c}" />
+					<apex:column title="Date" value="{!h.history.Date__c}" />
+					<apex:column title="Type" value="{!h.history.Type__c}" />
+				</apex:pageBlockTable>
+			</apex:pageblocksection>
+		</apex:pageblock>
+		<apex:pageblockbuttons >
+			<apex:commandbutton value="Save" action="{!SaveLedger}"/>
+			<apex:commandbutton value="Cancel" action="{!cancel}"/>
+		</apex:pageblockbuttons>
+	</apex:pageblock>	
+</apex:form>
+</apex:page>

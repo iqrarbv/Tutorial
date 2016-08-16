@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Sales Invoice</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sales Invoices</value>
+    </caseValues>
+    <fields>
+        <label><!-- Customer Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Sales Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Dimension --></label>
+        <name>Dimension__c</name>
+        <relationshipLabel><!-- Sales Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Format Type --></label>
+        <name>Format_Type__c</name>
+        <picklistValues>
+            <masterLabel>Product</masterLabel>
+            <translation><!-- Product --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Invoice Date --></label>
+        <name>Invoice_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Due Date --></label>
+        <name>Invoice_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Template --></label>
+        <name>Invoice_Template__c</name>
+        <relationshipLabel><!-- Sales Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Sales Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Paid Amount --></label>
+        <name>Paid_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Paid --></label>
+        <name>Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quote Number --></label>
+        <name>Quote_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- SOP Number --></label>
+        <name>SOP_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order --></label>
+        <name>Sales_Order__c</name>
+        <relationshipLabel><!-- Sales Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Settlement Discount --></label>
+        <name>Settlement_Discount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Settlement Due Days --></label>
+        <name>Settlement_Due_Days__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Posted</masterLabel>
+            <translation><!-- Posted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Gross --></label>
+        <name>Total_Gross__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Net --></label>
+        <name>Total_Net__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total VAT --></label>
+        <name>Total_VAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Sales Credit</masterLabel>
+            <translation><!-- Sales Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Invoice</masterLabel>
+            <translation><!-- Sales Invoice --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Sales Invoice Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Generate_PDF --></label>
+        <name>Generate_PDF</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Post_Invoice --></label>
+        <name>Post_Invoice</name>
+    </webLinks>
+</CustomObjectTranslation>

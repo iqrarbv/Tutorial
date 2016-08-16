@@ -1,0 +1,143 @@
+<apex:page controller="CustomerSalesInvoiceController" action="{!CalculateforExcel}" id="pg" >
+<apex:stylesheet value="{!$Resource.ZZFinancialsCSS}"/>
+<apex:pageMessages id="pgMsgs"/>
+	<apex:form id="frm">
+		<apex:pageBlock id="pb" title="Customer Report">
+		<apex:pageblockbuttons location="bottom">											
+			<input type="button" value="Run Report in Excel" onclick="OpenExcelReport();" class="btn"/>				
+		</apex:pageblockbuttons>
+		 <table width="100%" class="grid" id="tbl">
+		        <tr>
+		        	<td>
+		        	Customer
+		        	</td>
+		        	<td>
+		        		<apex:outputField value="{!objectLookup.CustomerAccount__c}" styleClass="lookupName" id="Text54">		        			
+		        		</apex:outputField>
+		        	</td>
+		        </tr>
+		        <tr>
+		            <td width="90" >
+		                First Invoice</td>
+		            <td>		            
+		                <apex:outputField styleclass="date" id="Text47" value="{!FirstInvoice.Trans_Date__c}"/>		            
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="90">
+		                Last Invoice</td>
+		            <td>		            
+		                <apex:outputField styleclass="date" id="Text48" value="{!LastInvoice.Trans_Date__c}"/>		            		            		            
+		            </td>
+		        </tr>		        
+		        <tr>
+		            <td width="90">
+		                Last Receipt</td>
+		            <td>		            
+		                <apex:outputField styleclass="date" id="Text49" value="{!LastReceipt.Trans_Date__c}"/>		            
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="90">
+		                Last Payment</td>
+		            <td>		            
+		                <apex:outputField styleclass="date" id="Text50" value="{!LastPayment.Trans_Date__c}"/>		            
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="90">
+		                M.T.D</td>
+		            <td>
+		                <apex:outputText id="Text51" value="{!MTD}"/>		            
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="90">
+		                Y.T.D</td>
+		            <td>
+		                <apex:outputText id="Text52" value="{!YTD}"/>		            
+		            </td>
+		        </tr>
+		        <tr>
+		            <td width="90">
+		                Prior Y.T.D</td>
+		            <td>		            
+		                <apex:outputText id="Text53" value="{!PriorYTD}"/>		            		            
+		            </td> 
+		            
+		        </tr>
+		    </table>
+		    <p></p> 					
+			<table width="100%" cellpadding="0" cellspacing="0" class="grid" id="tbl1" > 			
+			<tr>			
+				<td>
+				<b>Month</b>
+				</td>
+				<td>
+				<b>Invoices</b>
+				</td>
+				<td>
+				<b>Credits</b>
+				</td>
+				<td>
+				<b>Sales Balance</b>
+				</td>
+				<td>
+				<b>Receipts</b>
+				</td>
+				<td>
+				<b>Payments</b>
+				</td>			
+			</tr>			
+			<apex:repeat value="{!SalesInvoices}" var="itm" id="theRows">
+				<tr>	
+					<td>
+						<apex:outputText value="{!itm.Month}" id="mName" >							
+						</apex:outputText>
+					</td>
+					<td>
+						<apex:outputText value="{!itm.Invoices}" id="sInvoice" >							
+						</apex:outputText>
+					</td>
+					<td>
+						<apex:outputText value="{!itm.Credits}" id="sCredits" >							
+						</apex:outputText>
+					</td>
+					<td>
+						<apex:outputText value="{!itm.Balances}" id="sBlnc" >							
+						</apex:outputText>
+					</td>		
+					<td>
+						<apex:outputText value="{!itm.Receipts}" id="rcpts" >							
+						</apex:outputText>
+					</td>
+					<td>
+						<apex:outputText value="{!itm.Payments}" id="paymnt" >							
+						</apex:outputText>
+					</td>																	
+				</tr>
+			</apex:repeat>
+			</table>				 
+		</apex:pageBlock>
+	</apex:form>
+<script>
+	function setFocusOnLoad(){}	
+	function OpenExcelReport()
+	{
+		var Cstmr = document.getElementById('{!$Component.pg.frm.pb.Text54}').value;		
+		window.open('/apex/Excel_Customer?Cstmr='+Cstmr,'excelReport');
+		setBunload(false);
+	} 
+	function unloadMessage()
+	{
+        message = "Are you sure you want to navigate away from this page?"
+        return message;
+    }
+    
+    function setBunload(on)
+    {
+        window.onbeforeunload = (on) ? unloadMessage : null;                
+    }
+    setBunload(true);    
+</script>
+</apex:page>

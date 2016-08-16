@@ -1,0 +1,26 @@
+<apex:page standardcontroller="Account" extensions="CutomerActivity" title="Customer Activity">
+<apex:form >
+	<apex:pageblock title="{!typeAcctt} Activity" >
+				<apex:pageblocksection >
+					<apex:pageblocksectionitem >
+						{!typeAcctt} Balance : 
+						<apex:outputtext value="{0, number, 0.00}"  >
+				    		{!currencySymbol} <apex:param value="{!balance}" />
+						</apex:outputtext>
+					</apex:pageblocksectionitem>
+					<apex:pageblocksectionitem >
+						Paid Amount : 
+						<apex:outputtext value="{0, number, 0.00}"  >
+				    		{!currencySymbol} <apex:param value="{!pAmount}" />
+						</apex:outputtext>
+					</apex:pageblocksectionitem>
+					<apex:pageblocksectionitem >
+						Fiscal Turn Over : 
+						<apex:outputtext value="{0, number, 0.00}"  >
+				    		 {!currencySymbol} <apex:param value="{!turnPver}" />
+						</apex:outputtext>
+					</apex:pageblocksectionitem>
+				</apex:pageblocksection>
+	</apex:pageblock>
+</apex:form>
+</apex:page>

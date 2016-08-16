@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <content>InvalidOperationTS</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <content>InvalidOperationTS</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>InvalidOperationTS</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <fields>
+        <fullName>Account__c</fullName>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Time Sheet Details</relationshipLabel>
+        <relationshipName>Time_Sheet_Details</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Activity_Code__c</fullName>
+        <label>Activity Code</label>
+        <referenceTo>Activity_Code__c</referenceTo>
+        <relationshipName>Time_Sheets</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Created_Date__c</fullName>
+        <label>Created Date</label>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Date_String__c</fullName>
+        <label>Date String</label>
+        <length>20</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Date__c</fullName>
+        <label>Date</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Day__c</fullName>
+        <label>Day</label>
+        <length>15</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Name_of_business_passenger__c</fullName>
+        <label>Name of business passenger</label>
+        <length>100</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Narrative__c</fullName>
+        <label>Narrative</label>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <label>Project</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Time Sheet Details (Project)</relationshipLabel>
+        <relationshipName>Time_Sheets</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Time_Sheet__c</fullName>
+        <label>Time Sheet</label>
+        <referenceTo>Time_Sheet__c</referenceTo>
+        <relationshipLabel>Time Sheet Details</relationshipLabel>
+        <relationshipName>Time_Sheet_Details</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+    </fields>
+    <fields>
+        <fullName>Total_Hours__c</fullName>
+        <label>Total Hours</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>UID__c</fullName>
+        <displayFormat>TS-{00000}</displayFormat>
+        <label>UID</label>
+        <type>AutoNumber</type>
+    </fields>
+    <label>Time Sheet Detail</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Time Sheet Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Time Sheet Details</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

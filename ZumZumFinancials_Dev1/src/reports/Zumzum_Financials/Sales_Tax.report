@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Ledger__c.Tax_Rate__c</field>
+    </columns>
+    <columns>
+        <field>Ledger__c.Net__c</field>
+    </columns>
+    <columns>
+        <field>Ledger__c.Tax__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <criteriaItems>
+            <column>Ledger__c.Show_On_Transaction__c</column>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Ledger__c.Type__c</column>
+            <operator>equals</operator>
+            <value>SI</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Ledger__c.Type__c</column>
+            <operator>equals</operator>
+            <value>SC</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Ledger__c.Tax_Code__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <name>Sales Tax</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Ledger__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Ledger__c.Bank_Reconcile_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

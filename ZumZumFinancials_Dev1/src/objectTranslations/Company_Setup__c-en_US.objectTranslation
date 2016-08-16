@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Company Setup</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Company Setup</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Lock Date --></label>
+        <name>Account_Lock_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Company Registration Number --></label>
+        <name>Company_Registration_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Entity Type --></label>
+        <name>Entity_Type__c</name>
+        <picklistValues>
+            <masterLabel>Company</masterLabel>
+            <translation><!-- Company --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partnership</masterLabel>
+            <translation><!-- Partnership --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sole trader</masterLabel>
+            <translation><!-- Sole trader --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- VAT Number --></label>
+        <name>VAT_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- VAT Method --></label>
+        <name>VatMethod__c</name>
+        <picklistValues>
+            <masterLabel>Accrual</masterLabel>
+            <translation><!-- Accrual --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cash Accounting</masterLabel>
+            <translation><!-- Cash Accounting --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Company Setup Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,6 @@
+<apex:page standardController="Sales_Order__c" extensions="DeleteSalesOrder" title="Delete Sales Order" action="{!init}" >
+<apex:pagemessages id="errroMessages" />
+<apex:form id="mainForm" >
+&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Back to Sales Order" action="{!back}"/>
+</apex:form>
+</apex:page>

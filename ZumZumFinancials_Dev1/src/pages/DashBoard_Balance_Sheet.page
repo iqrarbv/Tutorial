@@ -1,0 +1,67 @@
+<apex:page controller="ReportBalanceSheetController" id="page" action="{!RunReportForDashBoard}">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Year');
+        data.addColumn('number', 'Periodic Balance Value');
+        data.addRows(3);
+        var d = new Date();
+		data.setValue(0, 0, getMonthName(d.getMonth()-2));
+        data.setValue(0, 1, {!thrdMonth});
+		data.setValue(1, 0, getMonthName(d.getMonth()-1));
+        data.setValue(1, 1, {!secMonth});
+
+		data.setValue(2, 0, getMonthName(d.getMonth()));
+        data.setValue(2, 1, {!thisMonth});
+        
+
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, {width: 400, height: 300, title: 'Balance Sheet',
+                          vAxis: {title: 'Periodic Sales', titleTextStyle: {color: 'red'}},
+                          hAxis: {maxValue: 5000},
+                          hAxis: {title: 'Month', titleTextStyle: {color: 'Blue'}}
+                         });
+      }
+      function getMonthName(val)
+		{
+			if(val==0)
+				return 'January';
+			if(val==1)
+				return 'Feberuary';
+			if(val==2)
+				return 'March';
+			if(val==3)
+				return 'April';
+			if(val==4)
+				return 'May';
+			if(val==5)
+				return 'Jun';
+			if(val==6)
+				return 'July';
+			if(val==7)
+				return 'August';
+			if(val==8)
+				return 'September';
+			if(val==9)
+				return 'October';
+			if(val==10)
+				return 'November';
+			if(val==11)
+				return 'December';		
+		}
+    </script>
+	<!-- 
+	{!thisMonth}
+	<br/>
+	{!secMonth}
+	<br/>
+	{!thrdMonth}
+	<br/>
+	 -->
+	<div id="chart_div" >
+	</div>
+</apex:page>

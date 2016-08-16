@@ -1,0 +1,15 @@
+<apex:page Controller="controllerInsertNominal" title="First Run Page">
+<apex:pagemessages id="errorMessages" />
+<div>
+<h1 align="center" class="No CSS Style">Wel Come to ZumZum Financials Application</h1>
+<br/>
+<br/>
+<img src="{!$Resource.AppLogo}" class="No CSS Style" />
+<br/>
+<br/>
+</div>
+<apex:form rendered="{!showbutton}">
+	Please Click here to install application data
+	<apex:commandbutton value="Install Application Data" action="{!init}" />
+</apex:form>
+</apex:page>

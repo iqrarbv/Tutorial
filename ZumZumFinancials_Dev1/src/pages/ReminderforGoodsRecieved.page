@@ -1,0 +1,7 @@
+<apex:page >
+<!-- <apex:page standardController="Purchase_Order__c" extensions="GoodsReminder" title="Reminder for Goods Recieved" action="{!init}">
+<apex:pagemessages showdetail="true" id="errorMessage"/>
+<apex:form id="mainForm">
+	
+</apex:form> -->
+</apex:page>

@@ -1,0 +1,36 @@
+<apex:page ></apex:page>
+<!-- 
+<apex:page standardController="Sales_Order__c" extensions="SendSalesOrderAsEmail" action="{!init}"  title="Send Purchase Order As Email" >
+
+<apex:pagemessages id="errorMessages" showdetail="true" />
+<apex:form >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandbutton value="Back to Sales order" action="{!back}" rendered="{!sendBack}"/>
+</apex:form>
+<apex:form id="mainForm" rendered="{!showPage}">
+<apex:pageblock title="Send Email to Contacts" rendered="{!sendBack=false}">
+		<apex:pageBlockTable value="{!emaillist}" var="o" >
+			<apex:column headervalue="Select" style="width:50px;">
+				<apex:inputCheckbox value="{!o.isSelected}"/>
+			</apex:column>
+			<apex:column headervalue="Contact Name" >
+				<apex:outputText value="{!o.contactName}" />	
+			</apex:column>
+			<apex:column headervalue="Email Address" >
+				<apex:outputText value="{!o.Email}" />	
+			</apex:column>
+		</apex:pageBlockTable>
+		<br/>
+		<br/>
+		Insert Email Addresses:
+		<br/>
+		<apex:inputtextarea value="{!customEmails}" style="width:400px;"/>
+		<br/>
+		<br/>
+		<apex:inputCheckbox value="{!sendEmailtoViewer}"/> Send me a copy of the email
+		<br/>
+		<br/>
+		<apex:commandbutton value="Send Email" action="{!sendEmails}" />
+	</apex:pageblock>
+</apex:form>
+</apex:page>
+ -->

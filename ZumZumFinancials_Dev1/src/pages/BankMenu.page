@@ -1,0 +1,52 @@
+<apex:page >
+	<apex:stylesheet value="{!URLFOR($Resource.ZF_BtnCSS)}"/>
+	<apex:pageblock title="Bank">
+		<apex:form >
+			<apex:pageblocksection columns="1">
+				<table width="100%" cellpadding="4">
+					<tr>
+						<td align="left">
+							<input type="button" class="roundbutton" value="Bank Accounts" onClick="window.location='/{!$ObjectType.Bank_Account__c}'" />
+							<br />
+						</td>
+					   	<td align="left">
+					   		<input name="button" type="button" class="roundbutton" onClick="window.location='/apex/BankReceipt_New'" value="Bank Receipts" />
+					   	</td>					   
+					  	<td align="left">
+					  		<input type="button" class="roundbutton" value="Bank Payments" onClick="window.location='/apex/BankPayments_New'" />
+					  	</td>					       
+				     	<td align="Left">
+							<input type="button" class="roundbutton" value="Customer Refund" onclick="window.location='/apex/CustomerRefund'" />
+						</td>        
+					 </tr>
+					 <tr>
+						<td align="Left">
+							<input type="button" class="roundbutton" value="Supplier Refund" onclick="window.location='/apex/SupplierRefund'" />
+						</td>					
+					  	<td align="left">
+					  		<input name="button2" type="button" class="roundbutton" onClick="window.location='/apex/CustomerReceiptPayment'" value="Receive payment from Customer against invoices" />
+					  	</td>					       					 
+						<td align="left">
+							<input type="button" class="roundbutton" value="Pay to Supplier against invoices" onClick="window.location='/apex/SupplierPayment'" />
+						</td>					
+				   		<td align="left">
+				   			<input name="button2" type="button" class="roundbutton" onClick="window.location='/apex/CustomerReceiptPayment'" value="Allocate pending Credit Notes and Payments on Account to Invoices" />
+						</td>
+				 	</tr>
+					<tr>				 				   
+				   		<td align="left">
+				   			<input name="button3" type="button" class="roundbutton" onClick="window.location='/apex/BankTransfer'" value="Transfer Between Bank Accounts" />
+				   		</td>				   
+						<td align="left">
+							<input type="button" class="roundbutton" value="Reconcile Bank Accounts" onClick="window.location='/{!$ObjectType.BankReconcile__c}'"/>
+						</td>				  		
+				  		<td align="left">
+				  			<input name="button4" type="button" class="roundbutton" onClick="window.location='/{!$ObjectType.RecurringTransaction__c}'" value="Schedule Recurring Transactions" />
+				  		</td>
+				 	</tr> 
+			</table>
+			
+			</apex:pageblocksection>
+		</apex:form>
+	</apex:pageblock>
+</apex:page>

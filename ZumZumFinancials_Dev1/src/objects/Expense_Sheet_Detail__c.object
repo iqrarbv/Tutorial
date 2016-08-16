@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <content>InvalidOperationEs</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <content>InvalidOperationEs</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>InvalidOperationEs</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>InvalidOperationEs</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Account__c</fullName>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Expense Sheet Detail</relationshipLabel>
+        <relationshipName>Expense_Sheet_Detail</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Business_Passenger__c</fullName>
+        <label>Business Passenger</label>
+        <length>100</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Date_String__c</fullName>
+        <label>Date String</label>
+        <length>20</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Date__c</fullName>
+        <label>Date</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Day__c</fullName>
+        <label>Day</label>
+        <length>20</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Expense_Sheet__c</fullName>
+        <label>Expense Sheet</label>
+        <referenceTo>Expense_Sheet__c</referenceTo>
+        <relationshipLabel>Expense Sheet Detail</relationshipLabel>
+        <relationshipName>Expense_Sheet_Detail</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <type>MasterDetail</type>
+    </fields>
+    <fields>
+        <fullName>Miles__c</fullName>
+        <label>Miles</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Narrative__c</fullName>
+        <label>Narrative</label>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Nominal_Account__c</fullName>
+        <label>Nominal Account</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>Expense Sheet Detail</relationshipLabel>
+        <relationshipName>Expense_Sheet_Detail</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <label>Project</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Expense Sheet Detail</relationshipLabel>
+        <relationshipName>Expense_Sheet_Detail</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Tax_Rate__c</fullName>
+        <label>Tax Rate</label>
+        <referenceTo>Tax_Rate__c</referenceTo>
+        <relationshipLabel>Expense Sheet Detail</relationshipLabel>
+        <relationshipName>Expense_Sheet_Detail</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Total_Gross__c</fullName>
+        <label>Total Gross</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Net__c</fullName>
+        <label>Total Net</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_VAT__c</fullName>
+        <label>Total VAT</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UID__c</fullName>
+        <displayFormat>ES-{00000}</displayFormat>
+        <label>UID</label>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Unit_Amount__c</fullName>
+        <label>Unit Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <label>Expense Sheet Detail</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Expense Sheet Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Expense Sheet Detail</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

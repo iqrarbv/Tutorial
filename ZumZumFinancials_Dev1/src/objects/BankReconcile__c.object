@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>BankReconcileAccounts</content>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Bank_Account__c</fullName>
+        <label>Bank Account Name</label>
+        <referenceTo>Bank_Account__c</referenceTo>
+        <relationshipLabel>BankReconcile</relationshipLabel>
+        <relationshipName>BankReconcile</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Charges_Amount__c</fullName>
+        <label>Charges of Amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Charges_Date__c</fullName>
+        <label>Date of Charges</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Charges_Nominal_Account__c</fullName>
+        <label>Nominal Account of Charges</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>BankReconcile (Charges Nominal Account)</relationshipLabel>
+        <relationshipName>BankReconcile1</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Ending_Balance__c</fullName>
+        <label>Ending Balance</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Amount__c</fullName>
+        <label>Interest of amount</label>
+        <precision>18</precision>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Date__c</fullName>
+        <label>Date of Interest</label>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Nominal_Account__c</fullName>
+        <label>Nominal Account of Interest</label>
+        <referenceTo>Nominal_Account__c</referenceTo>
+        <relationshipLabel>BankReconcile</relationshipLabel>
+        <relationshipName>BankReconcile</relationshipName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Reference__c</fullName>
+        <label>Reference</label>
+        <length>255</length>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Statement_Date__c</fullName>
+        <label>Statement Date</label>
+        <type>Date</type>
+    </fields>
+    <label>BankReconcile</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>BankReconcile Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>BankReconcile</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

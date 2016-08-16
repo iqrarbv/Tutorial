@@ -1,0 +1,3 @@
+<apex:page standardController="General_Setup__c">
+<apex:pageMessage id="pgMSgs" summary="You can not create new General Setup object" severity="error"/>
+</apex:page>

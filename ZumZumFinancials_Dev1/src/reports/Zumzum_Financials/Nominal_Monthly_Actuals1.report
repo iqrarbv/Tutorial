@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Nominal_Account__c.Nominal_Code__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Nominal_Budget__c.Month__c</field>
+    </columns>
+    <columns>
+        <field>Nominal_Budget__c.Year_String__c</field>
+    </columns>
+    <columns>
+        <field>Nominal_Budget__c.Actuals_Credit__c</field>
+    </columns>
+    <columns>
+        <field>Nominal_Budget__c.Actuals_Debit__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>Nominal Monthly Actuals</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntityCustomEntity$Nominal_Account__c$Nominal_Budget__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

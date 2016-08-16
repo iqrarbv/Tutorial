@@ -1,0 +1,49 @@
+<apex:page standardcontroller="Ledger__c" Title="Aged Payable Report" extensions="AgedRecieveables" id="mainPage" action="{!ExcelReport}" contenttype="application/vnd.ms-excel" showheader="false" sidebar="false">
+<apex:pagemessages id="errorMessage"/>
+<script type="text/javascript" src="{!URLFOR($Resource.jsGlobalFunctions)}"></script>
+<script type="text/javascript">
+				function OpenExcelReport()
+				{
+					var startDate = document.getElementById('mainPage:mainForm:payable:reportdate').value;
+					var startDate = new Date(startDate);
+					window.open('/apex/AgedRecivablesExcel?reportDate='+startDate.format("yyyy-mm-dd"));
+				}
+				</script>
+<apex:form id="mainForm">
+	<apex:pageblock title="Aged Payable" id="payable">
+				
+					<apex:pageblocksection >
+						<apex:pageblocktable value="{!lstPayable}" var="o" rendered="{!showreport}">
+							<apex:column headerValue="Account Number">
+								<apex:outputtext value="{!o.AccountName}"  />
+							</apex:column>
+							<apex:column headerValue="30 Days">
+								<apex:outputtext value="{!o.days30}"  />
+							</apex:column>
+							<apex:column headerValue="60 Days">
+								<apex:outputtext value="{!o.days60}"  />
+							</apex:column>
+							<apex:column headerValue="90 Days">
+								<apex:outputtext value="{!o.days90}"  />
+							</apex:column>
+							<apex:column headerValue="Older">
+								<apex:outputtext value="{!o.olderAmount}"  />
+							</apex:column>
+							<apex:column headerValue="Future">
+								<apex:outputtext value="{!o.featureAmount}"  />
+							</apex:column>
+						</apex:pageblocktable>
+				</apex:pageblocksection>
+	</apex:pageblock>
+</apex:form>			
+<!-- {!monthlyMap} -->
+<br/>
+<br/>
+<!-- {!oldPaymnets} -->
+<script type="text/javascript">
+	function setFocusOnLoad()
+	{
+		
+	}
+</script>
+</apex:page>

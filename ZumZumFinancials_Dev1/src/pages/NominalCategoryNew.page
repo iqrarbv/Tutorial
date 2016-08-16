@@ -1,0 +1,3 @@
+<apex:page standardController="Nominal_Categories__c">
+<apex:pageMessage id="pgMSgs" summary="You can not create new Nominal Category" severity="error"/>
+</apex:page>

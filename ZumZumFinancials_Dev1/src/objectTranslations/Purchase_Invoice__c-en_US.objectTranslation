@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Purchase Invoice</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Purchase Invoices</value>
+    </caseValues>
+    <fields>
+        <label><!-- Supplier Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Purchase Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Dimension --></label>
+        <name>Dimension__c</name>
+        <relationshipLabel><!-- Purchase Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Invoice Date --></label>
+        <name>Invoice_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Due Date --></label>
+        <name>Invoice_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Invoice Template --></label>
+        <name>Invoice_Template__c</name>
+        <relationshipLabel><!-- Purchase Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- POP Number --></label>
+        <name>POP_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Paid Amount --></label>
+        <name>Paid_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Paid --></label>
+        <name>Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status --></label>
+        <name>Payment_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Purchase Order --></label>
+        <name>Purchase_Order__c</name>
+        <relationshipLabel><!-- Purchase Invoices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Settlement Discount --></label>
+        <name>Settlement_Discount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Settlement due days --></label>
+        <name>Settlement_due_days__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Posted</masterLabel>
+            <translation><!-- Posted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VAT Processed</masterLabel>
+            <translation><!-- VAT Processed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Gross --></label>
+        <name>Total_Gross__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Net --></label>
+        <name>Total_Net__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total VAT --></label>
+        <name>Total_Tax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Purchase Credit</masterLabel>
+            <translation><!-- Purchase Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Purchase Invoice</masterLabel>
+            <translation><!-- Purchase Invoice --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Purchase Invoice Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Approve_for_Payment --></label>
+        <name>Approve_for_Payment</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_PDF --></label>
+        <name>Generate_PDF</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Post_Invoice --></label>
+        <name>Post_Invoice</name>
+    </webLinks>
+</CustomObjectTranslation>

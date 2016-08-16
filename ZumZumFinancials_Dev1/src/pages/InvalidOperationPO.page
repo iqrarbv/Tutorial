@@ -1,0 +1,6 @@
+<apex:page standardController="Purchase_Order_Line_Items__c" extensions="InvalidOperationPO" title="Invalid Operation" action="{!init}">
+<apex:pagemessages id="errorMessages" />
+<!-- 
+<apex:sectionheader title="Illegal Operation On Purchase Order Line item " />
+End Default Content REMOVE THIS -->
+</apex:page>

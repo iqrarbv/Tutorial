@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <value>Invoice Template</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Invoice Template</value>
+    </caseValues>
+    <fields>
+        <label><!-- Font Face --></label>
+        <name>Font_Face__c</name>
+        <picklistValues>
+            <masterLabel>Arial</masterLabel>
+            <translation><!-- Arial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Times New Roman</masterLabel>
+            <translation><!-- Times New Roman --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Verdana</masterLabel>
+            <translation><!-- Verdana --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Font Size --></label>
+        <name>Font_Size__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation><!-- 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation><!-- 12 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13</masterLabel>
+            <translation><!-- 13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14</masterLabel>
+            <translation><!-- 14 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15</masterLabel>
+            <translation><!-- 15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16</masterLabel>
+            <translation><!-- 16 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17</masterLabel>
+            <translation><!-- 17 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18</masterLabel>
+            <translation><!-- 18 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19</masterLabel>
+            <translation><!-- 19 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9</masterLabel>
+            <translation><!-- 9 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Footer Text --></label>
+        <name>Footer_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Heading Text --></label>
+        <name>Heading_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Default --></label>
+        <name>Is_Default__c</name>
+    </fields>
+    <fields>
+        <label><!-- Margins (left/right) - Inches --></label>
+        <name>Margins_left_right_Inches__c</name>
+    </fields>
+    <fields>
+        <label><!-- Margins (top/bottom) - Inches --></label>
+        <name>Margins_top_bottom__c</name>
+    </fields>
+    <layouts>
+        <layout>Invoice Template Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>
