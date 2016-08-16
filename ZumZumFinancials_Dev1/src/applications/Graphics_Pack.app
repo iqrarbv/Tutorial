@@ -5,5 +5,4 @@
     <label>Graphics Pack</label>
     <tab>standard-Document</tab>
     <tab>Graphics_Pack_Overview</tab>
-    <tab>Zum_Zum_Financials</tab>
 </CustomApplication>

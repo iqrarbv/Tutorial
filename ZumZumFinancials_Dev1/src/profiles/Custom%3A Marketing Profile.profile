@@ -1157,11 +1157,6 @@
     </fieldLevelSecurities>
     <fieldLevelSecurities>
         <editable>false</editable>
-        <field>Case.IsSelfClosed</field>
-        <hidden>true</hidden>
-    </fieldLevelSecurities>
-    <fieldLevelSecurities>
-        <editable>false</editable>
         <field>Case.IsSelfServiceClosed</field>
         <hidden>true</hidden>
     </fieldLevelSecurities>

@@ -1,5 +1,5 @@
 public class CorrectionsController { 
-	/*
+	
 	public List<Ledger__c> listLedger{get;set;}
 	public string numb{get;set;}
 	public Ledger__c ledger {get;set;}
@@ -77,5 +77,5 @@ public class CorrectionsController {
 		system.debug('init : '+numb );
 		ledger = [select Trans_No__c , Type__c , Sub_Account__c ,Nominal__c , Details__c , Reference__c , Net__c , Tax__c , Tax_Code__c , Amount__c from Ledger__c where  Name =: numb];
 	}
-	*/
+	
 }

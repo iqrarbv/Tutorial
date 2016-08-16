@@ -34,7 +34,7 @@
                         <select id="Select2" name="D2">
                             <option value="Days">Day(s)</option>
                             <option value="Weeks">Week(s)</option>
-                            <option value="Months" selected>Month(s)</option>
+                            <option value="Months" selected="true">Month(s)</option>
                         </select></div></td>
               </tr>
       </table>

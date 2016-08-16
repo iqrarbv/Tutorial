@@ -21,5 +21,4 @@
     <tab>Activity_Code__c</tab>
     <tab>VAT_Return__c</tab>
     <tab>Financial_Reports</tab>
-    <tab>Zum_Zum_Financials</tab>
 </CustomApplication>

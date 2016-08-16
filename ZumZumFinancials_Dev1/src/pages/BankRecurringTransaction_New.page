@@ -110,7 +110,7 @@
                         <select id="Select2" name="D2">
                             <option value="Days">Day(s)</option>
                             <option value="Weeks">Week(s)</option>
-                            <option value="Months" selected>Month(s)</option>
+                            <option value="Months" selected="true">Month(s)</option>
                         </select></td>
 					<td width="150">
 						Total Required Postings</td>
@@ -158,7 +158,7 @@
 		            <td width="50">
                     <select id="cmbTax" name="D3">
                         <option value="0">T0</option>
-                        <option value="17.5" selected>T1</option>
+                        <option value="17.5" selected="true">T1</option>
                         <option value="20">T2</option>
                         <option value="25">T3</option>
                         <option value="30">T4</option>
