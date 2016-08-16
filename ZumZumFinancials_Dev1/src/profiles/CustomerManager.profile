@@ -1267,16 +1267,6 @@
     </fieldLevelSecurities>
     <fieldLevelSecurities>
         <editable>false</editable>
-        <field>Case.IsVisibleInCss</field>
-        <hidden>true</hidden>
-    </fieldLevelSecurities>
-    <fieldLevelSecurities>
-        <editable>false</editable>
-        <field>Case.IsVisibleInSelfService</field>
-        <hidden>true</hidden>
-    </fieldLevelSecurities>
-    <fieldLevelSecurities>
-        <editable>false</editable>
         <field>Case.Origin</field>
         <hidden>true</hidden>
     </fieldLevelSecurities>
@@ -1718,11 +1708,6 @@
     <fieldLevelSecurities>
         <editable>false</editable>
         <field>Event.IsAllDayEvent</field>
-        <hidden>true</hidden>
-    </fieldLevelSecurities>
-    <fieldLevelSecurities>
-        <editable>false</editable>
-        <field>Event.IsVisibleInSelfService</field>
         <hidden>true</hidden>
     </fieldLevelSecurities>
     <fieldLevelSecurities>
@@ -3543,11 +3528,6 @@
     <fieldLevelSecurities>
         <editable>false</editable>
         <field>Task.Description</field>
-        <hidden>true</hidden>
-    </fieldLevelSecurities>
-    <fieldLevelSecurities>
-        <editable>false</editable>
-        <field>Task.IsVisibleInSelfService</field>
         <hidden>true</hidden>
     </fieldLevelSecurities>
     <fieldLevelSecurities>
