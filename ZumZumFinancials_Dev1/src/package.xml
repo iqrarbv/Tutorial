@@ -49,7 +49,6 @@
         <members>Quote</members>
         <members>QuoteLineItem</members>
         <members>QuoteTemplateRichTextData</members>
-        <members>SfoMatchHistoryItem</members>
         <members>Site</members>
         <members>Solution</members>
         <members>Task</members>
@@ -1712,22 +1711,6 @@
     <types>
         <members>Invoice_Reminders</members>
         <members>Invoice_Reminders/Sales_Invoice_Reminder</members>
-        <members>unfiled$public</members>
-        <members>unfiled$public/Account_Statement</members>
-        <members>unfiled$public/Invoice_Reminder_On_Due_Date</members>
-        <members>unfiled$public/MarketingProductInquiryResponse</members>
-        <members>unfiled$public/SUPPORTSelfServiceNewCommentNotificationSAMPLE</members>
-        <members>unfiled$public/SUPPORTSelfServiceNewUserLoginInformationSAMPLE</members>
-        <members>unfiled$public/SUPPORTSelfServiceResetPasswordSAMPLE</members>
-        <members>unfiled$public/SalesNewCustomerEmail</members>
-        <members>unfiled$public/SupportCaseAssignmentNotification</members>
-        <members>unfiled$public/SupportCaseCreatedPhoneInquiries</members>
-        <members>unfiled$public/SupportCaseCreatedWebInquiries</members>
-        <members>unfiled$public/SupportCaseResponse</members>
-        <members>unfiled$public/SupportEscalatedCaseNotification</members>
-        <members>unfiled$public/SupportEscalatedCaseReassignment</members>
-        <members>unfiled$public/SupportSelfServiceNewLoginandPassword</members>
-        <members>unfiled$public/SupportSelfServiceResetPassword</members>
         <name>EmailTemplate</name>
     </types>
     <types>
@@ -1776,10 +1759,7 @@
         <members>ZumZumRDI_Reports/Expense_Sheet_By_Project</members>
         <members>ZumZumRDI_Reports/Expense_Sheet_By_Status</members>
         <members>ZumZumRDI_Reports/Expense_Sheet_By_User</members>
-        <members>ZumZumRDI_Reports/Purchase_Order_By_Sub_Catagory</members>
-        <members>ZumZumRDI_Reports/Purchase_Orders_By_Project</members>
         <members>ZumZumRDI_Reports/Sales_Order_By_User</members>
-        <members>ZumZumRDI_Reports/Sales_Order_By_project</members>
         <members>Zumzum_Financials</members>
         <members>Zumzum_Financials/COA</members>
         <members>Zumzum_Financials/Ledger1</members>
@@ -1787,7 +1767,6 @@
         <members>Zumzum_Financials/Nominal_Monthly_Actuals1</members>
         <members>Zumzum_Financials/Purchase_Tax1</members>
         <members>Zumzum_Financials/Sales_Tax</members>
-        <members>unfiled$public</members>
         <name>Report</name>
     </types>
     <types>
