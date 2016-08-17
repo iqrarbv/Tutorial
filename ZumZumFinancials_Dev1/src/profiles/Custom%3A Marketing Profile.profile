@@ -4117,10 +4117,6 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>TransactionJournals</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>TransactionsMenu</apexPage>
         <enabled>false</enabled>
     </pageAccesses>

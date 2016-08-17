@@ -4411,10 +4411,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>TransactionJournals</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>TransactionsMenu</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
