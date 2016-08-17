@@ -3604,10 +3604,7 @@
         <apexPage>ApproveExpenseSheet</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
-    <pageAccesses>
-        <apexPage>AutocompleteTest</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
+    
     <pageAccesses>
         <apexPage>BankMenu</apexPage>
         <enabled>false</enabled>
@@ -3800,10 +3797,7 @@
         <apexPage>GeneralJournal</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
-    <pageAccesses>
-        <apexPage>GoogleChartTest</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
+    
     <pageAccesses>
         <apexPage>GraphicsPack</apexPage>
         <enabled>true</enabled>
@@ -3924,10 +3918,7 @@
         <apexPage>NominalCategoryNew</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
-    <pageAccesses>
-        <apexPage>NominalCodeSearchTest</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
+    
     <pageAccesses>
         <apexPage>OpeningBalances</apexPage>
         <enabled>false</enabled>
@@ -4104,10 +4095,7 @@
         <apexPage>Supplier_Opening_Balances</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
-    <pageAccesses>
-        <apexPage>TestJavascript</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
+   
     <pageAccesses>
         <apexPage>Time_Sheet_Pdf_View</apexPage>
         <enabled>false</enabled>
